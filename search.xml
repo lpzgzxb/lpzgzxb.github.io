@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>关于使用hexo创建博客</title>
+    <url>/2023/10/15/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<blockquote>
+<p>这是我的第一篇真正意义上的博客，不知道该写些什么，干脆就把创建这个博客网站的流程写下来分享给大家，当然希望大家也可以提出一些自己的建议和想法，我会尽可能的去改变和完善，谢谢大家</p>
+</blockquote>
+<span id="more"></span>
+
+<p><strong>前言</strong>：<br>我用的是win系统电脑，如果用的是水果电脑，可以参考  <a href="https://www.bilibili.com/video/BV1Yb411a7ty/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">手把手教你从0开始搭建自己的个人博客</a> ，其实两者大同小异，我会尽量用命令的方式去操作，大家可以直接<code>ctrl + c + v</code>跳过中间烧脑的原理部分</p>
+<!--more-->
+
+<h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><p>1.下载git</p>
+<ul>
+<li>hexo开源于github，需要git来下载，这里就不赘述下载流程了，下载可以参考<a href="https://blog.csdn.net/mukes/article/details/115693833">Git 详细安装教程</a><br>2.下载node</li>
+<li><a href="https://nodejs.org/en">点击跳转</a> 安装 <code>LTS</code> 版本的，一直下一步就可以了<br>3.下载 <code>Notepad++</code> </li>
+<li>参考 <a href="https://blog.csdn.net/louxiaofei_java/article/details/118121569">Notepad++ 下载安装和使用</a></li>
+</ul>
+<h2 id="2-使用命令行搭建hexo框架"><a href="#2-使用命令行搭建hexo框架" class="headerlink" title="2.使用命令行搭建hexo框架"></a>2.使用命令行搭建hexo框架</h2><p>1.按键<strong>win + command</strong>打开命令提示符</p>
+<p>2.输入命令查看node版本，确定node安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v	</span><br></pre></td></tr></table></figure>
+<p>同理查看npm版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.2.png"></p>
+<p>3.因为是外网，没有魔法的朋友打开下载都会会很慢，我们利用一个淘宝的镜像来安装会更加便捷，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=http://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>安装后，检查安装是否成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
+<p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.3.png"></p>
+<p>4.安装hexo框架</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>查看是否成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.4.png"></p>
+<h2 id="3-创建本地Blog网站"><a href="#3-创建本地Blog网站" class="headerlink" title="3.创建本地Blog网站"></a>3.创建本地Blog网站</h2><p>1.首先在电脑找一个自己喜欢的位置创建一个名为<code>My_Blog</code>的文件夹，我们所有关于博客的东西都在这里面，如果中间出现一些解决不了的问题，可以直接把该文件夹干掉重来。</p>
+<p>2.进入<code>My_Blog</code>的文件夹，<code>右击鼠标 - 显示更多 - Git Base Here</code><br> ，我们所有操作都可以在这个命令行里操作<br><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/3.2.png"></p>
+<p>3.初始化博客<strong>（文件里必须为空）</strong>，这个过程比较慢，请耐心等待，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/3.3.png"></p>
+<p>4.启动本地博客服务 <strong>（会生成一个网站）</strong>，用作预览</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/3.4.png"><br>5.本地访问地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:4000/</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>到此为止，我们就完成了大部分的博客搭建，进入网站就可以看见自己浩瀚星海蓝图的展开，接下来我们要把它上传到我的github上面，让它面向大众，让更多的小伙伴可以看到</p>
+</blockquote>
+<h2 id="4-创建github库，把本地文件上推"><a href="#4-创建github库，把本地文件上推" class="headerlink" title="4. 创建github库，把本地文件上推"></a>4. 创建github库，把本地文件上推</h2><p>1.我们首先要拥有一个GitHub账号，文章推荐<a href="https://blog.csdn.net/m0_67906358/article/details/128808210?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169737483416800186593921%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169737483416800186593921&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-128808210-null-null.142%5Ev96%5Epc_search_result_base6&utm_term=%E5%88%9B%E5%BB%BAgithub%E8%B4%A6%E5%8F%B7&spm=1018.2226.3001.4187">注册Github账号详细教程</a></p>
+<p>2.新建一个库<br><strong>注意：</strong>名字必须写 “xxx(用户名).github.io” 的格式<br><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/4.2.png"><br>然后create就可以创建好一个库了</p>
+<p>3.我们返回github base here ，在blog目录下安装git部署插件输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>没有红色的ERROR就是没问题的</p>
+<p>4.回到My_Blog文件里，找到 <code>_config.yml </code> 文件，右击鼠标用notepad++编辑，_config.yml文件是我们以后操作博客最主要的文件<br><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/4.4.png"></p>
+<p>5.拉到最下面，在depoly下按照如图填入<br><strong>注意：</strong>所有冒号后面都有空格。<br><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/4.5.png"><br>保存退出</p>
+<p>6.需要你的邮箱和名称，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email “邮箱”</span><br><span class="line">git config --global user.name “名称”</span><br></pre></td></tr></table></figure>
+
+<p>7.推到GitHub库中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>一大串代码过后就成功了</p>
+<p><strong>恭喜恭喜</strong><br>你已经成功创建了一个属于自己的博客，快输入网址https:&#x2F;&#x2F;（用户名）.github.io&#x2F; ，开启你的博客生涯吧！</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>我的第一篇博客</title>
+    <url>/2023/10/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<blockquote>
+<p>大风可以吹起一张白纸，但吹不动一只蝴蝶，因为生命的力量在于不顺从</p>
+</blockquote>
+<span id="more"></span>
+
+
+<p>#博客简介<br>该博客致力于发现和分享一些有趣的技术，我认为互联网的存在为人们提供了无限的信息资源，人们可以轻松获取知识、新闻、文化、娱乐等各种信息，这意味着更多的连接、更多的便利、更多的机会和更多的创新</p>
+<p>我相信随着该博客的发展壮大，越来越多的拥有共同爱好的朋友一起相聚于此，分享自己的热爱，这个社会会越来越好吧！</p>
+<p><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.jpg" alt="ababab"></p>
+]]></content>
+  </entry>
+</search>
