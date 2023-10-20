@@ -1,35 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>我的第一篇博客</title>
-    <url>/2023/10/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<blockquote>
-<p>大风可以吹起一张白纸，但吹不动一只蝴蝶，因为生命的力量在于不顺从</p>
-</blockquote>
+    <title>如何测试一个机器是大端还是小端</title>
+    <url>/2023/10/18/%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E6%98%AF%E5%A4%A7%E7%AB%AF%E8%BF%98%E6%98%AF%E5%B0%8F%E7%AB%AF/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>c/c++基础语法</category>
+      </categories>
+      <tags>
+        <tag>c语言 , 算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你了解结构体吗？</title>
+    <url>/2023/10/18/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<p>  我们知道c语言内置了许多基本数据类型例如：int float char double…等等。但是现在我需要一个可以同时存储多个不一样的数据类型的容器，比如在小明这个变量下同时存在年龄，班级，成绩等等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系,但是这几个数据结构是不尽相同的，我该怎么把他们整合起来呢?</p>
 <span id="more"></span>
 
+<h2 id="一-啥是结构体"><a href="#一-啥是结构体" class="headerlink" title="一. 啥是结构体"></a>一. 啥是结构体</h2><p>  结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p>
+<p>  int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为<strong>复杂数据类型</strong>或<strong>构造数据类型</strong>。</p>
+<h2 id="二-结构体的声明，定义和初始化"><a href="#二-结构体的声明，定义和初始化" class="headerlink" title="二. 结构体的声明，定义和初始化"></a>二. 结构体的声明，定义和初始化</h2><ul>
+<li>在使用结构体之前我们应当先声明它，定义形式为</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">study</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//可以包含多个变量或数组，它们的类型可以相同，也可以不同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>#博客简介<br>该博客致力于发现和分享一些有趣的技术，我认为互联网的存在为人们提供了无限的信息资源，人们可以轻松获取知识、新闻、文化、娱乐等各种信息，这意味着更多的连接、更多的便利、更多的机会和更多的创新</p>
-<p>我相信随着该博客的发展壮大，越来越多的拥有共同爱好的朋友一起相聚于此，分享自己的热爱，这个社会会越来越好吧！</p>
-<p><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.jpg" alt="ababab"></p>
-]]></content>
+<p>student为结构名，它包含五个成员：name, age, struentid, sex, score</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>该结构体只是定义，还未初始化，所以不占用内存</li>
+<li>如果结构体声明于maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li>
+<li>我们可以在对结构体定义的同时初始化</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line"> student.name, student.age, student.studenid, student.sex, student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>如果大家觉得结构名太长可以用<strong>typedef</strong>来定义</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>stu</code><strong>在这里不是作为变量，而是为</strong><code>student</code><strong>的代称，你可以以操作</strong><code>student</code><strong>的方式来操作</strong><code>stu</code></p>
+<h2 id="三-匿名结构体类型"><a href="#三-匿名结构体类型" class="headerlink" title="三. 匿名结构体类型"></a>三. 匿名结构体类型</h2><p>  顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
+<p><strong>注意：</strong> 这种语法c语言是支持的，但我们实际生活中一般不会用，因为该结构体只能用一次</p>
+<h2 id="四-结构体指针"><a href="#四-结构体指针" class="headerlink" title="四. 结构体指针"></a>四. 结构体指针</h2><p>其实结构体的指针与基础数据类型的指针大同小异</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>该程序把结构体变量<code>student</code>的地址赋给指针<code>Student</code><br><strong>注意：</strong> <strong>结构体和结构体变量是不一样的</strong>，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以<strong>结构体是不能直接取地址的</strong></p>
+<p>以下是错误示范：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="五-结构体传参"><a href="#五-结构体传参" class="headerlink" title="五. 结构体传参"></a>五. 结构体传参</h2><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值（形参也好，实参也罢），还有一种是传地址（指针真好玩），那么到底是传值还是传地址好勒？</p>
+<p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，为什么？<br>在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line">	 print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line">	 print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>结果：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>小知识：</strong> 如果传的为值那么我们用<code>.</code>来访问结构体成员；如果传地址的话我们就用<code>-&gt;</code>来访问，<code>-&gt;</code>也只能在结构体中使用。</p>
+<h2 id="六-结构体数组"><a href="#六-结构体数组" class="headerlink" title="六. 结构体数组"></a>六. 结构体数组</h2><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">	char name[10];//姓名</span><br><span class="line">	int age;//年龄</span><br><span class="line">	int studentid;//学号</span><br><span class="line">	char sex[10];//性别</span><br><span class="line">	float score;//成绩</span><br><span class="line">&#125; class[] = &#123; </span><br><span class="line">	&#123;&quot;xiaoming&quot;, 20, 8997, &#x27;男&#x27;, 98.5&#125;;</span><br><span class="line">	&#123;&quot;zhangsan&quot;, 21, 8998, &#x27;男&#x27;, 78.5&#125;</span><br><span class="line">	&#123;&quot;lisi&quot;, 20, 8999, &#x27;女&#x27;, 88&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
+<p>x 想打印出来也很简单，用个<code>for</code>循环就行</p>
+<p>七. 结构体内存大小</p>
+<p>大家在学习结构体的时候有没有考虑过：<strong>结构体它在内存中到底是如何存放的</strong>,是像顺序表一样一个接一个的存放吗？结构体内存大小是不是简单的加法运算呢？</p>
+<p>So, 接下来我来给大家讲讲结构体对齐的规则，对齐数和存储顺序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">	char name[10];</span><br><span class="line">	int age;</span><br><span class="line">	char sex;</span><br><span class="line">&#125;;</span><br><span class="line">struct Student2</span><br><span class="line">&#123;</span><br><span class="line">	char sex;</span><br><span class="line">	char name[10];</span><br><span class="line">	int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p>在相同的成员顺序不同的情况下，<code>Student1</code>和<code>Student2</code>大小相同吗？<br><img src="/" alt="1"></p>
+<p><code>Student1</code>和<code>Student2</code>大小居然不一样，那这到底是怎么回事呢？这就不得不好好说一说结构体在内存中的存放方式了（也就是结构体内存对齐）了</p>
+<h2 id="八-嵌套结构体"><a href="#八-嵌套结构体" class="headerlink" title="八. 嵌套结构体"></a>八. 嵌套结构体</h2>]]></content>
+      <categories>
+        <category>c/c++基础语法</category>
+      </categories>
+      <tags>
+        <tag>c语言 算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>关于使用hexo创建博客</title>
     <url>/2023/10/15/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<blockquote>
-<p>这是我的第一篇真正意义上的博客，不知道该写些什么，干脆就把创建这个博客网站的流程写下来分享给大家，当然希望大家也可以提出一些自己的建议和想法，我会尽可能的去改变和完善，谢谢大家</p>
-</blockquote>
+    <content><![CDATA[<p>  初次创建属于自己的博客，完全是从零开始，在这期间遇到了许许多多的困难，光是把这个网站变成自己喜欢的样子都花了有半个月的样子，网上资料多又杂乱。而且这也是第一次写，不知道什么样的格式内容会受大家喜欢，干脆把自己踩过的坑，遇到的困难总结起来，把经验分享给大家，希望大家多多批评指正。</p>
 <span id="more"></span>
 
 <p><strong>前言</strong>：<br>我用的是win系统电脑，如果用的是水果电脑，可以参考  <a href="https://www.bilibili.com/video/BV1Yb411a7ty/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">手把手教你从0开始搭建自己的个人博客</a> ，其实两者大同小异，我会尽量用命令的方式去操作，大家可以直接<code>ctrl + c + v</code>跳过中间烧脑的原理部分</p>
-<!--more-->
-
 <h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><p>1.下载git</p>
 <ul>
-<li>hexo开源于github，需要git来下载，这里就不赘述下载流程了，下载可以参考<a href="https://blog.csdn.net/mukes/article/details/115693833">Git 详细安装教程</a><br>2.下载node</li>
-<li><a href="https://nodejs.org/en">点击跳转</a> 安装 <code>LTS</code> 版本的，一直下一步就可以了<br>3.下载 <code>Notepad++</code> </li>
-<li>参考 <a href="https://blog.csdn.net/louxiaofei_java/article/details/118121569">Notepad++ 下载安装和使用</a></li>
+<li>hexo 开源于 github，需要git来下载，这里就不赘述下载流程了，下载可以参考<a href="https://blog.csdn.net/mukes/article/details/115693833">Git 详细安装教程</a></li>
+</ul>
+<p>2.下载node</p>
+<ul>
+<li><a href="https://nodejs.org/en">点击跳转</a> 安装 <code>LTS</code> 版本的，一直下一步就可以了</li>
+</ul>
+<p>3.下载 <code>Notepad++</code> </p>
+<ul>
+<li>参考 [Notepad++ 下载安装和使用](<a href="https://blog.csdn.net/">https://blog.csdn.net/</a><br>louxiaofei_java&#x2F;article&#x2F;details&#x2F;118121569)</li>
 </ul>
 <h2 id="2-使用命令行搭建hexo框架"><a href="#2-使用命令行搭建hexo框架" class="headerlink" title="2.使用命令行搭建hexo框架"></a>2.使用命令行搭建hexo框架</h2><p>1.按键<strong>win + command</strong>打开命令提示符</p>
 <p>2.输入命令查看node版本，确定node安装成功</p>
@@ -44,9 +122,9 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
 <p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.3.png"></p>
 <p>4.安装hexo框架</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <p>查看是否成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
 <p><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/2.4.png"></p>
 <h2 id="3-创建本地Blog网站"><a href="#3-创建本地Blog网站" class="headerlink" title="3.创建本地Blog网站"></a>3.创建本地Blog网站</h2><p>1.首先在电脑找一个自己喜欢的位置创建一个名为<code>My_Blog</code>的文件夹，我们所有关于博客的东西都在这里面，如果中间出现一些解决不了的问题，可以直接把该文件夹干掉重来。</p>
 <p>2.进入<code>My_Blog</code>的文件夹，<code>右击鼠标 - 显示更多 - Git Base Here</code><br> ，我们所有操作都可以在这个命令行里操作<br><img src="/./%E4%BD%BF%E7%94%A8hexo%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2_%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/3.2.png"></p>
@@ -78,5 +156,8 @@
 <p>一大串代码过后就成功了</p>
 <p><strong>恭喜恭喜</strong><br>你已经成功创建了一个属于自己的博客，快输入网址https:&#x2F;&#x2F;（用户名）.github.io&#x2F; ，开启你的博客生涯吧！</p>
 ]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
   </entry>
 </search>
