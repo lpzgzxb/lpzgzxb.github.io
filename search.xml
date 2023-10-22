@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>如何测试一个机器是大端还是小端</title>
-    <url>/2023/10/18/%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E6%98%AF%E5%A4%A7%E7%AB%AF%E8%BF%98%E6%98%AF%E5%B0%8F%E7%AB%AF/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>c/c++基础语法</category>
-      </categories>
-      <tags>
-        <tag>c语言 , 算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>你了解结构体吗？</title>
     <url>/2023/10/18/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
     <content><![CDATA[<p>  我们知道c语言内置了许多基本数据类型例如：int float char double…等等。但是现在我需要一个可以同时存储多个不一样的数据类型的容器，比如在小明这个变量下同时存在年龄，班级，成绩等等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系,但是这几个数据结构是不尽相同的，我该怎么把他们整合起来呢?</p>
@@ -159,5 +148,16 @@
       <categories>
         <category>Blog</category>
       </categories>
+  </entry>
+  <entry>
+    <title>如何测试一个机器是大端还是小端</title>
+    <url>/2023/10/18/%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E6%98%AF%E5%A4%A7%E7%AB%AF%E8%BF%98%E6%98%AF%E5%B0%8F%E7%AB%AF/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>c/c++基础语法</category>
+      </categories>
+      <tags>
+        <tag>c语言 , 算法</tag>
+      </tags>
   </entry>
 </search>
