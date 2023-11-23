@@ -1,6 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux笔记</title>
+    <url>/2023/11/20/Linux%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>随心笔记</p>
+<span id="more"></span>
+
+<p>学习完 <a href="https://www.bilibili.com/video/BV1n84y1i7td/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">黑马程序员新版Linux零基础快速入门到精通</a> 受益匪浅，老师讲了许多基础的语法知识，深入浅出的带我认识和理解了很多Linux的操作，我将它们整理下来供大家参考学习，也方便我后续的复习反刍。（该文章适合有一定基础的小伙伴学习）</p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p><strong>包括以下：</strong></p>
+<ul>
+<li>系统阐述</li>
+<li>初始Linux</li>
+<li>虚拟机介绍</li>
+<li>VM 和 CenOS的安装，配置环境</li>
+</ul>
+<p>以上我都不讲，有兴趣的可以去看上边的链接视频（问就是任性）</p>
+<ul>
+<li>Linux 目录结构<br><img src="E:\Blog\source\日志图片]E0%XEQV4L8Y7WH}3NY13J.png"><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录 <em>&#x2F;</em> ，所有文件都在 <strong>&#x2F;</strong> 下面。<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure></li>
+<li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>!命令前缀，自动执行上一次匹配的命令</li>
+</ul>
+<h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul>
+<li>&amp; <strong>ls</strong></li>
+</ul>
+<p>** 列出目录下内容 **</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ls [-a -l -h] [Linux 路径]</span><br><span class="line">-a : all 列出全部文件（包括隐藏文件/文件夹）</span><br><span class="line">-l : 以列表（竖向排序）展示内容</span><br><span class="line">-h : 以方便阅读的方式列出文件大小，K.M.G （一定要搭配 *-l* 才行）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&amp; <strong>cd</strong></li>
+</ul>
+<p><strong>切换到哪个目录下</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//change directory</span></span><br><span class="line">语法：cd [Linux 路径]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>cd 命令没有选项,只有参数,表示切换到哪个目录下</li>
+<li>cd 命令直接执行,不带参数,返回用户HOME目录</li>
+</ol>
+<ul>
+<li>&amp; <strong>pwd</strong><br><strong>查看当前工作目录</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//print work directory</span></span><br><span class="line">语法: pwd</span><br><span class="line">pwd 命令,无选项,无参数,直接输入表示查看当前工作目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-相对路径与绝对路径-特殊路径符"><a href="#2-相对路径与绝对路径-特殊路径符" class="headerlink" title="2. 相对路径与绝对路径 - 特殊路径符"></a>2. 相对路径与绝对路径 - 特殊路径符</h2><ul>
+<li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <em>&#x2F;</em> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p>
+</li>
+<li><p>&amp; <strong>特殊路径符</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">.    表示当亲目录</span><br><span class="line">..   表示上一级目录，cd .. 表示回退到上一级， cd ../.. 表示回退上二级目录</span><br><span class="line">~    表示HOME目录，cd ~ 表示切换到HOME目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-mkdir-touch"><a href="#3-mkdir-touch" class="headerlink" title="3. mkdir - touch"></a>3. mkdir - touch</h2><ul>
+<li><p>&amp; <strong>mkdir</strong><br><strong>创建新的文件夹（目录）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//make directory</span></span><br><span class="line">语法：mkdir [-p] Linux路径</span><br><span class="line">-p：自动创建不存在的父目录，适用于创建连续多级目录（可选）</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：创建文件夹有时会涉及权限问题，尽量创建文件于HOME目录内。</p>
+</li>
+<li><p>&amp; <strong>touch</strong><br><strong>创建文件</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-cat-more-vi-vim-编辑器-tail"><a href="#4-cat-more-vi-vim-编辑器-tail" class="headerlink" title="4. cat - more - vi&#x2F;vim 编辑器 - tail"></a>4. cat - more - vi&#x2F;vim 编辑器 - tail</h2><ul>
+<li><p>&amp; <strong>cat</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：cat Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong> 会展示全部文件内容，不适合过大的文件查看。</p>
+</li>
+<li><p>&amp; <strong>more</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：more Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+<p>空格翻页，q 退出。<br><strong>注：</strong> 支持翻页，适合大文件查看。</p>
+</li>
+<li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//visual interface</span></span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure>
+<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="E:\Blog\source\日志图片\40~I3TZEQGRSW7}BV04JY7U.png"></p>
+</li>
+</ul>
+<ol>
+<li>三种模式不能随意交换，输入模式与底线命令模式不相通</li>
+<li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹</li>
+<li>如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件</li>
+<li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
+</ol>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="E:\Blog\source\日志图片\CA}442@OQ$K%KJY5D[%~IF.png"><br><img src="E:\Blog\source\日志图片\E6H5QU15M78FJ$YWJD.png"></p>
+<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="E:\Blog\source\日志图片\49X9FP33H5HE92WK0.png"></p>
+<ul>
+<li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：tail [-f -num] Linux路径</span><br><span class="line">-f： 持续跟踪</span><br><span class="line">-num： 查看尾部多少行，默认<span class="number">10</span>行</span><br></pre></td></tr></table></figure>
+
+<p>带上 -f 后程序会跟踪文件最新更改，&#x3D;&#x3D;ctrl + c&#x3D;&#x3D;停止</p>
+<h2 id="5-cp-mv-rm"><a href="#5-cp-mv-rm" class="headerlink" title="5. cp - mv - rm"></a>5. cp - mv - rm</h2><ul>
+<li><p>&amp; <strong>cp</strong><br><strong>复制文件&#x2F;文件夹</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//copy</span></span><br><span class="line">语法：cp [-r] 参<span class="number">1</span> 参<span class="number">2</span></span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">参<span class="number">1</span>：被复制的文件/文件路径</span><br><span class="line">参<span class="number">2</span>：要复制去的地方</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>参2文件&#x2F;文件夹</strong></p>
+</li>
+<li><p>&amp; <strong>mv</strong><br><strong>移动文件&#x2F;文件夹，修改名称</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//move</span></span><br><span class="line">语法：mv 参<span class="number">1</span> 参<span class="number">2</span></span><br><span class="line">参<span class="number">1</span>：被复移动的文件/文件路径</span><br><span class="line">参<span class="number">2</span>：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改参1的名称</strong></p>
+</li>
+<li><p>&amp; <strong>rm</strong><br><strong>删除文件&#x2F;文件夹</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//remove</span></span><br><span class="line">语法：rm [-r -f] n个参数</span><br><span class="line">-r：删除对象为文件夹</span><br><span class="line">-f：force，强制删除</span><br><span class="line">参数：要删除的文件/文件夹路径，可以同时删除多个，以空格隔开</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong> rm 是一个&#x3D;&#x3D;危险&#x3D;&#x3D;的命令，尤其是处于root（超级管理员）用户下。</p>
+</li>
+</ul>
+<h2 id="6-which-find"><a href="#6-which-find" class="headerlink" title="6. which - find"></a>6. which - find</h2><ul>
+<li><p>&amp; <strong>which</strong><br><strong>查看命令的程序文件存放位置</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure>
+<p>Linux命令本质就是一个个可执行程序，就像自定义函数，使用它就去调用它，我们使用的命令都是系统自带的，which 命令可以找到该命令的位置。</p>
+</li>
+<li><p>&amp; <strong>find</strong><br><strong>按文件名查找文件</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法<span class="number">1</span>：find 起始地址 -name <span class="string">&quot;文件名&quot;</span></span><br><span class="line">起始地址：文件从哪开始查找</span><br><span class="line">-name：表示查找文件名</span><br><span class="line"></span><br><span class="line">语法<span class="number">2</span>：find 起始地址 -size +/- n [k/M/G]</span><br><span class="line">-size：按文件大小查找</span><br><span class="line">+/-：表示大于或小于</span><br><span class="line">n：表示大小数字</span><br><span class="line">k/M/G：表示单位</span><br></pre></td></tr></table></figure>
+<p>例：<br>在<strong>HOME目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find home -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find / -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>查找<strong>小于10kb 大小</strong>的文件：<code>find / -size -10k</code><br>在<strong>根目录</strong>查找<strong>大于10GB</strong> 大小的文件：<code>find / -size +10G</code></p>
+</li>
+</ul>
+<h2 id="7-grep-wc"><a href="#7-grep-wc" class="headerlink" title="7. grep - wc"></a>7. grep - wc</h2><ul>
+<li><p>&amp; <strong>grep</strong><br><strong>通过关键字过滤文件行</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：grep [-n] <span class="string">&quot;关键字&quot;</span> 文件路径</span><br><span class="line">-n：在结果中显示行号</span><br><span class="line">关键字：必填，需要隔离的关键字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>wc</strong><br><strong>统计文件行数，单词数量等</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：wc [-c -m -l -w] 文件路径</span><br><span class="line">-c：计算文件大小单位byte</span><br><span class="line">-m：统计字符串数量</span><br><span class="line">-l：统计行数</span><br><span class="line">-w：统计单词数量</span><br></pre></td></tr></table></figure>
+<p>不带选项，默认输出 -l，-w，-c 和文件名。</p>
+</li>
+</ul>
+<h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 -通配符"></a>8. 重定向符 - 管道符 -通配符</h2><ul>
+<li>&amp; <strong>重定向符</strong></li>
+</ul>
+<p><strong>&gt;</strong>      将左侧命令的结果，<em>覆盖</em>写入符号右侧指定的文件中<br><strong>&gt;&gt;</strong>    将左侧命令的结果，<em>追加</em>写入符号右侧指定的文件中</p>
+<p><strong>注：</strong> 如果左侧为<strong>命令</strong>，那么会把命令产生的结果覆盖或追加到指定文件中</p>
+<ul>
+<li>&amp; <strong>管道符</strong></li>
+</ul>
+<p><strong>|</strong> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计test.txt文件中带有test关键字有几行：<code>cat test.txt | grep test | wc -l</code></p>
+<p>适合搭配** cat grep** 等命令使用。</p>
+<ul>
+<li>&amp; <strong>通配符</strong><br><strong>模糊匹配</strong></li>
+</ul>
+<ol>
+<li>test* , 表示如何任何以test开头的内容。</li>
+<li>*test，表示如何任何以test结尾的内容。</li>
+<li><em>test</em>，表示如何任何包含test的内容。</li>
+</ol>
+<p>适合搭配 <strong>rm find</strong> 等命令使用。</p>
+<h2 id="9-echo"><a href="#9-echo" class="headerlink" title="9. echo"></a>9. echo</h2><ul>
+<li>&amp; <strong>echo</strong><br><strong>打印内容</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：echo 输出的内容</span><br><span class="line">echo 无选项 参数必填</span><br></pre></td></tr></table></figure>
+等同于c语言命令中的 <strong>printf</strong> ，打印内容在屏幕上</li>
+</ul>
+<ol>
+<li>输出内容建议用双引号括起来，更加美观，容易辨识</li>
+<li>输出内容为<strong>命令</strong>的话必须用 &#x3D;&#x3D;&#96;&#96;&#x3D;&#x3D; 括起来</li>
+</ol>
+<h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="root-超级管理员"><a href="#root-超级管理员" class="headerlink" title="root 超级管理员"></a>root 超级管理员</h2><h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><h2 id="chmod-命令"><a href="#chmod-命令" class="headerlink" title="chmod 命令"></a>chmod 命令</h2><h2 id="chown-命令"><a href="#chown-命令" class="headerlink" title="chown 命令"></a>chown 命令</h2><h2 id="酷酷的软件安装"><a href="#酷酷的软件安装" class="headerlink" title="酷酷的软件安装"></a>酷酷的软件安装</h2><h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><h2 id="软连接"><a href="#软连接" class="headerlink" title="软连接"></a>软连接</h2><h2 id="ip地址与主机名"><a href="#ip地址与主机名" class="headerlink" title="ip地址与主机名"></a>ip地址与主机名</h2><h2 id="固定ip地址"><a href="#固定ip地址" class="headerlink" title="固定ip地址"></a>固定ip地址</h2><h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><h2 id="网络请求下载"><a href="#网络请求下载" class="headerlink" title="网络请求下载"></a>网络请求下载</h2><h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h2 id="主机状态监控"><a href="#主机状态监控" class="headerlink" title="主机状态监控"></a>主机状态监控</h2><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h2 id="文件的上传下载"><a href="#文件的上传下载" class="headerlink" title="文件的上传下载"></a>文件的上传下载</h2><h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><ul>
+<li>未完待续</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux笔记</category>
+      </categories>
+      <tags>
+        <tag>c语言 算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
     <url>/2023/11/10/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
     <content><![CDATA[<p>随心笔记</p>
