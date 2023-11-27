@@ -10,14 +10,14 @@
 <h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p><strong>包括以下：</strong></p>
 <ul>
 <li>系统阐述</li>
-<li>初始Linux</li>
+<li>初识Linux</li>
 <li>虚拟机介绍</li>
 <li>VM 和 CenOS的安装，配置环境</li>
 </ul>
 <p>以上我都不讲，有兴趣的可以去看上边的链接视频（问就是任性）</p>
 <ul>
-<li>Linux 目录结构<br><img src="E:\Blog\source\日志图片]E0%XEQV4L8Y7WH}3NY13J.png"><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录 <em>&#x2F;</em> ，所有文件都在 <strong>&#x2F;</strong> 下面。<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure></li>
-<li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>!命令前缀，自动执行上一次匹配的命令</li>
+<li>Linux 目录结构<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG/%5DE0%25XEQV4L8Y7WH%7D3NY13J.png"><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录 <em>&#x2F;</em> ，所有文件都在 <strong>&#x2F;</strong> 下面。<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure></li>
+<li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</li>
 </ul>
 <h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul>
 <li>&amp; <strong>ls</strong></li>
@@ -62,7 +62,7 @@
 </li>
 <li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//visual interface</span></span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure>
-<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="E:\Blog\source\日志图片\40~I3TZEQGRSW7}BV04JY7U.png"></p>
+<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/40~I3TZEQGRSW7%7DBV04JY7U.png"></p>
 </li>
 </ul>
 <ol>
@@ -71,8 +71,8 @@
 <li>如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件</li>
 <li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
 </ol>
-<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="E:\Blog\source\日志图片\CA}442@OQ$K%KJY5D[%~IF.png"><br><img src="E:\Blog\source\日志图片\E6H5QU15M78FJ$YWJD.png"></p>
-<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="E:\Blog\source\日志图片\49X9FP33H5HE92WK0.png"></p>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG./CA%7D442@OQ$K%25KJY5D%5B%25~IF.png"><br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/E6H5QU15M78FJ$YWJD.png"></p>
+<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/49X9FP33H5HE92WK0.png"></p>
 <ul>
 <li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
 </ul>
@@ -139,7 +139,95 @@
 <li>输出内容建议用双引号括起来，更加美观，容易辨识</li>
 <li>输出内容为<strong>命令</strong>的话必须用 &#x3D;&#x3D;&#96;&#96;&#x3D;&#x3D; 括起来</li>
 </ol>
-<h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="root-超级管理员"><a href="#root-超级管理员" class="headerlink" title="root 超级管理员"></a>root 超级管理员</h2><h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><h2 id="chmod-命令"><a href="#chmod-命令" class="headerlink" title="chmod 命令"></a>chmod 命令</h2><h2 id="chown-命令"><a href="#chown-命令" class="headerlink" title="chown 命令"></a>chown 命令</h2><h2 id="酷酷的软件安装"><a href="#酷酷的软件安装" class="headerlink" title="酷酷的软件安装"></a>酷酷的软件安装</h2><h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><h2 id="软连接"><a href="#软连接" class="headerlink" title="软连接"></a>软连接</h2><h2 id="ip地址与主机名"><a href="#ip地址与主机名" class="headerlink" title="ip地址与主机名"></a>ip地址与主机名</h2><h2 id="固定ip地址"><a href="#固定ip地址" class="headerlink" title="固定ip地址"></a>固定ip地址</h2><h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><h2 id="网络请求下载"><a href="#网络请求下载" class="headerlink" title="网络请求下载"></a>网络请求下载</h2><h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h2 id="主机状态监控"><a href="#主机状态监控" class="headerlink" title="主机状态监控"></a>主机状态监控</h2><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h2 id="文件的上传下载"><a href="#文件的上传下载" class="headerlink" title="文件的上传下载"></a>文件的上传下载</h2><h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><ul>
+<h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="su-sudo"><a href="#su-sudo" class="headerlink" title="su - sudo"></a>su - sudo</h2><ul>
+<li>&amp; <strong>su</strong><br><strong>切换用户</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//switch user</span></span><br><span class="line">语法：su - [用户名]</span><br><span class="line"><span class="built_in">exit</span> 命令会回退到上一个用户</span><br></pre></td></tr></table></figure>
+<ol>
+<li>root 用户拥有最大的系统操作权限，而普通用户在许多地方权限受限。</li>
+<li>切换到root用户会要求输入密码，密码不会显现</li>
+<li>普通用户一般会在HOME目录下不受影响</li>
+<li>不填用户名默认为root用户<br><strong>注：</strong>权限越大，操作带来的影响就越危险</li>
+</ol>
+<ul>
+<li>&amp; <strong>sudo</strong><br><strong>以root用户，为命令临时授权</strong><br><strong>注：</strong>该命令要先在认证文件中添加语句，不然无法使用</li>
+</ul>
+<p><img src="/"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：sudo 其他命令</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><p>Linux关于权限管理级别有两个</p>
+<ol>
+<li>针对<strong>用户</strong>的权限控制</li>
+<li>针对<strong>用户组</strong>的权限控制</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>groupadd</strong><br><strong>创建用户组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">groupadd 组名</span><br></pre></td></tr></table></figure></li>
+<li><p>&amp; <strong>grupdel</strong><br><strong>删除用户组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">grupdel 组名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>useradd</strong><br><strong>创建用户</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：useradd [-g -d] 用户名</span><br><span class="line">-g：指定用户组，不指定会创建同名组并且自动加入</span><br><span class="line">-d：指定用户HOME路径，默认在/home/用户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>userdel</strong><br><strong>删除用户</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">userdel [-r] 用户名</span><br><span class="line">-r：删除用户的HOME目录，不带则保留</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>id</strong><br><strong>查看用户所属的组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：id 用户名</span><br><span class="line">用户名：查看的用户，不带则查看自身</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>usermod -aG</strong><br><strong>修改用户所属的组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：usermod -aG 用户组 用户</span><br></pre></td></tr></table></figure>
+<p>将指定用户加入指定用户组</p>
+</li>
+<li><p>&amp; <strong>getent</strong><br><strong>查看该电脑中有哪些用户或用户组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：getent passwd[用户]/group[用户组]</span><br></pre></td></tr></table></figure>
+<p>用户名带有七份信息：密码（x）；用户ID；描述信息；HOME目录；执行终端</p>
+</li>
+</ul>
+<p>用户名带有三份信息：组名；密码；用户组ID</p>
+<h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/"></p>
+<h2 id="chmod-命令和chown-命令"><a href="#chmod-命令和chown-命令" class="headerlink" title="chmod 命令和chown 命令"></a>chmod 命令和chown 命令</h2><ul>
+<li><p>&amp; <strong>chmod</strong><br><strong>修改文件&#x2F;文件夹的权限信息</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：chmod [-R] 权限 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>只有文件、文件夹所属用户或者root用户才可以使用该命令<br>快捷修改权限可以使用<strong>751权限</strong><br><img src="/"><br><strong>例如：</strong><br>将文件夹里所有文件权限修改为：rwx r-x –x 命令为：chmod -R u&#x3D;rwx,g&#x3D;rx,o&#x3D;x test<br>将文件夹权限修改为：rwx r-x –x 命令为：chmod 751 test<br><img src="/"></p>
+</li>
+<li><p>&amp; <strong>chown</strong><br><strong>可以修改文件&#x2F;文件夹所属用户和用户组</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：chown [-R] [用户][:][用户组] 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br><span class="line">: ：分隔</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>该命令只有root用户可以使用<br><strong>例如：</strong><br>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：<br>chown -R root:kkdp test</p>
+</li>
+</ul>
+<h2 id="yum-软件安装"><a href="#yum-软件安装" class="headerlink" title="yum 软件安装"></a>yum 软件安装</h2><ul>
+<li>&amp; <strong>yum</strong><br><strong>rpm包软件管理器，用于自动化安装配置Linux软件</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：yum [-y] [install | remove | sratch] 软件名称</span><br><span class="line">-y：自动确认</span><br><span class="line">install 安装，remove 卸载，search 搜索</span><br></pre></td></tr></table></figure>
+<strong>注意：</strong> 该命令需要root权限和联网</li>
+</ul>
+<h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><ul>
+<li>&amp; <strong>systemctl</strong><br><strong>管理服务</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">systemctl start | stop | status | enable | disable 服务名</span><br><span class="line">start 启动，stop 关闭，status 查看状态，enable 开机启动，disable 关闭开机启动</span><br></pre></td></tr></table></figure>
+<strong>注意：</strong>部分软件安装后没有自动集成到systemctl中，这些需要手动添加</li>
+</ul>
+<p>内置服务有很多，比如：<br>networkmanger 主网络服务<br>network 副网络服务<br>firewalld 防火墙服务<br>sshd ssh服务</p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><ul>
+<li>&amp; <strong>ln</strong><br><strong>软连接：在系统中创建软连接可以将文件链接到其他位置</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ln -s 参<span class="number">1</span> 参<span class="number">2</span></span><br><span class="line">-s：创建软连接</span><br><span class="line">参<span class="number">1</span>：被链接的文件或文件夹</span><br><span class="line">参<span class="number">2</span>：要链接去的目的地</span><br></pre></td></tr></table></figure>
+类似于win下的创建<strong>快捷方式</strong></li>
+</ul>
+<h2 id="ping-wget-curl"><a href="#ping-wget-curl" class="headerlink" title="ping - wget - curl"></a>ping - wget - curl</h2><ul>
+<li><p>&amp; <strong>ping</strong><br><strong>查看指定网络服务器是否联通</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ping [-c num] ip或主机名</span><br><span class="line">-c：检查的次数，不填默认无限次检查</span><br></pre></td></tr></table></figure></li>
+<li><p>&amp; <strong>wget</strong><br><strong>非交换式文件下载器，可下载网络文件</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：wget [-b] url</span><br><span class="line">-b：可选，后台下载</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>&amp; <strong>curl</strong><br><strong>可下载文件也可以发送网络请求</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：curl [-O] url</span><br><span class="line">-O：用于下载文件，当url为下载链接时，可以使用此项目保存文件</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="ps-kill"><a href="#ps-kill" class="headerlink" title="ps - kill"></a>ps - kill</h2><ul>
+<li>&amp; <strong>ps</strong><br><strong>查看Linux系统中的进程信息</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure></li>
+<li>&amp; <strong>kill</strong><br><strong>关闭进程</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：kill [<span class="number">-9</span>] 进程ID</span><br><span class="line"><span class="number">-9</span>：强制关闭进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="主机状态监控"><a href="#主机状态监控" class="headerlink" title="主机状态监控"></a>主机状态监控</h2><ul>
+<li>&amp; <strong>top</strong></li>
+</ul>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h2 id="文件的上传下载"><a href="#文件的上传下载" class="headerlink" title="文件的上传下载"></a>文件的上传下载</h2><h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><ul>
 <li>未完待续</li>
 </ul>
 ]]></content>
