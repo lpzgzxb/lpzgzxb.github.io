@@ -71,7 +71,7 @@
 <li>如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件</li>
 <li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
 </ol>
-<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG./CA%7D442@OQ$K%25KJY5D%5B%25~IF.png"><br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/E6H5QU15M78FJ$YWJD.png"></p>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG/CA%7D442@OQ$K%25KJY5D%5B%25~IF.png"><br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/E6H5QU15M78FJ$YWJD.png"></p>
 <p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/49X9FP33H5HE92WK0.png"></p>
 <ul>
 <li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
@@ -224,12 +224,37 @@
 <li>&amp; <strong>ps</strong><br><strong>查看Linux系统中的进程信息</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure></li>
 <li>&amp; <strong>kill</strong><br><strong>关闭进程</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：kill [<span class="number">-9</span>] 进程ID</span><br><span class="line"><span class="number">-9</span>：强制关闭进程</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="主机状态监控"><a href="#主机状态监控" class="headerlink" title="主机状态监控"></a>主机状态监控</h2><ul>
-<li>&amp; <strong>top</strong></li>
+<h2 id="主机状态监控-top-df"><a href="#主机状态监控-top-df" class="headerlink" title="主机状态监控 top - df -"></a>主机状态监控 top - df -</h2><ul>
+<li><p>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure>
+<p>默认五秒刷新一次<br><img src="/"><br><img src="/"></p>
+</li>
+<li><p>&amp; <strong>df</strong><br><strong>查看硬盘的使用情况</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h2 id="文件的上传下载"><a href="#文件的上传下载" class="headerlink" title="文件的上传下载"></a>文件的上传下载</h2><h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><ul>
-<li>未完待续</li>
+<h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><p>常用有2种压缩格式</p>
+<ol>
+<li>.tar，称为tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li>
+<li>.gz，.tar.gz 这个会压缩内存。</li>
+</ol>
+<ul>
+<li>&amp; <strong>tar</strong><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参<span class="number">1</span> 参<span class="number">2</span> 参<span class="number">3.</span>..</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure>
+<strong>注意：</strong><br>-z 如果要使用的话<strong>一般</strong>处于选项第一位<br>-f <strong>必须</strong>在选项最后一位<br>-C 建议单独使用</li>
 </ul>
+<p><strong>例子：</strong></p>
+<ol>
+<li>压缩<br><strong>封装</strong>1,2,3.txt文件于test.tar文件夹中：tar -cvf test.tar 1.txt 2.txt 3.txt<br><strong>压缩</strong>1,2,3.txt文件于test.tar文件夹中：tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</li>
+<li>解压<br>解压test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>zip</strong><br><strong>压缩为zip格式</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：zip [-r] 参<span class="number">1</span> 参<span class="number">2.</span>..</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure>
+<p><strong>例子：</strong><br>将abc.txt 和 test文件夹压缩到test.zip 文件中：zip -r  test.zip a.txt b.txt c.txt test</p>
+</li>
+<li><p>&amp; <strong>unzip</strong><br><strong>解压zip格式</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>老师还讲了环境变量，IP地址，域名，端口，文件的上传下载等等。本人懒就不写了。</p>
 ]]></content>
       <categories>
         <category>Linux笔记</category>
