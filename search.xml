@@ -75,8 +75,8 @@
 <li>该结构体只是定义，还未初始化，所以不占用内存</li>
 <li>如果结构体声明在maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li>
 </ol>
-<h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line"> student.name, student.age, student.studenid, student.sex, 			student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line">stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span><br></pre></td></tr></table></figure>
+<h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line">    student.name, student.age, student.studenid,student.sex,student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line"><span class="comment">//stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span></span><br></pre></td></tr></table></figure>
 <h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
@@ -85,14 +85,15 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
 <p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p>
 <p>以下是错误示范：</p>
-<p><code>struct Student *stu = &amp;Student</code></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student;</span><br></pre></td></tr></table></figure>
+
 <h3 id="六-结构体传参"><a href="#六-结构体传参" class="headerlink" title="六.结构体传参"></a>六.结构体传参</h3><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值，还有一种是传地址，那么到底是传值还是传地址好勒？</p>
 <p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，<code>为什么？</code></p>
 <p>因为在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line">	 print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line">	 print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
-<p><em>小知识：</em> 如果传的为值那么我们用.来访问结构体成员；如果传地址的话我们就用-&gt;来访问，-&gt;也只能在结构体中使用。</p>
+<p><em>小知识：</em> 传值我们用<code>.</code>来访问结构体成员；传地址的话我们用<code>-&gt;</code>来访问，<code>-&gt;</code>符号也只能在结构体中使用。</p>
 <h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">	&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">	&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">	&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
 <p>想打印该变量出来也很简单，用for循环就行</p>
@@ -106,7 +107,7 @@
 <span id="more"></span>
 
 
-<h3 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="??? 什么是小端存储，大端存储"></a>??? 什么是小端存储，大端存储</h3><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
+<h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
 <ol>
 <li>小端存储</li>
 </ol>
@@ -165,9 +166,372 @@
 <span id="more"></span>
 <p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
 <ol>
-<li>接线正确<br>GND – GND<br>VCC – 5V<br>RXD – TXD<br>TXD – RXD</li>
-<li>一定要按住状态键在上电</li>
-<li><em><strong>STCAL的软件要在AT命令后加个回车</strong></em></li>
+<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
+</li>
+<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
+</li>
+<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Linux笔记</title>
+    <url>/2024/06/11/Linux%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>随心笔记</p>
+<span id="more"></span>
+
+<p>学习完 <a href="https://www.bilibili.com/video/BV1n84y1i7td/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">黑马程序员新版Linux零基础快速入门到精通</a> 受益匪浅，老师讲了许多基础的语法知识，深入浅出的带我认识和理解了很多Linux的操作，我将它们整理下来供大家参考学习，也方便我后续的复习反刍。（该文章适合有一定基础的小伙伴学习）</p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p><strong>包括以下：</strong></p>
+<ul>
+<li>系统阐述</li>
+<li>初识Linux</li>
+<li>虚拟机介绍</li>
+<li>VM 和 CenOS的安装，配置环境</li>
+</ul>
+<p>以上我都不讲，有兴趣的可以去看上边的链接视频（问就是任性）</p>
+<ul>
+<li><p>Linux 目录结构<br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录<code>/</code>，所有文件都在<code>/</code>下面。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</p>
+</li>
+</ul>
+<h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul>
+<li>&amp; <strong>ls</strong></li>
+</ul>
+<p>** 列出目录下内容 **</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ls [-a -l -h] [Linux 路径]</span><br><span class="line">-a : all 列出全部文件（包括隐藏文件/文件夹）</span><br><span class="line">-l : 以列表（竖向排序）展示内容</span><br><span class="line">-h : 以方便阅读的方式列出文件大小，K.M.G （一定要搭配 *-l* 才行）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&amp; <strong>cd</strong></li>
+</ul>
+<p><strong>切换到哪个目录下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//change directory</span><br><span class="line">语法：cd [Linux 路径]</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>cd 命令没有选项,只有参数,表示切换到哪个目录下</li>
+<li>cd 命令直接执行,不带参数,返回用户HOME目录</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>pwd</strong><br><em><strong>查看当前工作目录</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//print work directory</span><br><span class="line">语法: pwd</span><br><span class="line">pwd 命令,无选项,无参数,直接输入表示查看当前工作目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-相对路径与绝对路径-特殊路径符"><a href="#2-相对路径与绝对路径-特殊路径符" class="headerlink" title="2. 相对路径与绝对路径 - 特殊路径符"></a>2. 相对路径与绝对路径 - 特殊路径符</h2><ul>
+<li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <em>&#x2F;</em> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p>
+</li>
+<li><p>&amp; <strong>特殊路径符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.    表示当亲目录</span><br><span class="line">..   表示上一级目录，cd .. 表示回退到上一级， cd ../.. 表示回退上二级目录</span><br><span class="line">~    表示HOME目录，cd ~ 表示切换到HOME目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-mkdir-touch"><a href="#3-mkdir-touch" class="headerlink" title="3. mkdir - touch"></a>3. mkdir - touch</h2><ul>
+<li><p>&amp; <strong>mkdir</strong><br><strong>创建新的文件夹（目录）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//make directory</span><br><span class="line">语法：mkdir [-p] Linux路径</span><br><span class="line">-p：自动创建不存在的父目录，适用于创建连续多级目录（可选）</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>：创建文件夹有时会涉及权限问题，尽量创建文件于HOME目录内。</p>
+</li>
+<li><p>&amp; <strong>touch</strong><br><strong>创建文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-cat-more-vi-vim-编辑器-tail"><a href="#4-cat-more-vi-vim-编辑器-tail" class="headerlink" title="4. cat - more - vi&#x2F;vim 编辑器 - tail"></a>4. cat - more - vi&#x2F;vim 编辑器 - tail</h2><ul>
+<li><p>&amp; <strong>cat</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：cat Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> 会展示全部文件内容，不适合过大的文件查看。</p>
+</li>
+<li><p>&amp; <strong>more</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：more Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p>空格翻页，q 退出。<br><strong>注：</strong> 支持翻页，适合大文件查看。</p>
+</li>
+<li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//visual interface</span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure>
+
+<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/40~I3TZEQGRSW7%7DBV04JY7U.png" alt="img"></p>
+</li>
+</ul>
+<ol>
+<li>三种模式不能随意交换，输入模式与底线命令模式不相通</li>
+<li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹</li>
+<li>如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件</li>
+<li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
+</ol>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG/CA442@OQ$K%25KJY5D%25~IF.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/E6H5QU15M78FJ$YWJD.png" alt="img"></p>
+<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/49X9FP33H5HE92WK0.png" alt="img"></p>
+<ul>
+<li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：tail [-f -num] Linux路径</span><br><span class="line">-f： 持续跟踪</span><br><span class="line">-num： 查看尾部多少行，默认10行</span><br></pre></td></tr></table></figure>
+
+<p>带上 -f 后程序会跟踪文件最新更改，<code>ctrl + c</code>停止</p>
+<h2 id="5-cp-mv-rm"><a href="#5-cp-mv-rm" class="headerlink" title="5. cp - mv - rm"></a>5. cp - mv - rm</h2><ul>
+<li><p>&amp; <strong>cp</strong><br><strong>复制文件&#x2F;文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//copy</span><br><span class="line">语法：cp [-r] 参1 参2</span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">参1：被复制的文件/文件路径</span><br><span class="line">参2：要复制去的地方</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>参2文件&#x2F;文件夹</strong></p>
+</li>
+<li><p>&amp; <strong>mv</strong><br><strong>移动文件&#x2F;文件夹，修改名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//move</span><br><span class="line">语法：mv 参1 参2</span><br><span class="line">参1：被复移动的文件/文件路径</span><br><span class="line">参2：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改参1的名称</strong></p>
+</li>
+<li><p>&amp; <strong>rm</strong><br><strong>删除文件&#x2F;文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//remove</span><br><span class="line">语法：rm [-r -f] n个参数</span><br><span class="line">-r：删除对象为文件夹</span><br><span class="line">-f：force，强制删除</span><br><span class="line">参数：要删除的文件/文件夹路径，可以同时删除多个，以空格隔开</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> rm 是一个<code>危险</code>的命令，尤其是处于root（超级管理员）用户下。</p>
+</li>
+</ul>
+<h2 id="6-which-find"><a href="#6-which-find" class="headerlink" title="6. which - find"></a>6. which - find</h2><ul>
+<li><p>&amp; <strong>which</strong><br><strong>查看命令的程序文件存放位置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure>
+
+<p>Linux命令本质就是一个个可执行程序，就像自定义函数，使用它就去调用它，我们使用的命令都是系统自带的，which 命令可以找到该命令的位置。</p>
+</li>
+<li><p>&amp; <strong>find</strong><br><strong>按文件名查找文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法1：find 起始地址 -name &quot;文件名&quot;</span><br><span class="line">起始地址：文件从哪开始查找</span><br><span class="line">-name：表示查找文件名</span><br><span class="line"></span><br><span class="line">语法2：find 起始地址 -size +/- n [k/M/G]</span><br><span class="line">-size：按文件大小查找</span><br><span class="line">+/-：表示大于或小于</span><br><span class="line">n：表示大小数字</span><br><span class="line">k/M/G：表示单位</span><br></pre></td></tr></table></figure>
+
+<p>例：<br>在<strong>HOME目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find home -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find / -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>查找<strong>小于10kb 大小</strong>的文件：<code>find / -size -10k</code><br>在<strong>根目录</strong>查找<strong>大于10GB</strong> 大小的文件：<code>find / -size +10G</code></p>
+</li>
+</ul>
+<h2 id="7-grep-wc"><a href="#7-grep-wc" class="headerlink" title="7. grep - wc"></a>7. grep - wc</h2><ul>
+<li><p>&amp; <strong>grep</strong><br><strong>通过关键字过滤文件行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：grep [-n] &quot;关键字&quot; 文件路径</span><br><span class="line">-n：在结果中显示行号</span><br><span class="line">关键字：必填，需要隔离的关键字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>wc</strong><br><strong>统计文件行数，单词数量等</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：wc [-c -m -l -w] 文件路径</span><br><span class="line">-c：计算文件大小单位byte</span><br><span class="line">-m：统计字符串数量</span><br><span class="line">-l：统计行数</span><br><span class="line">-w：统计单词数量</span><br></pre></td></tr></table></figure>
+
+<p>不带选项，默认输出 -l，-w，-c 和文件名。</p>
+</li>
+</ul>
+<h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 -通配符"></a>8. 重定向符 - 管道符 -通配符</h2><ul>
+<li>&amp; <strong>重定向符</strong></li>
+</ul>
+<p><strong>&gt;</strong> 将左侧命令的结果，<em>覆盖</em>写入符号右侧指定的文件中<br><strong>&gt;&gt;</strong> 将左侧命令的结果，<em>追加</em>写入符号右侧指定的文件中</p>
+<p><strong>注：</strong> 如果左侧为<strong>命令</strong>，那么会把命令产生的结果覆盖或追加到指定文件中</p>
+<ul>
+<li>&amp; <strong>管道符</strong></li>
+</ul>
+<p><strong>|</strong> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计test.txt文件中带有test关键字有几行：<code>cat test.txt | grep test | wc -l</code></p>
+<p>适合搭配** cat grep** 等命令使用。</p>
+<ul>
+<li>&amp; <strong>通配符</strong><br><strong>模糊匹配</strong></li>
+</ul>
+<ol>
+<li>test* , 表示如何任何以test开头的内容。</li>
+<li>*test，表示如何任何以test结尾的内容。</li>
+<li><em>test</em>，表示如何任何包含test的内容。</li>
+</ol>
+<p>适合搭配 <strong>rm find</strong> 等命令使用。</p>
+<h2 id="9-echo"><a href="#9-echo" class="headerlink" title="9. echo"></a>9. echo</h2><ul>
+<li><p>&amp; <strong>echo</strong><br>打印内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：echo 输出的内容</span><br><span class="line">echo 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p>等同于c语言命令中的 printf ，打印内容在屏幕上</p>
+</li>
+</ul>
+<ol>
+<li>输出内容建议用双引号括起来，更加美观，容易辨识</li>
+<li>输出内容为<strong>命令</strong>的话必须用 <code>``</code> 括起来</li>
+</ol>
+<h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="su-sudo"><a href="#su-sudo" class="headerlink" title="su - sudo"></a>su - sudo</h2><ul>
+<li>&amp; <strong>su</strong><br><strong>切换用户</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//switch user</span><br><span class="line">语法：su - [用户名]</span><br><span class="line">exit 命令会回退到上一个用户</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>root 用户拥有最大的系统操作权限，而普通用户在许多地方权限受限。</li>
+<li>切换到root用户会要求输入密码，密码不会显现</li>
+<li>普通用户一般会在HOME目录下不受影响</li>
+<li>不填用户名默认为root用户<br><strong>注：</strong>权限越大，操作带来的影响就越危险</li>
+</ol>
+<ul>
+<li>&amp; <strong>sudo</strong><br><strong>以root用户，为命令临时授权</strong><br><strong>注：</strong>该命令要先在认证文件中添加语句，不然无法使用</li>
+</ul>
+<p><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ccc.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：sudo 其他命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><p>Linux关于权限管理级别有两个</p>
+<ol>
+<li>针对<strong>用户</strong>的权限控制</li>
+<li>针对<strong>用户组</strong>的权限控制</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>groupadd</strong><br><strong>创建用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">groupadd 组名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>grupdel</strong><br><strong>删除用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grupdel 组名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>useradd</strong><br><strong>创建用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：useradd [-g -d] 用户名</span><br><span class="line">-g：指定用户组，不指定会创建同名组并且自动加入</span><br><span class="line">-d：指定用户HOME路径，默认在/home/用户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>userdel</strong><br><strong>删除用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">userdel [-r] 用户名</span><br><span class="line">-r：删除用户的HOME目录，不带则保留</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>id</strong><br><strong>查看用户所属的组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：id 用户名</span><br><span class="line">用户名：查看的用户，不带则查看自身</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>usermod -aG</strong><br><strong>修改用户所属的组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：usermod -aG 用户组 用户</span><br></pre></td></tr></table></figure>
+
+<p>将指定用户加入指定用户组</p>
+</li>
+<li><p>&amp; <strong>getent</strong><br><strong>查看该电脑中有哪些用户或用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：getent passwd[用户]/group[用户组]</span><br></pre></td></tr></table></figure>
+
+<p>用户名带有七份信息：密码（x）；用户ID；描述信息；HOME目录；执行终端</p>
+</li>
+</ul>
+<p>​	用户名带有三份信息：组名；密码；用户组ID</p>
+<h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/aaa.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/vvv.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/zzz.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/q.png" alt="img"></p>
+<h2 id="chmod-命令和chown-命令"><a href="#chmod-命令和chown-命令" class="headerlink" title="chmod 命令和chown 命令"></a>chmod 命令和chown 命令</h2><ul>
+<li><p>&amp; <strong>chmod</strong><br>修改文件&#x2F;文件夹的权限信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chmod [-R] 权限 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>只有文件、文件夹所属用户或者root用户才可以使用该命令</p>
+<p>快捷修改权限可以使用 751权限</p>
+</li>
+</ul>
+<p><strong>例如：</strong><br>将文件夹里所有文件权限修改为：rwx r-x –x 命令为：chmod -R u&#x3D;rwx,g&#x3D;rx,o&#x3D;x test<br>将文件夹权限修改为：rwx r-x –x 命令为：chmod 751 test</p>
+<ul>
+<li><p>&amp; <strong>chown</strong><br>可以修改文件&#x2F;文件夹所属用户和用户组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chown [-R] [用户][:][用户组] 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br><span class="line">: ：分隔</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>该命令只有root用户可以使用</p>
+<p>例如：</p>
+<p>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：</p>
+<p>chown -R root:kkdp test</p>
+</li>
+</ul>
+<h2 id="yum-软件安装"><a href="#yum-软件安装" class="headerlink" title="yum 软件安装"></a>yum 软件安装</h2><ul>
+<li><p>&amp; <strong>yum</strong></p>
+<p>rpm包软件管理器，用于自动化安装配置Linux软件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：yum [-y] [install | remove | sratch] 软件名称</span><br><span class="line">-y：自动确认</span><br><span class="line">install 安装，remove 卸载，search 搜索</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>该命令需要root权限和联网</p>
+</li>
+</ul>
+<h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><ul>
+<li><p>&amp; <strong>systemctl</strong></p>
+<p>管理服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start | stop | status | enable | disable 服务名</span><br><span class="line">start 启动，stop 关闭，status 查看状态，enable 开机启动，disable 关闭开机启动</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>部分软件安装后没有自动集成到systemctl中，这些需要手动添加</p>
+</li>
+</ul>
+<p>​	内置服务有很多，比如：<br>​	networkmanger 主网络服务<br>​	network 副网络服务<br>​	firewalld 防火墙服务<br>​	sshd ssh服务</p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><ul>
+<li><p>&amp; <strong>ln</strong></p>
+<p>软连接：在系统中创建软连接可以将文件链接到其他位置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ln -s 参1 参2</span><br><span class="line">-s：创建软连接</span><br><span class="line">参1：被链接的文件或文件夹</span><br><span class="line">参2：要链接去的目的地</span><br></pre></td></tr></table></figure>
+<p>类似于win下的创建快捷方式</p>
+</li>
+</ul>
+<h2 id="ping-wget-curl"><a href="#ping-wget-curl" class="headerlink" title="ping - wget - curl"></a>ping - wget - curl</h2><ul>
+<li><p>&amp; <strong>ping</strong><br><strong>查看指定网络服务器是否联通</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ping [-c num] ip或主机名</span><br><span class="line">-c：检查的次数，不填默认无限次检查</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>wget</strong><br><strong>非交换式文件下载器，可下载网络文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：wget [-b] url</span><br><span class="line">-b：可选，后台下载</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>curl</strong><br><strong>可下载文件也可以发送网络请求</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：curl [-O] url</span><br><span class="line">-O：用于下载文件，当url为下载链接时，可以使用此项目保存文件</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="ps-kill"><a href="#ps-kill" class="headerlink" title="ps - kill"></a>ps - kill</h2><ul>
+<li><p>&amp; <strong>ps</strong></p>
+<p>查看Linux系统中的进程信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>kill</strong></p>
+<p>关闭进程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：kill [-9] 进程ID</span><br><span class="line">-9：强制关闭进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="主机状态监控-top-df"><a href="#主机状态监控-top-df" class="headerlink" title="主机状态监控 top - df -"></a>主机状态监控 top - df -</h2><ul>
+<li>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure>
+
+<p>  默认五秒刷新一次<br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/aq.png" alt="img"><br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ab.png" alt="img"><br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ac.png" alt="img"></p>
+<ul>
+<li><p>&amp; <strong>df</strong><br><strong>查看硬盘的使用情况</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><p>常用有2种压缩格式</p>
+<ol>
+<li>.tar，称为 tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li>
+<li>.gz，.tar.gz 这个会压缩内存。</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>tar</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参1 参2 参3...</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>-z ：如果要使用的话一般处于选项第一位</p>
+<p>-f ：必须在选项最后一位</p>
+<p>-C  ：建议单独使用</p>
+</li>
+</ul>
+<p><strong>例子：</strong></p>
+<ol>
+<li>压缩<br><strong>封装</strong>1,2,3.txt文件于test.tar文件夹中：tar -cvf test.tar 1.txt 2.txt 3.txt<br><strong>压缩</strong>1,2,3.txt文件于test.tar文件夹中：tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</li>
+<li>解压<br>解压test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>zip</strong><br><strong>压缩为zip格式</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：zip [-r] 参1 参2...</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子：</strong><br>将abc.txt 和 test文件夹压缩到test.zip 文件中：zip -r test.zip a.txt b.txt c.txt test</p>
+</li>
+<li><p>&amp; <strong>unzip</strong><br><strong>解压zip格式</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>结构体大小计算</title>
+    <url>/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/</url>
+    <content><![CDATA[<p>结构体内存大小计算不是简单的 1 + 1 ，那么系统是如何存放结构体的数据？它的大小又是如何计算的呢？</p>
+<span id="more"></span>
+
+<h2 id="简单结构体大小计算"><a href="#简单结构体大小计算" class="headerlink" title="简单结构体大小计算"></a>简单结构体大小计算</h2><p>可以简单分为<strong>三步走战略</strong>：</p>
+<ol>
+<li>找到各个成员大小，这个CPU原因会有所差异。</li>
+<li>考虑成员对其方式<br><strong>注：</strong> 这里会有一个默认对其数的概念，如VS编译器默认对其数为8。<br>找到最小值</li>
+</ol>
+<p><img src="/" alt="img"></p>
+<ol start="3">
+<li>计算结构体的总大小<br>把它在内存中的存在方式画出来</li>
+</ol>
+<p><img src="/" alt="img"></p>
+<p>我们可以清楚的看到该结构体的大小为13</p>
+<h2 id="进阶大小计算"><a href="#进阶大小计算" class="headerlink" title="进阶大小计算"></a>进阶大小计算</h2><ol>
+<li>结构体数组大小计算</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">	double num;</span><br><span class="line">	char name[10];</span><br><span class="line">	int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>首先找最小值：<br>double -&gt; 8（内存大小） -&gt; 8（默认对齐数） -&gt; 8（最小值）<br>char -&gt; 1 -&gt; 8 -&gt;1<br>int -&gt; 4 -&gt; 8 -&gt; 4<br>考虑对其方式：<br>这个 char 类型的数组，只需要把它看做十个 char 型连在一起即可，最大对齐数是 int 的4<br>计算：<br>所以该结构体的大小为：8 + 10 + 空2 + 4 &#x3D; 24</p>
+<ol start="2">
+<li>嵌套结构体大小计算</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct s1 &#123;</span><br><span class="line">    char a;//1 -&gt; 8 -&gt; 1</span><br><span class="line">    int b;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    struct s &#123;</span><br><span class="line">        char c;//1 -&gt; 8 -&gt; 1 </span><br><span class="line">        int d;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    &#125;;</span><br><span class="line">    float e;//4 -&gt; 8 -&gt; 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>计算结构体大小时是把里面这个结构体就看做是一个char,和一个int，不是看做一个整体。</p>
+<p>所以该结构体大小为：1 + 空3 + 4 +1 +空3 + 4 + 4 &#x3D; 20</p>
+<h2 id="修改默认对其数"><a href="#修改默认对其数" class="headerlink" title="修改默认对其数"></a>修改默认对其数</h2><p>我们可以借助预处理命令来修改‘</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure>
+
+<p>C语言中的默认对齐数，取决于编译器和计算机体系结构。C语言标准并没有规定特定的默认对齐数，而是留给了编译器实现来确定。在大多数情况下，编译器会根据目标体系结构的要求来确定默认的对齐数。</p>
+<p><strong>注意以下几点：</strong></p>
+<ol>
+<li>使用 #pragma pack() 可能会<strong>降低内存</strong>访问效率，因为不再按照默认的对齐方式进行对齐，导致内存访问更频繁。</li>
+<li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li>
+<li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li>
+<li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li>
 </ol>
 ]]></content>
   </entry>

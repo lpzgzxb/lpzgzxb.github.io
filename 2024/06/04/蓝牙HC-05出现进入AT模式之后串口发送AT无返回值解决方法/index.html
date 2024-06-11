@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -239,10 +239,15 @@
 <span id="more"></span>
 <p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
 <ol>
-<li>接线正确<br>GND – GND<br>VCC – 5V<br>RXD – TXD<br>TXD – RXD</li>
-<li>一定要按住状态键在上电</li>
-<li><em><strong>STCAL的软件要在AT命令后加个回车</strong></em></li>
+<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
+</li>
+<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
+</li>
+<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
+</li>
 </ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -338,7 +343,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
