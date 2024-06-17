@@ -189,20 +189,19 @@
 <li>系统阐述</li>
 <li>初识Linux</li>
 <li>虚拟机介绍</li>
-<li>VM 和 CenOS的安装，配置环境</li>
+<li>VM 和 CenOS 的安装，配置环境</li>
 </ul>
-<p>以上我都不讲，有兴趣的可以去看上边的链接视频（问就是任性）</p>
-<ul>
-<li><p>Linux 目录结构<br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录<code>/</code>，所有文件都在<code>/</code>下面。</p>
+<p>以上有兴趣的可以去看上边的链接视频</p>
+<p><em>Linux 目录结构</em><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录<code>/</code>，所有文件都在<code>/</code>下面。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</p>
-</li>
+
+<ul>
+<li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</li>
 </ul>
 <h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul>
 <li>&amp; <strong>ls</strong></li>
 </ul>
-<p>** 列出目录下内容 **</p>
+<p><strong>列出目录下内容</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ls [-a -l -h] [Linux 路径]</span><br><span class="line">-a : all 列出全部文件（包括隐藏文件/文件夹）</span><br><span class="line">-l : 以列表（竖向排序）展示内容</span><br><span class="line">-h : 以方便阅读的方式列出文件大小，K.M.G （一定要搭配 *-l* 才行）</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -220,7 +219,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//print work directory</span><br><span class="line">语法: pwd</span><br><span class="line">pwd 命令,无选项,无参数,直接输入表示查看当前工作目录</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="2-相对路径与绝对路径-特殊路径符"><a href="#2-相对路径与绝对路径-特殊路径符" class="headerlink" title="2. 相对路径与绝对路径 - 特殊路径符"></a>2. 相对路径与绝对路径 - 特殊路径符</h2><ul>
-<li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <em>&#x2F;</em> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p>
+<li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <code>/</code> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p>
 </li>
 <li><p>&amp; <strong>特殊路径符</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.    表示当亲目录</span><br><span class="line">..   表示上一级目录，cd .. 表示回退到上一级， cd ../.. 表示回退上二级目录</span><br><span class="line">~    表示HOME目录，cd ~ 表示切换到HOME目录</span><br></pre></td></tr></table></figure></li>
@@ -232,7 +231,9 @@
 <p><strong>注</strong>：创建文件夹有时会涉及权限问题，尽量创建文件于HOME目录内。</p>
 </li>
 <li><p>&amp; <strong>touch</strong><br><strong>创建文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure>
+<p>这个命令用于创建一个空文件，或者更新现有文件的时间戳。<br>如果文件已经存在，touch 命令会更新它的访问时间和修改时间到当前时间。此外，touch 命令还可以同时更新多个文件的时间戳。</p>
+</li>
 </ul>
 <h2 id="4-cat-more-vi-vim-编辑器-tail"><a href="#4-cat-more-vi-vim-编辑器-tail" class="headerlink" title="4. cat - more - vi&#x2F;vim 编辑器 - tail"></a>4. cat - more - vi&#x2F;vim 编辑器 - tail</h2><ul>
 <li><p>&amp; <strong>cat</strong><br><strong>查看文件内容</strong></p>
@@ -248,17 +249,16 @@
 <li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//visual interface</span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure>
 
-<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/40~I3TZEQGRSW7%7DBV04JY7U.png" alt="img"></p>
+<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/40~I3TZEQGRSW7%7DBV04JY7U.png"></p>
 </li>
 </ul>
 <ol>
 <li>三种模式不能随意交换，输入模式与底线命令模式不相通</li>
-<li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹</li>
-<li>如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件</li>
+<li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹；如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件。</li>
 <li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
 </ol>
-<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/./%EF%BF%BD%EF%BF%BD%EF%BF%BDG/CA442@OQ$K%25KJY5D%25~IF.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/E6H5QU15M78FJ$YWJD.png" alt="img"></p>
-<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/./%E6%97%A5%E5%BF%97%E5%9B%BE%E7%89%87/49X9FP33H5HE92WK0.png" alt="img"></p>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/CA442@OQ$K%25KJY5D%25~IF.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/E6H5QU15M78FJ$YWJD.png" alt="img"></p>
+<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/49X9FP33H5HE92WK0.png" alt="img"></p>
 <ul>
 <li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
 </ul>
@@ -267,27 +267,27 @@
 <p>带上 -f 后程序会跟踪文件最新更改，<code>ctrl + c</code>停止</p>
 <h2 id="5-cp-mv-rm"><a href="#5-cp-mv-rm" class="headerlink" title="5. cp - mv - rm"></a>5. cp - mv - rm</h2><ul>
 <li><p>&amp; <strong>cp</strong><br><strong>复制文件&#x2F;文件夹</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//copy</span><br><span class="line">语法：cp [-r] 参1 参2</span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">参1：被复制的文件/文件路径</span><br><span class="line">参2：要复制去的地方</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//copy</span><br><span class="line">语法：cp [-r] value_1 value_2</span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">value_1：被复制的文件/文件路径</span><br><span class="line">valuee_2：要复制去的地方</span><br></pre></td></tr></table></figure>
 
-<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>参2文件&#x2F;文件夹</strong></p>
+<p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>文件&#x2F;文件夹</strong></p>
 </li>
 <li><p>&amp; <strong>mv</strong><br><strong>移动文件&#x2F;文件夹，修改名称</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//move</span><br><span class="line">语法：mv 参1 参2</span><br><span class="line">参1：被复移动的文件/文件路径</span><br><span class="line">参2：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//move</span><br><span class="line">语法：mv value_1 value_2</span><br><span class="line">value_1：被复移动的文件/文件路径</span><br><span class="line">value_2：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure>
 
-<p><strong>注：</strong>参2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改参1的名称</strong></p>
+<p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改value_1的名称</strong></p>
 </li>
 <li><p>&amp; <strong>rm</strong><br><strong>删除文件&#x2F;文件夹</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//remove</span><br><span class="line">语法：rm [-r -f] n个参数</span><br><span class="line">-r：删除对象为文件夹</span><br><span class="line">-f：force，强制删除</span><br><span class="line">参数：要删除的文件/文件夹路径，可以同时删除多个，以空格隔开</span><br></pre></td></tr></table></figure>
 
-<p><strong>注：</strong> rm 是一个<code>危险</code>的命令，尤其是处于root（超级管理员）用户下。</p>
+<p><strong>注：</strong> rm 是一个<code>危险</code>的命令，尤其是处于root（超级管理员）用户下，使用之前一定要慎重考虑。</p>
 </li>
 </ul>
 <h2 id="6-which-find"><a href="#6-which-find" class="headerlink" title="6. which - find"></a>6. which - find</h2><ul>
 <li><p>&amp; <strong>which</strong><br><strong>查看命令的程序文件存放位置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure></li>
+</ul>
 <p>Linux命令本质就是一个个可执行程序，就像自定义函数，使用它就去调用它，我们使用的命令都是系统自带的，which 命令可以找到该命令的位置。</p>
-</li>
+<ul>
 <li><p>&amp; <strong>find</strong><br><strong>按文件名查找文件</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法1：find 起始地址 -name &quot;文件名&quot;</span><br><span class="line">起始地址：文件从哪开始查找</span><br><span class="line">-name：表示查找文件名</span><br><span class="line"></span><br><span class="line">语法2：find 起始地址 -size +/- n [k/M/G]</span><br><span class="line">-size：按文件大小查找</span><br><span class="line">+/-：表示大于或小于</span><br><span class="line">n：表示大小数字</span><br><span class="line">k/M/G：表示单位</span><br></pre></td></tr></table></figure>
 
@@ -304,18 +304,20 @@
 <p>不带选项，默认输出 -l，-w，-c 和文件名。</p>
 </li>
 </ul>
-<h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 -通配符"></a>8. 重定向符 - 管道符 -通配符</h2><ul>
-<li>&amp; <strong>重定向符</strong></li>
+<h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 - 通配符"></a>8. 重定向符 - 管道符 - 通配符</h2><ul>
+<li>&amp; <strong>重定向符</strong>  <code>&gt;</code></li>
 </ul>
 <p><strong>&gt;</strong> 将左侧命令的结果，<em>覆盖</em>写入符号右侧指定的文件中<br><strong>&gt;&gt;</strong> 将左侧命令的结果，<em>追加</em>写入符号右侧指定的文件中</p>
+<p><strong>好处：</strong>Linux 命令主要通过命令行界面的单命令来执行，重定向符可以让单命令组合为<code>批处理命令</code>，使得执行命令更加高效快捷。</p>
 <p><strong>注：</strong> 如果左侧为<strong>命令</strong>，那么会把命令产生的结果覆盖或追加到指定文件中</p>
 <ul>
-<li>&amp; <strong>管道符</strong></li>
+<li>&amp; <strong>管道符</strong>  <code>|</code></li>
 </ul>
-<p><strong>|</strong> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计test.txt文件中带有test关键字有几行：<code>cat test.txt | grep test | wc -l</code></p>
-<p>适合搭配** cat grep** 等命令使用。</p>
+<p><code>|</code> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计 test.txt 文件中带有 test 关键字有几行：<code>cat test.txt | grep test | wc -l</code></p>
+<p>适合搭配 <strong>cat &#x2F; grep</strong> 等命令使用。</p>
 <ul>
-<li>&amp; <strong>通配符</strong><br><strong>模糊匹配</strong></li>
+<li>&amp; <strong>通配符</strong></li>
+<li><strong>模糊匹配</strong> <code>*</code></li>
 </ul>
 <ol>
 <li>test* , 表示如何任何以test开头的内容。</li>
@@ -323,6 +325,12 @@
 <li><em>test</em>，表示如何任何包含test的内容。</li>
 </ol>
 <p>适合搭配 <strong>rm find</strong> 等命令使用。</p>
+<p>通配符还有多种，以下为AI生成<br>问号（?）：</p>
+<p>问号代表单个任意字符。例如，ls ?.txt 会列出当前目录下所有以单个字符和 .txt 结尾的文件，如 a.txt、b.txt 等。<br>方括号（[]）：</p>
+<p>方括号用于匹配括号内的任意一个字符。例如，ls [abc].txt 会列出当前目录下所有以 a.txt、b.txt 或 c.txt 结尾的文件。<br>方括号还可以包含字符范围，如 [a-z] 代表任意一个小写字母。<br>花括号（{}）：</p>
+<p>花括号用于匹配括号内的多个选项中的任意一个。例如，ls {file1,file2,file3}.txt 会列出 file1.txt、file2.txt 和 file3.txt。<br>花括号也可以与模式结合使用，如 {a,b,c}* 会匹配以 a、b 或 c 开头的任意文件。<br>反斜杠（\）：</p>
+<p>当你需要匹配通配符本身时，可以使用反斜杠进行转义。例如，ls *.txt 会匹配文件名中包含星号的文件，如 example*.txt。<br>正则表达式：</p>
+<p>虽然不是通配符，但正则表达式在某些命令中（如 grep）用于复杂的模糊匹配。正则表达式使用特定的模式来匹配字符串，例如 grep ‘^[0-9]+’ 会匹配以一个或多个数字开头的行。</p>
 <h2 id="9-echo"><a href="#9-echo" class="headerlink" title="9. echo"></a>9. echo</h2><ul>
 <li><p>&amp; <strong>echo</strong><br>打印内容</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：echo 输出的内容</span><br><span class="line">echo 无选项 参数必填</span><br></pre></td></tr></table></figure>
@@ -341,16 +349,16 @@
 
 <ol>
 <li>root 用户拥有最大的系统操作权限，而普通用户在许多地方权限受限。</li>
-<li>切换到root用户会要求输入密码，密码不会显现</li>
+<li>切换到root用户会要求输入密码，密码<code>不会显现</code></li>
 <li>普通用户一般会在HOME目录下不受影响</li>
-<li>不填用户名默认为root用户<br><strong>注：</strong>权限越大，操作带来的影响就越危险</li>
+<li>不填用户名默认为root用户</li>
 </ol>
 <ul>
-<li>&amp; <strong>sudo</strong><br><strong>以root用户，为命令临时授权</strong><br><strong>注：</strong>该命令要先在认证文件中添加语句，不然无法使用</li>
+<li>&amp; <strong>sudo</strong></li>
 </ul>
-<p><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ccc.png" alt="img"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：sudo 其他命令</span><br></pre></td></tr></table></figure>
-
+<p>  <code>临时授权</code>其他命令为 root 权限<br>  <strong>注：</strong>该命令要提前在认证文件中添加命令，不然无法使用，以下为添加命令方式</p>
+<p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ccc.png"></p>
 <h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><p>Linux关于权限管理级别有两个</p>
 <ol>
 <li>针对<strong>用户</strong>的权限控制</li>
@@ -384,13 +392,12 @@
 </li>
 </ul>
 <p>​	用户名带有三份信息：组名；密码；用户组ID</p>
-<h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/aaa.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/vvv.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/zzz.png" alt="img"><br><img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/q.png" alt="img"></p>
+<h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/q.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ww.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/vvv.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/zzz.png"></p>
 <h2 id="chmod-命令和chown-命令"><a href="#chmod-命令和chown-命令" class="headerlink" title="chmod 命令和chown 命令"></a>chmod 命令和chown 命令</h2><ul>
 <li><p>&amp; <strong>chmod</strong><br>修改文件&#x2F;文件夹的权限信息</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chmod [-R] 权限 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br></pre></td></tr></table></figure>
 
-<p><strong>注意：</strong></p>
-<p>只有文件、文件夹所属用户或者root用户才可以使用该命令</p>
+<p><strong>注意：</strong>只有文件、文件夹所属用户或者root用户才可以使用该命令</p>
 <p>快捷修改权限可以使用 751权限</p>
 </li>
 </ul>
@@ -399,11 +406,9 @@
 <li><p>&amp; <strong>chown</strong><br>可以修改文件&#x2F;文件夹所属用户和用户组</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chown [-R] [用户][:][用户组] 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br><span class="line">: ：分隔</span><br></pre></td></tr></table></figure>
 
-<p><strong>注意：</strong></p>
-<p>该命令只有root用户可以使用</p>
+<p><strong>注意：</strong>该命令只有root用户可以使用</p>
 <p>例如：</p>
-<p>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：</p>
-<p>chown -R root:kkdp test</p>
+<p>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：chown -R root:kkdp test</p>
 </li>
 </ul>
 <h2 id="yum-软件安装"><a href="#yum-软件安装" class="headerlink" title="yum 软件安装"></a>yum 软件安装</h2><ul>
@@ -411,8 +416,7 @@
 <p>rpm包软件管理器，用于自动化安装配置Linux软件</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：yum [-y] [install | remove | sratch] 软件名称</span><br><span class="line">-y：自动确认</span><br><span class="line">install 安装，remove 卸载，search 搜索</span><br></pre></td></tr></table></figure>
 
-<p><strong>注意：</strong></p>
-<p>该命令需要root权限和联网</p>
+<p><strong>注意：</strong>该命令需要root权限和联网</p>
 </li>
 </ul>
 <h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><ul>
@@ -445,30 +449,29 @@
 <h2 id="ps-kill"><a href="#ps-kill" class="headerlink" title="ps - kill"></a>ps - kill</h2><ul>
 <li><p>&amp; <strong>ps</strong></p>
 <p>查看Linux系统中的进程信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>&amp; <strong>kill</strong></p>
 <p>关闭进程</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：kill [-9] 进程ID</span><br><span class="line">-9：强制关闭进程</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：kill [<span class="number">-9</span>] 进程ID</span><br><span class="line"><span class="number">-9</span>：强制关闭进程</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="主机状态监控-top-df"><a href="#主机状态监控-top-df" class="headerlink" title="主机状态监控 top - df -"></a>主机状态监控 top - df -</h2><ul>
-<li>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure>
+<li><p>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure>
 
-<p>  默认五秒刷新一次<br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/aq.png" alt="img"><br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ab.png" alt="img"><br>  <img src="/./%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/ac.png" alt="img"></p>
-<ul>
+<p>默认五秒刷新一次<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ab.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ac.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/aq.png" alt="img"></p>
+</li>
 <li><p>&amp; <strong>df</strong><br><strong>查看硬盘的使用情况</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><p>常用有2种压缩格式</p>
 <ol>
-<li>.tar，称为 tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li>
-<li>.gz，.tar.gz 这个会压缩内存。</li>
+<li>.tar  称为 tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li>
+<li>.gz  .tar.gz 这个会压缩内存。</li>
 </ol>
 <ul>
 <li><p>&amp; <strong>tar</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参1 参2 参3...</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参<span class="number">1</span> 参<span class="number">2</span> 参<span class="number">3.</span>..</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：</strong></p>
 <p>-z ：如果要使用的话一般处于选项第一位</p>
@@ -479,16 +482,16 @@
 <p><strong>例子：</strong></p>
 <ol>
 <li>压缩<br><strong>封装</strong>1,2,3.txt文件于test.tar文件夹中：tar -cvf test.tar 1.txt 2.txt 3.txt<br><strong>压缩</strong>1,2,3.txt文件于test.tar文件夹中：tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</li>
-<li>解压<br>解压test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li>
+<li>解压<br>解压 test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压 test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li>
 </ol>
 <ul>
 <li><p>&amp; <strong>zip</strong><br><strong>压缩为zip格式</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：zip [-r] 参1 参2...</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：zip [-r] 参<span class="number">1</span> 参<span class="number">2.</span>..</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure>
 
 <p><strong>例子：</strong><br>将abc.txt 和 test文件夹压缩到test.zip 文件中：zip -r test.zip a.txt b.txt c.txt test</p>
 </li>
 <li><p>&amp; <strong>unzip</strong><br><strong>解压zip格式</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
   </entry>
@@ -532,6 +535,26 @@
 <li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li>
 <li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li>
 <li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
+    <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
+    <content><![CDATA[<p>随心笔记</p>
+<span id="more"></span>
+
+<p>官方原题为：</p>
+<p><img src="/../images/leetcode%20%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/L.png"></p>
+<p>该题官方原解为：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line"><span class="type">int</span> left = <span class="number">0</span>, right = numsSize - <span class="number">1</span>, ans = numsSize;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> mid = ((right - left) &gt;&gt; <span class="number">1</span>) + left;</span><br><span class="line">        <span class="keyword">if</span> (target &lt;= nums[mid]) &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中这段代码，有点小疑惑 - &gt;<br><code>int mid = ((right - left) &gt;&gt; 1) + left;</code><br>这段代码可以同理为：</p>
+<p><code>int mid = (right + left) / 2;</code><br>我们知道 int 是有范围的，如果 r + l 过大会溢出，所以不使用除2的操作；当位移运算符前数字为偶数时， &gt;&gt; 1 等同 &#x2F; 2 ；<code>+ left</code>是保证移运算符前数字为奇数时<code>mid</code>的值依然为偶数，方便下面的运算</p>
+<p>这段代码有两个优点：</p>
+<ol>
+<li>(r - l) 不会溢出，因为我们知道 r &gt; l 。</li>
+<li>(&gt;&gt; 1) 位移运算符所要的计算量少，而且可以代替 &#x2F; 2 。</li>
 </ol>
 ]]></content>
   </entry>
