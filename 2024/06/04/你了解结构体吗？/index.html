@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#008000","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?">
+  <meta name="description" content="我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你了解结构体吗？">
 <meta property="og:url" content="http://example.com/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/index.html">
 <meta property="og:site_name" content="酷酷小彭">
-<meta property="og:description" content="我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?">
+<meta property="og:description" content="我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-04T10:36:25.000Z">
 <meta property="article:modified_time" content="2024-06-04T10:36:25.000Z">
@@ -235,10 +235,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p>
+        <p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p>
 <span id="more"></span>
 
-
+<p>比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p>
 <h1 id="啥是结构体"><a href="#啥是结构体" class="headerlink" title="啥是结构体"></a>啥是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p>
 <p>int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为复杂数据类型或构造数据类型。</p>
 <h3 id="一-结构体的声明，定义和初始化"><a href="#一-结构体的声明，定义和初始化" class="headerlink" title="一.  结构体的声明，定义和初始化"></a>一.  结构体的声明，定义和初始化</h3><p>在使用结构体之前我们应当先声明它，定义形式为</p>
@@ -253,7 +253,7 @@
 <h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
-<p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为该结构体只能用一次</p>
+<p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为<code>该结构体只能用一次</code></p>
 <h3 id="五-结构体指针"><a href="#五-结构体指针" class="headerlink" title="五. 结构体指针"></a>五. 结构体指针</h3><p>其实结构体的指针与基础数据类型的指针大同小异</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
 <p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p>
@@ -270,7 +270,7 @@
 <h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">	&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">	&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">	&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
 <p>想打印该变量出来也很简单，用for循环就行</p>
-<h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。</p>
+<h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。<br><a target="_blank" rel="noopener" href="https://lpzgzxb.github.io/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/#more">结构体内存大小计算</a></p>
 
     </div>
 
