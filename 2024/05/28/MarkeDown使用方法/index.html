@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -291,6 +291,67 @@
 <p><a href="baidu.com%22%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">网页跳转</a></p>
 <p>请参考<a href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">标题</a></p>
 <p><img src="/www.baidu.com%22%E5%9B%BE%E7%89%87%E4%BB%8B%E7%BB%8D%22" alt="图片链接"></p>
+<hr>
+<p>LaTeX语法用来表示数学公式，并通过特定的分隔符来区分。</p>
+<ol>
+<li><p><strong>行内数学公式</strong>：</p>
+<ul>
+<li>使用单个美元符号<code>$...$</code>将公式包裹起来。</li>
+<li>例如：<code>$x = \frac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125;$</code> 会显示为 (x &#x3D; \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})。</li>
+</ul>
+</li>
+<li><p><strong>块级（显示模式）数学公式</strong>：</p>
+<ul>
+<li>使用双美元符号<code>$$...$$</code>将公式包裹起来。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">x &amp;= y + z \\</span><br><span class="line">a^2 &amp;= b^2 + c^2</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{align}<br>x &amp;&#x3D; y + z \<br>a^2 &amp;&#x3D; b^2 + c^2<br>\end{align}<br>]</li>
+</ul>
+</li>
+<li><p><strong>数学环境</strong>：</p>
+<ul>
+<li>可以使用一些特定的环境，如<code>align</code>、<code>equation</code>、<code>gather</code>等，来对公式进行更复杂的排版。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">E = mc^2</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">F = ma</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{equation}<br>E &#x3D; mc^2<br>\end{equation}<br>\begin{equation}<br>F &#x3D; ma<br>\end{equation}<br>]</li>
+</ul>
+</li>
+<li><p><strong>希腊字母</strong>：</p>
+<ul>
+<li>例如：<code>$\alpha$</code> 显示为 (\alpha)，<code>$\beta$</code> 显示为 (\beta)，<code>$\gamma$</code> 显示为 (\gamma)。</li>
+</ul>
+</li>
+<li><p><strong>上标和下标</strong>：</p>
+<ul>
+<li>上标使用<code>^</code>，下标使用<code>_</code>。</li>
+<li>例如：<code>$x^2$</code> 显示为 (x^2)，<code>$x_i$</code> 显示为 (x_i)。</li>
+</ul>
+</li>
+<li><p><strong>分数</strong>：</p>
+<ul>
+<li>使用<code>\frac&#123;分子&#125;&#123;分母&#125;</code>。</li>
+<li>例如：<code>$\frac&#123;1&#125;&#123;2&#125;$</code> 显示为 (\frac{1}{2})。</li>
+</ul>
+</li>
+<li><p><strong>根号</strong>：</p>
+<ul>
+<li>使用<code>\sqrt[n]&#123;...&#125;</code>表示n次根。</li>
+<li>例如：<code>$\sqrt&#123;2&#125;$</code> 显示为 (\sqrt{2})，<code>$\sqrt[3]&#123;27&#125;$</code> 显示为 (\sqrt[3]{27})。</li>
+</ul>
+</li>
+<li><p><strong>求和与积分</strong>：</p>
+<ul>
+<li>使用<code>\sum</code>、<code>\int</code>等。</li>
+<li>例如：<code>$\sum_&#123;i=1&#125;^&#123;n&#125; i$</code> 显示为 (\sum_{i&#x3D;1}^{n} i)，<code>$\int_&#123;a&#125;^&#123;b&#125; f(x) dx$</code> 显示为 (\int_{a}^{b} f(x) dx)。</li>
+</ul>
+</li>
+<li><p><strong>矩阵</strong>：</p>
+<ul>
+<li>使用<code>\begin&#123;matrix&#125;...\end&#123;matrix&#125;</code>或<code>\begin&#123;pmatrix&#125;...\end&#123;pmatrix&#125;</code>等。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;pmatrix&#125;</span><br><span class="line">a &amp; b \\</span><br><span class="line">c &amp; d</span><br><span class="line">\end&#123;pmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{pmatrix}<br>a &amp; b \<br>c &amp; d<br>\end{pmatrix}<br>]</li>
+</ul>
+</li>
+</ol>
+<p>这些是Markdown中一些基本的数学公式表示方法，可以满足大多数数学表达的需求。</p>
 
     </div>
 
@@ -387,7 +448,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
