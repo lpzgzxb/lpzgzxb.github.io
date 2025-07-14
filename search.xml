@@ -1,136 +1,766 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>KMP算法</title>
-      <link href="/2024/06/18/KMP%E7%AE%97%E6%B3%95/"/>
-      <url>/2024/06/18/KMP%E7%AE%97%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<p>KMP算法是是非常经典的算法，也是难度很高的算法，但掌握了它的核心要点也是很简单的</p><span id="more"></span><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//主串：  abcddacbabdc    i</span><br><span class="line">//模式串：acba          j</span><br></pre></td></tr></table></figure><h1 id="1-暴力算法"><a href="#1-暴力算法" class="headerlink" title="1. 暴力算法"></a>1. 暴力算法</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//朴素模式匹配算法\暴力算法</span></span><br><span class="line"><span class="comment">//使用双指针一一匹对</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Index</span><span class="params">(<span class="type">char</span> ms[], <span class="type">char</span> mos[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(ms) &amp;&amp; j &lt; <span class="built_in">strlen</span>(mos))<span class="comment">//同时满足</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ms[i] == mos[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            i = i - j + <span class="number">1</span>;</span><br><span class="line">            j = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (j &gt;= <span class="built_in">strlen</span>(mos))<span class="comment">// 6</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> i - <span class="built_in">strlen</span>(mos) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ms[] = <span class="string">&quot;ababscdsa&quot;</span>;   <span class="comment">//10</span></span><br><span class="line">    <span class="type">char</span> mos[] = <span class="string">&quot;bscds&quot;</span>;       <span class="comment">//5</span></span><br><span class="line">    <span class="type">int</span> pf = Index(ms, mos);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, pf); <span class="comment">//5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="2-KMP算法"><a href="#2-KMP算法" class="headerlink" title="2. KMP算法"></a>2. KMP算法</h1><h1 id="3-进阶算法"><a href="#3-进阶算法" class="headerlink" title="3. 进阶算法"></a>3. 进阶算法</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//KMP进阶算法</span></span><br><span class="line"><span class="comment">//在 next 数组上面增加了 arr_nextval 函数，对 next 数组重新排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">arr_nextval</span><span class="params">(<span class="type">char</span> mos[], <span class="type">int</span> next[], <span class="type">int</span> nextval[])</span></span><br><span class="line">&#123;</span><br><span class="line">    nextval[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">2</span>; j &lt; <span class="number">10</span>; j++)<span class="comment">//循环遍历next数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mos[j] == mos[next[j]])</span><br><span class="line">        &#123;</span><br><span class="line">            nextval[j] = nextval[next[j]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            nextval[j] = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(<span class="type">char</span> mos[], <span class="type">int</span> next[])</span><span class="comment">// next 数组</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>; </span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>;      <span class="comment">//字符串下标</span></span><br><span class="line">    next[<span class="number">1</span>] = <span class="number">0</span>;    <span class="comment">//从下标为一的数组开始赋值</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(mos))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">0</span> || mos[i] == mos[k]) <span class="comment">//匹配成功</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++k;</span><br><span class="line">            next[i] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>                            <span class="comment">//匹配失败--回溯</span></span><br><span class="line">            k = next[k];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Index_KMP</span><span class="params">(<span class="type">char</span> ms[], <span class="type">char</span> mos[])</span></span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> next[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> nextval[<span class="keyword">sizeof</span>(next) / <span class="keyword">sizeof</span>(next[<span class="number">0</span>])] = &#123; <span class="number">0</span> &#125;;<span class="comment">//初始化nextval数组</span></span><br><span class="line"></span><br><span class="line">        get_next(mos, next);                <span class="comment">// 0 0 1 1 1...</span></span><br><span class="line">        arr_nextval(mos, next, nextval);    <span class="comment">//</span></span><br><span class="line">   </span><br><span class="line">        <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(ms) &amp;&amp; j &lt; <span class="built_in">strlen</span>(mos))<span class="comment">//同时满足</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span> || ms[i] == mos[j])  <span class="comment">//匹配成功</span></span><br><span class="line">            &#123;                                                  </span><br><span class="line">                ++i;                        <span class="comment">// a b cddacbabdc</span></span><br><span class="line">                ++j;                        <span class="comment">// a c ba</span></span><br><span class="line">            &#125;                               </span><br><span class="line">                                            </span><br><span class="line">            <span class="keyword">else</span>                            <span class="comment">//匹配失败-回溯</span></span><br><span class="line">            &#123;</span><br><span class="line">                j = nextval[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= <span class="built_in">strlen</span>(mos))<span class="comment">// 6</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i - <span class="built_in">strlen</span>(mos) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ms[] = <span class="string">&quot;ababscdsa&quot;</span>;   <span class="comment">//10</span></span><br><span class="line">    <span class="type">char</span> mos[] = <span class="string">&quot;bscds&quot;</span>;       <span class="comment">//5</span></span><br><span class="line">    <span class="type">int</span> pf = Index_KMP(ms, mos);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, pf); <span class="comment">//5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>算法的进阶就在于对于<code>next</code>数组的重新排序，使得回溯次数减少，进而影响算法循环次数。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 算法 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
-      <link href="/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/"/>
-      <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
-      
-        <content type="html"><![CDATA[<p>随心笔记</p><span id="more"></span><p>官方原题为：</p><p><img src="/../images/leetcode%20%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/L.png"></p><p>该题官方原解为：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line"><span class="type">int</span> left = <span class="number">0</span>, right = numsSize - <span class="number">1</span>, ans = numsSize;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> mid = ((right - left) &gt;&gt; <span class="number">1</span>) + left;</span><br><span class="line">        <span class="keyword">if</span> (target &lt;= nums[mid]) &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中这段代码，有点小疑惑 - &gt;<br><code>int mid = ((right - left) &gt;&gt; 1) + left;</code><br>这段代码可以同理为：</p><p><code>int mid = (right + left) / 2;</code><br>我们知道 int 是有范围的，如果 r + l 过大会溢出，所以不使用除2的操作；当位移运算符前数字为偶数时， &gt;&gt; 1 等同 &#x2F; 2 ；<code>+ left</code>是保证移运算符前数字为奇数时<code>mid</code>的值依然为偶数，方便下面的运算</p><p>这段代码有两个优点：</p><ol><li>(r - l) 不会溢出，因为我们知道 r &gt; l 。</li><li>(&gt;&gt; 1) 位移运算符所要的计算量少，而且可以代替 &#x2F; 2 。</li></ol>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux笔记</title>
-      <link href="/2024/06/11/Linux%E7%AC%94%E8%AE%B0/"/>
-      <url>/2024/06/11/Linux%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<p>随心笔记</p><span id="more"></span><p>学习完 <a href="https://www.bilibili.com/video/BV1n84y1i7td/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">黑马程序员新版Linux零基础快速入门到精通</a> 受益匪浅，老师讲了许多基础的语法知识，深入浅出的带我认识和理解了很多Linux的操作，我将它们整理下来供大家参考学习，也方便我后续的复习反刍。（该文章适合有一定基础的小伙伴学习）</p><h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p><strong>包括以下：</strong></p><ul><li>系统阐述</li><li>初识Linux</li><li>虚拟机介绍</li><li>VM 和 CenOS 的安装，配置环境</li></ul><p>以上有兴趣的可以去看上边的链接视频</p><p><em>Linux 目录结构</em><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录<code>/</code>，所有文件都在<code>/</code>下面。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure><ul><li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</li></ul><h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul><li>&amp; <strong>ls</strong></li></ul><p><strong>列出目录下内容</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法：ls [-a -l -h] [Linux 路径]</span><br><span class="line">-a : all 列出全部文件（包括隐藏文件/文件夹）</span><br><span class="line">-l : 以列表（竖向排序）展示内容</span><br><span class="line">-h : 以方便阅读的方式列出文件大小，K.M.G （一定要搭配 *-l* 才行）</span><br></pre></td></tr></table></figure><ul><li>&amp; <strong>cd</strong></li></ul><p><strong>切换到哪个目录下</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//change directory</span><br><span class="line">语法：cd [Linux 路径]</span><br></pre></td></tr></table></figure><ol><li>cd 命令没有选项,只有参数,表示切换到哪个目录下</li><li>cd 命令直接执行,不带参数,返回用户HOME目录</li></ol><ul><li><p>&amp; <strong>pwd</strong><br><em><strong>查看当前工作目录</strong></em></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//print work directory</span><br><span class="line">语法: pwd</span><br><span class="line">pwd 命令,无选项,无参数,直接输入表示查看当前工作目录</span><br></pre></td></tr></table></figure></li></ul><h2 id="2-相对路径与绝对路径-特殊路径符"><a href="#2-相对路径与绝对路径-特殊路径符" class="headerlink" title="2. 相对路径与绝对路径 - 特殊路径符"></a>2. 相对路径与绝对路径 - 特殊路径符</h2><ul><li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <code>/</code> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p></li><li><p>&amp; <strong>特殊路径符</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.    表示当亲目录</span><br><span class="line">..   表示上一级目录，cd .. 表示回退到上一级， cd ../.. 表示回退上二级目录</span><br><span class="line">~    表示HOME目录，cd ~ 表示切换到HOME目录</span><br></pre></td></tr></table></figure></li></ul><h2 id="3-mkdir-touch"><a href="#3-mkdir-touch" class="headerlink" title="3. mkdir - touch"></a>3. mkdir - touch</h2><ul><li><p>&amp; <strong>mkdir</strong><br><strong>创建新的文件夹（目录）</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//make directory</span><br><span class="line">语法：mkdir [-p] Linux路径</span><br><span class="line">-p：自动创建不存在的父目录，适用于创建连续多级目录（可选）</span><br></pre></td></tr></table></figure><p><strong>注</strong>：创建文件夹有时会涉及权限问题，尽量创建文件于HOME目录内。</p></li><li><p>&amp; <strong>touch</strong><br><strong>创建文件</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure><p>这个命令用于创建一个空文件，或者更新现有文件的时间戳。<br>如果文件已经存在，touch 命令会更新它的访问时间和修改时间到当前时间。此外，touch 命令还可以同时更新多个文件的时间戳。</p></li></ul><h2 id="4-cat-more-vi-vim-编辑器-tail"><a href="#4-cat-more-vi-vim-编辑器-tail" class="headerlink" title="4. cat - more - vi&#x2F;vim 编辑器 - tail"></a>4. cat - more - vi&#x2F;vim 编辑器 - tail</h2><ul><li><p>&amp; <strong>cat</strong><br><strong>查看文件内容</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：cat Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure><p><strong>注：</strong> 会展示全部文件内容，不适合过大的文件查看。</p></li><li><p>&amp; <strong>more</strong><br><strong>查看文件内容</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：more Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure><p>空格翻页，q 退出。<br><strong>注：</strong> 支持翻页，适合大文件查看。</p></li><li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//visual interface</span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure><p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/40~I3TZEQGRSW7%7DBV04JY7U.png"></p></li></ul><ol><li>三种模式不能随意交换，输入模式与底线命令模式不相通</li><li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹；如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件。</li><li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li></ol><p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/CA442@OQ$K%25KJY5D%25~IF.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/E6H5QU15M78FJ$YWJD.png" alt="img"></p><p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/49X9FP33H5HE92WK0.png" alt="img"></p><ul><li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：tail [-f -num] Linux路径</span><br><span class="line">-f： 持续跟踪</span><br><span class="line">-num： 查看尾部多少行，默认10行</span><br></pre></td></tr></table></figure><p>带上 -f 后程序会跟踪文件最新更改，<code>ctrl + c</code>停止</p><h2 id="5-cp-mv-rm"><a href="#5-cp-mv-rm" class="headerlink" title="5. cp - mv - rm"></a>5. cp - mv - rm</h2><ul><li><p>&amp; <strong>cp</strong><br><strong>复制文件&#x2F;文件夹</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//copy</span><br><span class="line">语法：cp [-r] value_1 value_2</span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">value_1：被复制的文件/文件路径</span><br><span class="line">valuee_2：要复制去的地方</span><br></pre></td></tr></table></figure><p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>文件&#x2F;文件夹</strong></p></li><li><p>&amp; <strong>mv</strong><br><strong>移动文件&#x2F;文件夹，修改名称</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//move</span><br><span class="line">语法：mv value_1 value_2</span><br><span class="line">value_1：被复移动的文件/文件路径</span><br><span class="line">value_2：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure><p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改value_1的名称</strong></p></li><li><p>&amp; <strong>rm</strong><br><strong>删除文件&#x2F;文件夹</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//remove</span><br><span class="line">语法：rm [-r -f] n个参数</span><br><span class="line">-r：删除对象为文件夹</span><br><span class="line">-f：force，强制删除</span><br><span class="line">参数：要删除的文件/文件夹路径，可以同时删除多个，以空格隔开</span><br></pre></td></tr></table></figure><p><strong>注：</strong> rm 是一个<code>危险</code>的命令，尤其是处于root（超级管理员）用户下，使用之前一定要慎重考虑。</p></li></ul><h2 id="6-which-find"><a href="#6-which-find" class="headerlink" title="6. which - find"></a>6. which - find</h2><ul><li><p>&amp; <strong>which</strong><br><strong>查看命令的程序文件存放位置</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure></li></ul><p>Linux命令本质就是一个个可执行程序，就像自定义函数，使用它就去调用它，我们使用的命令都是系统自带的，which 命令可以找到该命令的位置。</p><ul><li><p>&amp; <strong>find</strong><br><strong>按文件名查找文件</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">语法1：find 起始地址 -name &quot;文件名&quot;</span><br><span class="line">起始地址：文件从哪开始查找</span><br><span class="line">-name：表示查找文件名</span><br><span class="line"></span><br><span class="line">语法2：find 起始地址 -size +/- n [k/M/G]</span><br><span class="line">-size：按文件大小查找</span><br><span class="line">+/-：表示大于或小于</span><br><span class="line">n：表示大小数字</span><br><span class="line">k/M/G：表示单位</span><br></pre></td></tr></table></figure><p>例：<br>在<strong>HOME目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find home -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find / -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>查找<strong>小于10kb 大小</strong>的文件：<code>find / -size -10k</code><br>在<strong>根目录</strong>查找<strong>大于10GB</strong> 大小的文件：<code>find / -size +10G</code></p></li></ul><h2 id="7-grep-wc"><a href="#7-grep-wc" class="headerlink" title="7. grep - wc"></a>7. grep - wc</h2><ul><li><p>&amp; <strong>grep</strong><br><strong>通过关键字过滤文件行</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：grep [-n] &quot;关键字&quot; 文件路径</span><br><span class="line">-n：在结果中显示行号</span><br><span class="line">关键字：必填，需要隔离的关键字</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>wc</strong><br><strong>统计文件行数，单词数量等</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">语法：wc [-c -m -l -w] 文件路径</span><br><span class="line">-c：计算文件大小单位byte</span><br><span class="line">-m：统计字符串数量</span><br><span class="line">-l：统计行数</span><br><span class="line">-w：统计单词数量</span><br></pre></td></tr></table></figure><p>不带选项，默认输出 -l，-w，-c 和文件名。</p></li></ul><h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 - 通配符"></a>8. 重定向符 - 管道符 - 通配符</h2><ul><li>&amp; <strong>重定向符</strong>  <code>&gt;</code></li></ul><p><strong>&gt;</strong> 将左侧命令的结果，<em>覆盖</em>写入符号右侧指定的文件中<br><strong>&gt;&gt;</strong> 将左侧命令的结果，<em>追加</em>写入符号右侧指定的文件中</p><p><strong>好处：</strong>Linux 命令主要通过命令行界面的单命令来执行，重定向符可以让单命令组合为<code>批处理命令</code>，使得执行命令更加高效快捷。</p><p><strong>注：</strong> 如果左侧为<strong>命令</strong>，那么会把命令产生的结果覆盖或追加到指定文件中</p><ul><li>&amp; <strong>管道符</strong>  <code>|</code></li></ul><p><code>|</code> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计 test.txt 文件中带有 test 关键字有几行：<code>cat test.txt | grep test | wc -l</code></p><p>适合搭配 <strong>cat &#x2F; grep</strong> 等命令使用。</p><ul><li>&amp; <strong>通配符</strong></li><li><strong>模糊匹配</strong> <code>*</code></li></ul><ol><li>test* , 表示如何任何以test开头的内容。</li><li>*test，表示如何任何以test结尾的内容。</li><li><em>test</em>，表示如何任何包含test的内容。</li></ol><p>适合搭配 <strong>rm find</strong> 等命令使用。</p><p>通配符还有多种，以下为AI生成<br>问号（?）：</p><p>问号代表单个任意字符。例如，ls ?.txt 会列出当前目录下所有以单个字符和 .txt 结尾的文件，如 a.txt、b.txt 等。<br>方括号（[]）：</p><p>方括号用于匹配括号内的任意一个字符。例如，ls [abc].txt 会列出当前目录下所有以 a.txt、b.txt 或 c.txt 结尾的文件。<br>方括号还可以包含字符范围，如 [a-z] 代表任意一个小写字母。<br>花括号（{}）：</p><p>花括号用于匹配括号内的多个选项中的任意一个。例如，ls {file1,file2,file3}.txt 会列出 file1.txt、file2.txt 和 file3.txt。<br>花括号也可以与模式结合使用，如 {a,b,c}* 会匹配以 a、b 或 c 开头的任意文件。<br>反斜杠（\）：</p><p>当你需要匹配通配符本身时，可以使用反斜杠进行转义。例如，ls *.txt 会匹配文件名中包含星号的文件，如 example*.txt。<br>正则表达式：</p><p>虽然不是通配符，但正则表达式在某些命令中（如 grep）用于复杂的模糊匹配。正则表达式使用特定的模式来匹配字符串，例如 grep ‘^[0-9]+’ 会匹配以一个或多个数字开头的行。</p><h2 id="9-echo"><a href="#9-echo" class="headerlink" title="9. echo"></a>9. echo</h2><ul><li><p>&amp; <strong>echo</strong><br>打印内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：echo 输出的内容</span><br><span class="line">echo 无选项 参数必填</span><br></pre></td></tr></table></figure><p>等同于c语言命令中的 printf ，打印内容在屏幕上</p></li></ul><ol><li>输出内容建议用双引号括起来，更加美观，容易辨识</li><li>输出内容为<strong>命令</strong>的话必须用 <code>``</code> 括起来</li></ol><h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="su-sudo"><a href="#su-sudo" class="headerlink" title="su - sudo"></a>su - sudo</h2><ul><li>&amp; <strong>su</strong><br><strong>切换用户</strong></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//switch user</span><br><span class="line">语法：su - [用户名]</span><br><span class="line">exit 命令会回退到上一个用户</span><br></pre></td></tr></table></figure><ol><li>root 用户拥有最大的系统操作权限，而普通用户在许多地方权限受限。</li><li>切换到root用户会要求输入密码，密码<code>不会显现</code></li><li>普通用户一般会在HOME目录下不受影响</li><li>不填用户名默认为root用户</li></ol><ul><li>&amp; <strong>sudo</strong></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：sudo 其他命令</span><br></pre></td></tr></table></figure><p>  <code>临时授权</code>其他命令为 root 权限<br>  <strong>注：</strong>该命令要提前在认证文件中添加命令，不然无法使用，以下为添加命令方式</p><p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ccc.png"></p><h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><p>Linux关于权限管理级别有两个</p><ol><li>针对<strong>用户</strong>的权限控制</li><li>针对<strong>用户组</strong>的权限控制</li></ol><ul><li><p>&amp; <strong>groupadd</strong><br><strong>创建用户组</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd 组名</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>grupdel</strong><br><strong>删除用户组</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grupdel 组名</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>useradd</strong><br><strong>创建用户</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：useradd [-g -d] 用户名</span><br><span class="line">-g：指定用户组，不指定会创建同名组并且自动加入</span><br><span class="line">-d：指定用户HOME路径，默认在/home/用户名</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>userdel</strong><br><strong>删除用户</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdel [-r] 用户名</span><br><span class="line">-r：删除用户的HOME目录，不带则保留</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>id</strong><br><strong>查看用户所属的组</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：id 用户名</span><br><span class="line">用户名：查看的用户，不带则查看自身</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>usermod -aG</strong><br><strong>修改用户所属的组</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：usermod -aG 用户组 用户</span><br></pre></td></tr></table></figure><p>将指定用户加入指定用户组</p></li><li><p>&amp; <strong>getent</strong><br><strong>查看该电脑中有哪些用户或用户组</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：getent passwd[用户]/group[用户组]</span><br></pre></td></tr></table></figure><p>用户名带有七份信息：密码（x）；用户ID；描述信息；HOME目录；执行终端</p></li></ul><p>​用户名带有三份信息：组名；密码；用户组ID</p><h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/q.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ww.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/vvv.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/zzz.png"></p><h2 id="chmod-命令和chown-命令"><a href="#chmod-命令和chown-命令" class="headerlink" title="chmod 命令和chown 命令"></a>chmod 命令和chown 命令</h2><ul><li><p>&amp; <strong>chmod</strong><br>修改文件&#x2F;文件夹的权限信息</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：chmod [-R] 权限 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br></pre></td></tr></table></figure><p><strong>注意：</strong>只有文件、文件夹所属用户或者root用户才可以使用该命令</p><p>快捷修改权限可以使用 751权限</p></li></ul><p><strong>例如：</strong><br>将文件夹里所有文件权限修改为：rwx r-x –x 命令为：chmod -R u&#x3D;rwx,g&#x3D;rx,o&#x3D;x test<br>将文件夹权限修改为：rwx r-x –x 命令为：chmod 751 test</p><ul><li><p>&amp; <strong>chown</strong><br>可以修改文件&#x2F;文件夹所属用户和用户组</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：chown [-R] [用户][:][用户组] 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br><span class="line">: ：分隔</span><br></pre></td></tr></table></figure><p><strong>注意：</strong>该命令只有root用户可以使用</p><p>例如：</p><p>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：chown -R root:kkdp test</p></li></ul><h2 id="yum-软件安装"><a href="#yum-软件安装" class="headerlink" title="yum 软件安装"></a>yum 软件安装</h2><ul><li><p>&amp; <strong>yum</strong></p><p>rpm包软件管理器，用于自动化安装配置Linux软件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：yum [-y] [install | remove | sratch] 软件名称</span><br><span class="line">-y：自动确认</span><br><span class="line">install 安装，remove 卸载，search 搜索</span><br></pre></td></tr></table></figure><p><strong>注意：</strong>该命令需要root权限和联网</p></li></ul><h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><ul><li><p>&amp; <strong>systemctl</strong></p><p>管理服务</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start | stop | status | enable | disable 服务名</span><br><span class="line">start 启动，stop 关闭，status 查看状态，enable 开机启动，disable 关闭开机启动</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><p>部分软件安装后没有自动集成到systemctl中，这些需要手动添加</p></li></ul><p>​内置服务有很多，比如：<br>​networkmanger 主网络服务<br>​network 副网络服务<br>​firewalld 防火墙服务<br>​sshd ssh服务</p><h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><ul><li><p>&amp; <strong>ln</strong></p><p>软连接：在系统中创建软连接可以将文件链接到其他位置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法：ln -s 参1 参2</span><br><span class="line">-s：创建软连接</span><br><span class="line">参1：被链接的文件或文件夹</span><br><span class="line">参2：要链接去的目的地</span><br></pre></td></tr></table></figure><p>类似于win下的创建快捷方式</p></li></ul><h2 id="ping-wget-curl"><a href="#ping-wget-curl" class="headerlink" title="ping - wget - curl"></a>ping - wget - curl</h2><ul><li><p>&amp; <strong>ping</strong><br><strong>查看指定网络服务器是否联通</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：ping [-c num] ip或主机名</span><br><span class="line">-c：检查的次数，不填默认无限次检查</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>wget</strong><br><strong>非交换式文件下载器，可下载网络文件</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：wget [-b] url</span><br><span class="line">-b：可选，后台下载</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>curl</strong><br><strong>可下载文件也可以发送网络请求</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法：curl [-O] url</span><br><span class="line">-O：用于下载文件，当url为下载链接时，可以使用此项目保存文件</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure></li></ul><h2 id="ps-kill"><a href="#ps-kill" class="headerlink" title="ps - kill"></a>ps - kill</h2><ul><li><p>&amp; <strong>ps</strong></p><p>查看Linux系统中的进程信息</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure></li><li><p>&amp; <strong>kill</strong></p><p>关闭进程</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：kill [<span class="number">-9</span>] 进程ID</span><br><span class="line"><span class="number">-9</span>：强制关闭进程</span><br></pre></td></tr></table></figure></li></ul><h2 id="主机状态监控-top-df"><a href="#主机状态监控-top-df" class="headerlink" title="主机状态监控 top - df -"></a>主机状态监控 top - df -</h2><ul><li><p>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure><p>默认五秒刷新一次<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ab.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ac.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/aq.png" alt="img"></p></li><li><p>&amp; <strong>df</strong><br><strong>查看硬盘的使用情况</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li></ul><h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><p>常用有2种压缩格式</p><ol><li>.tar  称为 tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li><li>.gz  .tar.gz 这个会压缩内存。</li></ol><ul><li><p>&amp; <strong>tar</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参<span class="number">1</span> 参<span class="number">2</span> 参<span class="number">3.</span>..</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><p>-z ：如果要使用的话一般处于选项第一位</p><p>-f ：必须在选项最后一位</p><p>-C  ：建议单独使用</p></li></ul><p><strong>例子：</strong></p><ol><li>压缩<br><strong>封装</strong>1,2,3.txt文件于test.tar文件夹中：tar -cvf test.tar 1.txt 2.txt 3.txt<br><strong>压缩</strong>1,2,3.txt文件于test.tar文件夹中：tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</li><li>解压<br>解压 test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压 test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li></ol><ul><li><p>&amp; <strong>zip</strong><br><strong>压缩为zip格式</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：zip [-r] 参<span class="number">1</span> 参<span class="number">2.</span>..</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure><p><strong>例子：</strong><br>将abc.txt 和 test文件夹压缩到test.zip 文件中：zip -r test.zip a.txt b.txt c.txt test</p></li><li><p>&amp; <strong>unzip</strong><br><strong>解压zip格式</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>结构体大小计算</title>
-      <link href="/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/"/>
-      <url>/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/</url>
-      
-        <content type="html"><![CDATA[<p>结构体内存大小计算不是简单的 1 + 1 ，那么系统是如何存放结构体的数据？它的大小又是如何计算的呢？</p><span id="more"></span><h2 id="简单结构体大小计算"><a href="#简单结构体大小计算" class="headerlink" title="简单结构体大小计算"></a>简单结构体大小计算</h2><p>可以简单分为<strong>三步走战略</strong>：</p><ol><li>找到各个成员大小，这个CPU原因会有所差异。</li><li>考虑成员对其方式<br><strong>注：</strong> 这里会有一个默认对其数的概念，如VS编译器默认对其数为8。<br>找到最小值</li></ol><p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/qqq.png" alt="img"></p><ol start="3"><li>计算结构体的总大小<br>把它在内存中的存在方式画出来</li></ol><p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/www.png" alt="img"></p><p>我们可以清楚的看到该结构体的大小为13</p><h2 id="进阶大小计算"><a href="#进阶大小计算" class="headerlink" title="进阶大小计算"></a>进阶大小计算</h2><ol><li>结构体数组大小计算</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">double num;</span><br><span class="line">char name[10];</span><br><span class="line">int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>首先找最小值：<br>double -&gt; 8（内存大小） -&gt; 8（默认对齐数） -&gt; 8（最小值）<br>char -&gt; 1 -&gt; 8 -&gt;1<br>int -&gt; 4 -&gt; 8 -&gt; 4<br>考虑对其方式：<br>这个 char 类型的数组，只需要把它看做十个 char 型连在一起即可，最大对齐数是 int 的4<br>计算：<br>所以该结构体的大小为：8 + 10 + 空2 + 4 &#x3D; 24</p><ol start="2"><li>嵌套结构体大小计算</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct s1 &#123;</span><br><span class="line">    char a;//1 -&gt; 8 -&gt; 1</span><br><span class="line">    int b;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    struct s &#123;</span><br><span class="line">        char c;//1 -&gt; 8 -&gt; 1 </span><br><span class="line">        int d;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    &#125;;</span><br><span class="line">    float e;//4 -&gt; 8 -&gt; 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>计算结构体大小时是把里面这个结构体就看做是一个char,和一个int，不是看做一个整体。</p><p>所以该结构体大小为：1 + 空3 + 4 +1 +空3 + 4 + 4 &#x3D; 20</p><h2 id="修改默认对其数"><a href="#修改默认对其数" class="headerlink" title="修改默认对其数"></a>修改默认对其数</h2><p>我们可以借助预处理命令来修改‘</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure><p>C语言中的默认对齐数，取决于编译器和计算机体系结构。C语言标准并没有规定特定的默认对齐数，而是留给了编译器实现来确定。在大多数情况下，编译器会根据目标体系结构的要求来确定默认的对齐数。</p><p><strong>注意以下几点：</strong></p><ol><li>使用 #pragma pack() 可能会<strong>降低内存</strong>访问效率，因为不再按照默认的对齐方式进行对齐，导致内存访问更频繁。</li><li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li><li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li><li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li></ol>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>如何判断机器的大小端</title>
-      <link href="/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/"/>
-      <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
-      
-        <content type="html"><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p><span id="more"></span><h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p><ol><li>小端存储：</li></ol><p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p><ol start="2"><li>大端存储：</li></ol><p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p><p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p><ul><li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p></li><li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p></li><li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p></li><li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p></li></ul><p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p><p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>你了解结构体吗？</title>
-      <link href="/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/"/>
-      <url>/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
-      
-        <content type="html"><![CDATA[<p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p><span id="more"></span><p>比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p><h1 id="啥是结构体"><a href="#啥是结构体" class="headerlink" title="啥是结构体"></a>啥是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p><p>int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为复杂数据类型或构造数据类型。</p><h3 id="一-结构体的声明，定义和初始化"><a href="#一-结构体的声明，定义和初始化" class="headerlink" title="一.  结构体的声明，定义和初始化"></a>一.  结构体的声明，定义和初始化</h3><p>在使用结构体之前我们应当先声明它，定义形式为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">study</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="comment">//可以包含多个变量或数组，它们的类型可以相同，也可以不同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><em>注意：</em></p><ol><li>该结构体只是定义，还未初始化，所以不占用内存</li><li>如果结构体声明在maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li></ol><h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line"><span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line"><span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line"><span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line"><span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line">    student.name, student.age, student.studenid,student.sex,student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line"><span class="comment">//stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span></span><br></pre></td></tr></table></figure><h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p><p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为<code>该结构体只能用一次</code></p><h3 id="五-结构体指针"><a href="#五-结构体指针" class="headerlink" title="五. 结构体指针"></a>五. 结构体指针</h3><p>其实结构体的指针与基础数据类型的指针大同小异</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line"><span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line"><span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line"><span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line"><span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure><p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p><p>以下是错误示范：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student;</span><br></pre></td></tr></table></figure><h3 id="六-结构体传参"><a href="#六-结构体传参" class="headerlink" title="六.结构体传参"></a>六.结构体传参</h3><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值，还有一种是传地址，那么到底是传值还是传地址好勒？</p><p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，<code>为什么？</code></p><p>因为在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line"> print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line"> print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>结果：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure><p><em>小知识：</em> 传值我们用<code>.</code>来访问结构体成员；传地址的话我们用<code>-&gt;</code>来访问，<code>-&gt;</code>符号也只能在结构体中使用。</p><h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line"><span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line"><span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line"><span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line"><span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>想打印该变量出来也很简单，用for循环就行</p><h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。<br><a href="https://lpzgzxb.github.io/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/#more">结构体内存大小计算</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
-      <link href="/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-      <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<p>发送AT无返回值解决方法</p><span id="more"></span><p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p><ol><li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p></li><li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p></li><li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p></li></ol><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>MarkeDown使用方法</title>
-      <link href="/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-      <url>/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<p>MarkDown 基础使用方法</p><span id="more"></span><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p><em>斜体</em><br><strong>加粗</strong><br><em><strong>斜体和加粗</strong></em><br><u>下划线</u><br>&#x3D;&#x3D;高亮&#x3D;&#x3D;</p><blockquote><p>这是一段引用</p></blockquote><p>有序列表：</p><ol><li>有序一</li><li>有序二</li><li>有序三</li></ol><p>无序列表：</p><ul><li>无序一</li><li>无序二</li><li>无序三</li></ul><p>自选择</p><ul><li><input checked="" disabled="" type="checkbox"> 选项一</li><li><input checked="" disabled="" type="checkbox"> 选项二</li><li><input disabled="" type="checkbox"> 选项三</li></ul><p><code>我是代码行</code></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我是代码块</span></span><br></pre></td></tr></table></figure><p><em><strong>表格</strong></em></p><table><thead><tr><th align="left">关键字1</th><th align="right">关键字2</th><th align="center">关键字3</th></tr></thead><tbody><tr><td align="left">靠左</td><td align="right">靠右</td><td align="center">居中</td></tr><tr><td align="left">张三</td><td align="right">李四</td><td align="center">王五</td></tr></tbody></table><p>脚注：<br>我是脚注<a href="%E6%88%91%E6%98%AF%E8%84%9A%E6%B3%A8">^脚注</a></p><p>分割线：</p><hr><p><a href="baidu.com%22%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">网页跳转</a></p><p>请参考<a href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">标题</a></p><p><img src="/www.baidu.com%22%E5%9B%BE%E7%89%87%E4%BB%8B%E7%BB%8D%22" alt="图片链接"></p><hr><p>LaTeX语法用来表示数学公式，并通过特定的分隔符来区分。</p><ol><li><p><strong>行内数学公式</strong>：</p><ul><li>使用单个美元符号<code>$...$</code>将公式包裹起来。</li><li>例如：<code>$x = \frac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125;$</code> 会显示为 (x &#x3D; \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})。</li></ul></li><li><p><strong>块级（显示模式）数学公式</strong>：</p><ul><li>使用双美元符号<code>$$...$$</code>将公式包裹起来。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">x &amp;= y + z \\</span><br><span class="line">a^2 &amp;= b^2 + c^2</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{align}<br>x &amp;&#x3D; y + z \<br>a^2 &amp;&#x3D; b^2 + c^2<br>\end{align}<br>]</li></ul></li><li><p><strong>数学环境</strong>：</p><ul><li>可以使用一些特定的环境，如<code>align</code>、<code>equation</code>、<code>gather</code>等，来对公式进行更复杂的排版。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">E = mc^2</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">F = ma</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{equation}<br>E &#x3D; mc^2<br>\end{equation}<br>\begin{equation}<br>F &#x3D; ma<br>\end{equation}<br>]</li></ul></li><li><p><strong>希腊字母</strong>：</p><ul><li>例如：<code>$\alpha$</code> 显示为 (\alpha)，<code>$\beta$</code> 显示为 (\beta)，<code>$\gamma$</code> 显示为 (\gamma)。</li></ul></li><li><p><strong>上标和下标</strong>：</p><ul><li>上标使用<code>^</code>，下标使用<code>_</code>。</li><li>例如：<code>$x^2$</code> 显示为 (x^2)，<code>$x_i$</code> 显示为 (x_i)。</li></ul></li><li><p><strong>分数</strong>：</p><ul><li>使用<code>\frac&#123;分子&#125;&#123;分母&#125;</code>。</li><li>例如：<code>$\frac&#123;1&#125;&#123;2&#125;$</code> 显示为 (\frac{1}{2})。</li></ul></li><li><p><strong>根号</strong>：</p><ul><li>使用<code>\sqrt[n]&#123;...&#125;</code>表示n次根。</li><li>例如：<code>$\sqrt&#123;2&#125;$</code> 显示为 (\sqrt{2})，<code>$\sqrt[3]&#123;27&#125;$</code> 显示为 (\sqrt[3]{27})。</li></ul></li><li><p><strong>求和与积分</strong>：</p><ul><li>使用<code>\sum</code>、<code>\int</code>等。</li><li>例如：<code>$\sum_&#123;i=1&#125;^&#123;n&#125; i$</code> 显示为 (\sum_{i&#x3D;1}^{n} i)，<code>$\int_&#123;a&#125;^&#123;b&#125; f(x) dx$</code> 显示为 (\int_{a}^{b} f(x) dx)。</li></ul></li><li><p><strong>矩阵</strong>：</p><ul><li>使用<code>\begin&#123;matrix&#125;...\end&#123;matrix&#125;</code>或<code>\begin&#123;pmatrix&#125;...\end&#123;pmatrix&#125;</code>等。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;pmatrix&#125;</span><br><span class="line">a &amp; b \\</span><br><span class="line">c &amp; d</span><br><span class="line">\end&#123;pmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{pmatrix}<br>a &amp; b \<br>c &amp; d<br>\end{pmatrix}<br>]</li></ul></li></ol><p>这些是Markdown中一些基本的数学公式表示方法，可以满足大多数数学表达的需求。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>数电笔记</title>
-      <link href="/2024/05/28/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/"/>
-      <url>/2024/05/28/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<p>该文章是关于模拟电子技术基础的学习笔记，不是专业的教学文章，主要用于本人复盘和复习，如有写的不对的，请谅解</p><span id="more"></span><h1 id="1-PN结"><a href="#1-PN结" class="headerlink" title="1. PN结"></a>1. PN结</h1><p>我们常见的小灯泡就是二极管，而二极管最重要的结构就是PN结</p><h3 id="1-1-1-PN结的形成"><a href="#1-1-1-PN结的形成" class="headerlink" title="1.1.1  PN结的形成"></a>1.1.1  PN结的形成</h3><p>1.1.1  单晶硅</p><p>硅元素最外层有四个电子，与其他硅元素的电子形成共价键，当硅元素足够多时，形成的晶体就叫单晶硅</p><p>因为硅元素最外层电子两两成为共价键，由于共价键的<code>稳定性</code>，所以这时候单晶硅不导电，这种我们称之为<code>本征半导体</code><br><img src="../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102107.jpg" style="zoom: 25%;" /></p><p>1.1.2  N型半导体（Negative 负电）</p><p>我们可以通过掺杂工艺在单晶硅里加入磷元素（P），磷元素最外层电子有五个，四个电子与硅元素外四个形成稳定的共价键，剩下一个<code>带负电的自由电子</code></p><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102113.jpg"></p><p>1.1.3  P型半导体（Positive 正电）</p><p>同理我们在单晶硅里加入硼元素（B），磷元素最外层电子有三个，与硅元素外电子一一对应后会形成一个<code>空穴</code>，空穴容易吸引来一个电子，但硼元素最外层只有三个电子，所以又很容易失去空穴中的电子</p><p>空穴可以被视为一个正电荷载流子，因为它们可以移动并在电场作用下传导电流。当空穴移动时，它们相当于正电荷在移动，但实际的正电荷并没有移动，而是电子的缺失。因此，空穴在PN结中起到正电荷载流子的作用，但它们本身并不是实际的带电粒子。</p><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102116.jpg"></p><p>1.1.4  扩散运动</p><p>B型半导体带一个自由移动的电子，而P型半导体带一个空穴，我们把他们放在一起，B区的自由电子会自发的向P区移动，我们称之为扩散运动</p><p>1.1.5  漂移运动</p><p>我把P区和B区交汇处用 p 和 n 表示，也称之为<code>耗尽层</code>，耗尽层会产生一个电场，n 带正电 p 带负电，电场方向由 n -&gt; p ，因为电子受电场力与电场方向相反，所以电子会受到 p -&gt; n 的力 ，p 的自由电子会自发的向 n 移动这种我们称之为<code>漂移运动</code></p><p><code>注意</code>: 扩散运动和漂移运动是处于动态平衡的</p><p>p 和 n 形成的区域我们称之为 <code>PN结</code></p><p>1.1.6  对称结和不对称结</p><p>对称性指的是当P区N区的掺杂浓度相同时，PN结两侧的载流子（空穴和电子）数量是对称的，它们在各自的区域内是平衡的。</p><p>不对称性的原因很多，</p><ul><li><p>掺杂浓度的不对称性：通常P型和N型半导体的掺杂浓度是不同的，这导致了PN结两侧的载流子浓度不同。</p></li><li><p>电场方向的不对称性：PN结内建电场的方向是从N型半导体指向P型半导体，这种电场方向是固定的，表现出不对称性。</p></li><li><p>电流方向的不对称性：在外加电压的情况下，PN结允许电流从P型流向N型（正向偏置），而对从N型流向P型的电流（反向偏置）有较大的阻碍，这种电流方向的不对称性是PN结的基本特性之一。</p></li><li><p>温度系数的不对称性：虽然PN结的内建电势与温度有关，但P型和N型半导体的温度系数可能不同，这在一定程度上破坏了温度效应的对称性。</p></li><li><p>材料特性的不对称性：如果P型和N型半导体的材料特性（如掺杂类型、晶格结构等）不同，那么即使在没有外加电压的情况下，PN结两侧的物理特性也可能表现出不对称性。</p></li></ul><h3 id="1-2-PN结的伏安特性"><a href="#1-2-PN结的伏安特性" class="headerlink" title="1.2. PN结的伏安特性"></a>1.2. PN结的伏安特性</h3><p>1.2.1  伏安特性曲线图</p><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110536.jpg"></p><p>1.2.2  PN结的电流方程</p><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110539.jpg"><br>V<del>t</del>在室温下一般为26mv，所以电流 i 趋近无穷，所以看伏安特性曲线图当电压达到一定值超过死区时，电流 i 为无穷大。</p><p>1.2.3  正向导通和反向截止</p><ul><li><p>正向导通：我们在PN结上加一个外电场比如电池，正极接P区，负极接N区，当外电场力大于 p 和 n 形成的电场力时，N区的自由电子会不断的填充P区的空穴，P区的自由电子又会顺着正极进入电源，循环往复，PN结就导通了</p></li><li><p>反向截止：当PN结上所加的反向电压达到一定数值时，反向电流激增的现象</p></li></ul><p>1.2.4  反向击穿</p><ul><li>雪崩击穿：<br>发生在掺杂浓度低的PN结，浓度越低，PN结越厚。当电压达到一定的值，电子被赋予很大的能量，会直接撞飞价原子，一生二，二生三，三生万物，雪崩就开始了</li></ul><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110547.jpg"></p><ul><li><p>齐纳击穿：<br>  发生在掺杂浓度高的PN结，浓度越高，PN结越薄。不需要多大的电压，电子会而击穿，常用于稳压</p></li><li><p>热击穿：<br>  PN结耗散功率超阈值，温度升高，PN结过热而烧毁，也叫二次击穿，不可逆。前两种击穿发生时都<em>不一定</em>会损坏PN结，都是可逆的，</p></li></ul><p><strong>知识点：</strong>当温度升高时雪崩击穿不容易发生，齐纳击穿容易发生。</p><p>1.2.5  温度的影响</p><ul><li>随着温度升高，正向曲线向左移，反向曲线向下移动。</li></ul><p><img src="/"></p><ul><li>室温上升 1 摄氏度，正向压降 2 - 2.5 mv；室温上升 10 摄氏度时，反向电流增大一倍。</li></ul><h1 id="2-二极管"><a href="#2-二极管" class="headerlink" title="2. 二极管"></a>2. 二极管</h1><h3 id="2-1-二极管的主要参数"><a href="#2-1-二极管的主要参数" class="headerlink" title="2.1  二极管的主要参数"></a>2.1  二极管的主要参数</h3><p>二极管是一种半导体器件，主要用于控制电流的单向流动。它具有许多重要的参数，这些参数决定了二极管的性能和应用范围。以下是一些主要的二极管参数：</p><ul><li><strong>正向压降（Vf）</strong>：二极管在正向偏置时，电流开始流动的最小电压。</li><li><strong>反向电压（Vr）</strong>：二极管在反向偏置时，能够承受的最大电压，超过这个电压可能会导致二极管损坏。</li><li><strong>最大电流（If）</strong>：二极管能够安全通过的最大电流，超过这个电流可能会损坏二极管。</li><li><strong>最大功耗（Pd）</strong>：二极管在正常工作时能够承受的最大功耗。</li><li><strong>工作频率（f）</strong>：二极管能够正常工作的频率范围。</li><li><strong>最大正向电流（Ifmax）</strong>：二极管在正向偏置时能够承受的最大电流。</li><li><strong>最小正向电压（Vfmin）</strong>：二极管在正向偏置时能够导通的最小电压。</li></ul><p>了解这些参数对于选择合适的二极管以及确保其在电路中正常工作是非常重要的。</p><h3 id="2-2-二极管的等效电路模型"><a href="#2-2-二极管的等效电路模型" class="headerlink" title="2.2  二极管的等效电路模型"></a>2.2  二极管的等效电路模型</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/aac83e8f-39df-46c9-84ee-26361fc69cf0.png"></p><h3 id="2-3-二极管的微变等效"><a href="#2-3-二极管的微变等效" class="headerlink" title="2.3  二极管的微变等效"></a>2.3  二极管的微变等效</h3><p>微变等效电路可以用来分析二极管在交流信号或高频信号下的响应，这对于设计二极管在电路中的实际应用非常重要。</p><h3 id="2-2-特殊二极管的应用"><a href="#2-2-特殊二极管的应用" class="headerlink" title="2.2  特殊二极管的应用"></a>2.2  特殊二极管的应用</h3><p>特殊二极管在现代电子技术中发挥着重要的作用，具有独特的功能和特点，适用于不同的应用场合。以下是一些特殊二极管的应用及其特点：</p><ol><li><strong>肖特基二极管</strong>：<ul><li><strong>特点</strong>：肖特基二极管具有低正向电压降、快速开关速度和高频性能优异等特点。它还具有较低的反向漏电流和较高的温度稳定性。</li><li><strong>应用</strong>：广泛应用于高速开关电路、电源管理、信号处理和射频应用等领域。随着科技的进步，研究者还在不断探索新型半导体材料和优化器件结构，以提高肖特基二极管的性能和应用范围。</li></ul></li><li><strong>光电二极管</strong>：<ul><li><strong>特点</strong>：光电二极管利用光电效应，将光的能量转换为电子的能量，具有高灵敏度、快速响应和宽波长范围。</li><li><strong>应用</strong>：广泛应用于光通信、光电测量和光电控制等领域，是光学传感器和光电探测器的理想选择。</li></ul></li><li><strong>稳压二极管</strong>：<ul><li><strong>特点</strong>：稳压二极管利用反向击穿效应，在一定的电压范围内保持较为稳定的电压输出。</li><li><strong>应用</strong>：广泛应用于电源电路和电压稳定器中，提供稳定的电压输出。</li></ul></li><li><strong>齐纳二极管</strong>：<ul><li><strong>特点</strong>：齐纳二极管在受到反向偏压时能够维持固定的电压，提供已知基准电压。</li><li><strong>应用</strong>：用于电源中的电压基准，波形削波或限幅，防止电压超过极限。</li></ul></li></ol><h1 id="3-三级管（BJT）"><a href="#3-三级管（BJT）" class="headerlink" title="3. 三级管（BJT）"></a>3. 三级管（BJT）</h1><h3 id="3-1-三极管的结构"><a href="#3-1-三极管的结构" class="headerlink" title="3.1  三极管的结构"></a>3.1  三极管的结构</h3><p>3.1.1  构成方式<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/6731c1eb-2d55-4f85-b261-5df0b854b763.png"><br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/17feb439-24e2-42b1-8494-864d3683f49a.png"></p><p>三个区域：PNP 或者 NPN<br>三个电极：基极（b），集电极（c），发射极（e）<br>两个PN结：集电结，发射结</p><h3 id="3-2-三极管的导电原理"><a href="#3-2-三极管的导电原理" class="headerlink" title="3.2  三极管的导电原理"></a>3.2  三极管的导电原理</h3><p><strong>特征及原理</strong>：</p><ul><li>发射极浓度很高，以便于有大量的自由电子运动</li><li>基极很薄，方便发射极的电子更容易进入集电极；同时可看作开关，控制集电极和发射极的导通</li><li>集电极主要来接收发射极的电子<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/64e4cf40-ba78-4c6a-86f6-daf7dce7b77d.png"><br>内部载流子的运动</li></ul><ol><li>发射结正偏，发射区的自由电子会进入基区，与其空穴复合</li><li>基区的空穴很少，只有少量的电子会进入循环</li><li>集电区的自由电子在电场力的作用下进入发射区</li><li>发射区的电子和基区的空穴复合有限，多余的电子会穿过PN结进入集电区，进入下一个循环</li></ol><h3 id="3-3-三极管的四种状态"><a href="#3-3-三极管的四种状态" class="headerlink" title="3.3  三极管的四种状态"></a>3.3  三极管的四种状态</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/24219830-4007-41d1-97ba-51b37eadcc1e.png"><br>3.3.1  截止状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/89322a67-e19a-42cd-9f2c-6f5609de7fc6.png"></p><p>3.3.2  饱和状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ddf3dbe2-37f4-40fa-b136-2c9ae2533004.png"></p><p>3.3.3  放大状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/a909e048-f5d7-40b2-abce-9509d3278477.png"></p><p>3.3.4  击穿状态<br>当V<del>CE</del>过大，三极管进入击穿状态，三极管烧毁</p><h3 id="3-4-三级管的正反偏置和基本公式"><a href="#3-4-三级管的正反偏置和基本公式" class="headerlink" title="3.4  三级管的正反偏置和基本公式"></a>3.4  三级管的正反偏置和基本公式</h3><p>发大区：i<del>B</del> &#x3D; $\beta$ * i<del>c</del><br>截止区：双结反偏<br>饱和区：双结正偏</p><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/d7fa9999-9e15-47ba-88f9-6834b6fa81e8.png"></p><h3 id="3-5-BJT共射特征曲线"><a href="#3-5-BJT共射特征曲线" class="headerlink" title="3.5  BJT共射特征曲线"></a>3.5  BJT共射特征曲线</h3><p>3.5.1  输入特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/164a600a-5cf0-45df-bc82-83dcca8499ef.png"></p><p>3.5.2  输出特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240727_084632.jpg"></p><h3 id="3-6-温度变化曲线"><a href="#3-6-温度变化曲线" class="headerlink" title="3.6  温度变化曲线"></a>3.6  温度变化曲线</h3><p>3.6.1  输入温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p><p>3.6.2  输出温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/beb9bc12-89a7-4b0a-84c6-0ac277e1ad14.png"></p><h1 id="4-MOS管的使用"><a href="#4-MOS管的使用" class="headerlink" title="4. MOS管的使用"></a>4. MOS管的使用</h1><h3 id="4-1-MOS管都组成和使用原理"><a href="#4-1-MOS管都组成和使用原理" class="headerlink" title="4.1  MOS管都组成和使用原理"></a>4.1  MOS管都组成和使用原理</h3><p>4.1.1  MOS管都组成<br><img src="/"></p><p>4.1.2  结型场效应管</p><p>4.1.3  绝缘栅型场效应管（MOSFET）</p><ol><li>U<del>GS</del> 不导通时，U<del>GS</del> &lt; U<del>GS(th)</del>，U<del>GS</del> &#x3D; R<del>DS</del></li><li>U<del>GS</del> &gt; U<del>GS(th)</del></li></ol><hr><p>鸣谢：</p><p><a href="https://www.bilibili.com/video/BV1bm4y1V7Ek/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">人类最伟大的发明–PN结</a></p><p>[模拟电子技术基础 上交大 郑益慧主讲](【4K精品】模拟电子技术基础 上交大 郑益慧主讲（模拟电路&#x2F;模电 讲课水平略胜华成英，视频质量完爆清华版 4K超清重制版）_哔哩哔哩_bilibili(<a href="https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&amp;vd_source=7cfb68109cfb644748c42234407548fb</a>))</p><p><a href="https://www.bilibili.com/video/BV1Jq4y1E7QZ/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">三极管的饱和与放大</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+<search>
+  <entry>
+    <title>KMP算法</title>
+    <url>/2024/06/18/KMP%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>KMP算法是是非常经典的算法，也是难度很高的算法，但掌握了它的核心要点也是很简单的</p>
+<span id="more"></span>
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//主串：  abcddacbabdc    i</span><br><span class="line">//模式串：acba          j</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-暴力算法"><a href="#1-暴力算法" class="headerlink" title="1. 暴力算法"></a>1. 暴力算法</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//朴素模式匹配算法\暴力算法</span></span><br><span class="line"><span class="comment">//使用双指针一一匹对</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Index</span><span class="params">(<span class="type">char</span> ms[], <span class="type">char</span> mos[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(ms) &amp;&amp; j &lt; <span class="built_in">strlen</span>(mos))<span class="comment">//同时满足</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ms[i] == mos[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            i = i - j + <span class="number">1</span>;</span><br><span class="line">            j = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (j &gt;= <span class="built_in">strlen</span>(mos))<span class="comment">// 6</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> i - <span class="built_in">strlen</span>(mos) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ms[] = <span class="string">&quot;ababscdsa&quot;</span>;   <span class="comment">//10</span></span><br><span class="line">    <span class="type">char</span> mos[] = <span class="string">&quot;bscds&quot;</span>;       <span class="comment">//5</span></span><br><span class="line">    <span class="type">int</span> pf = Index(ms, mos);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, pf); <span class="comment">//5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-KMP算法"><a href="#2-KMP算法" class="headerlink" title="2. KMP算法"></a>2. KMP算法</h1><h1 id="3-进阶算法"><a href="#3-进阶算法" class="headerlink" title="3. 进阶算法"></a>3. 进阶算法</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//KMP进阶算法</span></span><br><span class="line"><span class="comment">//在 next 数组上面增加了 arr_nextval 函数，对 next 数组重新排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">arr_nextval</span><span class="params">(<span class="type">char</span> mos[], <span class="type">int</span> next[], <span class="type">int</span> nextval[])</span></span><br><span class="line">&#123;</span><br><span class="line">    nextval[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">2</span>; j &lt; <span class="number">10</span>; j++)<span class="comment">//循环遍历next数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mos[j] == mos[next[j]])</span><br><span class="line">        &#123;</span><br><span class="line">            nextval[j] = nextval[next[j]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            nextval[j] = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">get_next</span><span class="params">(<span class="type">char</span> mos[], <span class="type">int</span> next[])</span><span class="comment">// next 数组</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>; </span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>;      <span class="comment">//字符串下标</span></span><br><span class="line">    next[<span class="number">1</span>] = <span class="number">0</span>;    <span class="comment">//从下标为一的数组开始赋值</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(mos))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">0</span> || mos[i] == mos[k]) <span class="comment">//匹配成功</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++i;</span><br><span class="line">            ++k;</span><br><span class="line">            next[i] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>                            <span class="comment">//匹配失败--回溯</span></span><br><span class="line">            k = next[k];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Index_KMP</span><span class="params">(<span class="type">char</span> ms[], <span class="type">char</span> mos[])</span></span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> next[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> nextval[<span class="keyword">sizeof</span>(next) / <span class="keyword">sizeof</span>(next[<span class="number">0</span>])] = &#123; <span class="number">0</span> &#125;;<span class="comment">//初始化nextval数组</span></span><br><span class="line"></span><br><span class="line">        get_next(mos, next);                <span class="comment">// 0 0 1 1 1...</span></span><br><span class="line">        arr_nextval(mos, next, nextval);    <span class="comment">//</span></span><br><span class="line">   </span><br><span class="line">        <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(ms) &amp;&amp; j &lt; <span class="built_in">strlen</span>(mos))<span class="comment">//同时满足</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span> || ms[i] == mos[j])  <span class="comment">//匹配成功</span></span><br><span class="line">            &#123;                                                  </span><br><span class="line">                ++i;                        <span class="comment">// a b cddacbabdc</span></span><br><span class="line">                ++j;                        <span class="comment">// a c ba</span></span><br><span class="line">            &#125;                               </span><br><span class="line">                                            </span><br><span class="line">            <span class="keyword">else</span>                            <span class="comment">//匹配失败-回溯</span></span><br><span class="line">            &#123;</span><br><span class="line">                j = nextval[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= <span class="built_in">strlen</span>(mos))<span class="comment">// 6</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i - <span class="built_in">strlen</span>(mos) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ms[] = <span class="string">&quot;ababscdsa&quot;</span>;   <span class="comment">//10</span></span><br><span class="line">    <span class="type">char</span> mos[] = <span class="string">&quot;bscds&quot;</span>;       <span class="comment">//5</span></span><br><span class="line">    <span class="type">int</span> pf = Index_KMP(ms, mos);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, pf); <span class="comment">//5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法的进阶就在于对于<code>next</code>数组的重新排序，使得回溯次数减少，进而影响算法循环次数。</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux笔记</title>
+    <url>/2024/06/11/Linux%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>随心笔记</p>
+<span id="more"></span>
+
+<p>学习完 <a href="https://www.bilibili.com/video/BV1n84y1i7td/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">黑马程序员新版Linux零基础快速入门到精通</a> 受益匪浅，老师讲了许多基础的语法知识，深入浅出的带我认识和理解了很多Linux的操作，我将它们整理下来供大家参考学习，也方便我后续的复习反刍。（该文章适合有一定基础的小伙伴学习）</p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p><strong>包括以下：</strong></p>
+<ul>
+<li>系统阐述</li>
+<li>初识Linux</li>
+<li>虚拟机介绍</li>
+<li>VM 和 CenOS 的安装，配置环境</li>
+</ul>
+<p>以上有兴趣的可以去看上边的链接视频</p>
+<p><em>Linux 目录结构</em><br>Linux 目录结构是一个树形结构，不像 win 系统可以拥有多个盘符，Linux 只有根目录<code>/</code>，所有文件都在<code>/</code>下面。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/.cocal/hello,txt</span><br><span class="line">第一个 / 是根目录</span><br><span class="line">后面的 / 表示层级关系</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>快捷键<br>ctrl+c 强制停止<br>ctrl+d 退出或登出<br>ctrl + l 或 clear 命令 清空终端内容<br>history 显示历史命令<br>ctrl + r 搜索历史命令<br>!命令前缀，自动执行上一次匹配的命令</li>
+</ul>
+<h1 id="二-基础命令"><a href="#二-基础命令" class="headerlink" title="二. 基础命令"></a>二. 基础命令</h1><h2 id="1-ls-cd-pwd"><a href="#1-ls-cd-pwd" class="headerlink" title="1. ls - cd - pwd"></a>1. ls - cd - pwd</h2><ul>
+<li>&amp; <strong>ls</strong></li>
+</ul>
+<p><strong>列出目录下内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ls [-a -l -h] [Linux 路径]</span><br><span class="line">-a : all 列出全部文件（包括隐藏文件/文件夹）</span><br><span class="line">-l : 以列表（竖向排序）展示内容</span><br><span class="line">-h : 以方便阅读的方式列出文件大小，K.M.G （一定要搭配 *-l* 才行）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&amp; <strong>cd</strong></li>
+</ul>
+<p><strong>切换到哪个目录下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//change directory</span><br><span class="line">语法：cd [Linux 路径]</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>cd 命令没有选项,只有参数,表示切换到哪个目录下</li>
+<li>cd 命令直接执行,不带参数,返回用户HOME目录</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>pwd</strong><br><em><strong>查看当前工作目录</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//print work directory</span><br><span class="line">语法: pwd</span><br><span class="line">pwd 命令,无选项,无参数,直接输入表示查看当前工作目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-相对路径与绝对路径-特殊路径符"><a href="#2-相对路径与绝对路径-特殊路径符" class="headerlink" title="2. 相对路径与绝对路径 - 特殊路径符"></a>2. 相对路径与绝对路径 - 特殊路径符</h2><ul>
+<li><p>&amp; <strong>相对路径和绝对路径</strong><br>绝对路径：以<strong>根目录</strong>为起点，描述路径，以 <code>/</code> 开头<br>相对路径：以<strong>当前目录</strong>为起点，描述路径</p>
+</li>
+<li><p>&amp; <strong>特殊路径符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.    表示当亲目录</span><br><span class="line">..   表示上一级目录，cd .. 表示回退到上一级， cd ../.. 表示回退上二级目录</span><br><span class="line">~    表示HOME目录，cd ~ 表示切换到HOME目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-mkdir-touch"><a href="#3-mkdir-touch" class="headerlink" title="3. mkdir - touch"></a>3. mkdir - touch</h2><ul>
+<li><p>&amp; <strong>mkdir</strong><br><strong>创建新的文件夹（目录）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//make directory</span><br><span class="line">语法：mkdir [-p] Linux路径</span><br><span class="line">-p：自动创建不存在的父目录，适用于创建连续多级目录（可选）</span><br></pre></td></tr></table></figure>
+
+<p><strong>注</strong>：创建文件夹有时会涉及权限问题，尽量创建文件于HOME目录内。</p>
+</li>
+<li><p>&amp; <strong>touch</strong><br><strong>创建文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：touch Linux路径</span><br></pre></td></tr></table></figure>
+<p>这个命令用于创建一个空文件，或者更新现有文件的时间戳。<br>如果文件已经存在，touch 命令会更新它的访问时间和修改时间到当前时间。此外，touch 命令还可以同时更新多个文件的时间戳。</p>
+</li>
+</ul>
+<h2 id="4-cat-more-vi-vim-编辑器-tail"><a href="#4-cat-more-vi-vim-编辑器-tail" class="headerlink" title="4. cat - more - vi&#x2F;vim 编辑器 - tail"></a>4. cat - more - vi&#x2F;vim 编辑器 - tail</h2><ul>
+<li><p>&amp; <strong>cat</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：cat Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> 会展示全部文件内容，不适合过大的文件查看。</p>
+</li>
+<li><p>&amp; <strong>more</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：more Linux路径</span><br><span class="line">cat 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p>空格翻页，q 退出。<br><strong>注：</strong> 支持翻页，适合大文件查看。</p>
+</li>
+<li><p>&amp; <strong>vi &#x2F; vim编辑器</strong><br><strong>查看文件内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//visual interface</span><br><span class="line">语法：vi / vim 文件路径</span><br></pre></td></tr></table></figure>
+
+<p>vi &#x2F; vim 编辑器拥有三种模式：命令模式，输入模式，底线命令模式。<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/40~I3TZEQGRSW7%7DBV04JY7U.png"></p>
+</li>
+</ul>
+<ol>
+<li>三种模式不能随意交换，输入模式与底线命令模式不相通</li>
+<li>如果文件路径的文件<strong>不存在</strong>，该命令会创建新文件夹；如果文件路径的文件<strong>存在</strong>，该命令会编辑已有的文件。</li>
+<li>vim 是 vi 的加强版兼容所有 vi 功能，建议用新的 vim 命令</li>
+</ol>
+<p><em>命令模式快捷键</em>（vim 命令直接进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/CA442@OQ$K%25KJY5D%25~IF.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/E6H5QU15M78FJ$YWJD.png" alt="img"></p>
+<p><em>底线命令模式</em>（在命令模式下输入 <strong>:</strong> 进入）<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/49X9FP33H5HE92WK0.png" alt="img"></p>
+<ul>
+<li>&amp; <strong>tail</strong><br><strong>查看文件尾部内容，跟踪文件最新更改</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：tail [-f -num] Linux路径</span><br><span class="line">-f： 持续跟踪</span><br><span class="line">-num： 查看尾部多少行，默认10行</span><br></pre></td></tr></table></figure>
+
+<p>带上 -f 后程序会跟踪文件最新更改，<code>ctrl + c</code>停止</p>
+<h2 id="5-cp-mv-rm"><a href="#5-cp-mv-rm" class="headerlink" title="5. cp - mv - rm"></a>5. cp - mv - rm</h2><ul>
+<li><p>&amp; <strong>cp</strong><br><strong>复制文件&#x2F;文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//copy</span><br><span class="line">语法：cp [-r] value_1 value_2</span><br><span class="line">-r：复制对象是文件夹</span><br><span class="line">value_1：被复制的文件/文件路径</span><br><span class="line">valuee_2：要复制去的地方</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动创建<strong>文件&#x2F;文件夹</strong></p>
+</li>
+<li><p>&amp; <strong>mv</strong><br><strong>移动文件&#x2F;文件夹，修改名称</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//move</span><br><span class="line">语法：mv value_1 value_2</span><br><span class="line">value_1：被复移动的文件/文件路径</span><br><span class="line">value_2：要移动去的地方，或要更改的名称</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>value_2路径的文件&#x2F;文件夹如果不存在的话，系统会自动<strong>更改value_1的名称</strong></p>
+</li>
+<li><p>&amp; <strong>rm</strong><br><strong>删除文件&#x2F;文件夹</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//remove</span><br><span class="line">语法：rm [-r -f] n个参数</span><br><span class="line">-r：删除对象为文件夹</span><br><span class="line">-f：force，强制删除</span><br><span class="line">参数：要删除的文件/文件夹路径，可以同时删除多个，以空格隔开</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong> rm 是一个<code>危险</code>的命令，尤其是处于root（超级管理员）用户下，使用之前一定要慎重考虑。</p>
+</li>
+</ul>
+<h2 id="6-which-find"><a href="#6-which-find" class="headerlink" title="6. which - find"></a>6. which - find</h2><ul>
+<li><p>&amp; <strong>which</strong><br><strong>查看命令的程序文件存放位置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：which 命令</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>Linux命令本质就是一个个可执行程序，就像自定义函数，使用它就去调用它，我们使用的命令都是系统自带的，which 命令可以找到该命令的位置。</p>
+<ul>
+<li><p>&amp; <strong>find</strong><br><strong>按文件名查找文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法1：find 起始地址 -name &quot;文件名&quot;</span><br><span class="line">起始地址：文件从哪开始查找</span><br><span class="line">-name：表示查找文件名</span><br><span class="line"></span><br><span class="line">语法2：find 起始地址 -size +/- n [k/M/G]</span><br><span class="line">-size：按文件大小查找</span><br><span class="line">+/-：表示大于或小于</span><br><span class="line">n：表示大小数字</span><br><span class="line">k/M/G：表示单位</span><br></pre></td></tr></table></figure>
+
+<p>例：<br>在<strong>HOME目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find home -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>下查找名字<strong>带有 test</strong> 的文件：<code>find / -name &quot;*test*&quot;</code><br>在<strong>根目录</strong>查找<strong>小于10kb 大小</strong>的文件：<code>find / -size -10k</code><br>在<strong>根目录</strong>查找<strong>大于10GB</strong> 大小的文件：<code>find / -size +10G</code></p>
+</li>
+</ul>
+<h2 id="7-grep-wc"><a href="#7-grep-wc" class="headerlink" title="7. grep - wc"></a>7. grep - wc</h2><ul>
+<li><p>&amp; <strong>grep</strong><br><strong>通过关键字过滤文件行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：grep [-n] &quot;关键字&quot; 文件路径</span><br><span class="line">-n：在结果中显示行号</span><br><span class="line">关键字：必填，需要隔离的关键字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>wc</strong><br><strong>统计文件行数，单词数量等</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：wc [-c -m -l -w] 文件路径</span><br><span class="line">-c：计算文件大小单位byte</span><br><span class="line">-m：统计字符串数量</span><br><span class="line">-l：统计行数</span><br><span class="line">-w：统计单词数量</span><br></pre></td></tr></table></figure>
+
+<p>不带选项，默认输出 -l，-w，-c 和文件名。</p>
+</li>
+</ul>
+<h2 id="8-重定向符-管道符-通配符"><a href="#8-重定向符-管道符-通配符" class="headerlink" title="8. 重定向符 - 管道符 - 通配符"></a>8. 重定向符 - 管道符 - 通配符</h2><ul>
+<li>&amp; <strong>重定向符</strong>  <code>&gt;</code></li>
+</ul>
+<p><strong>&gt;</strong> 将左侧命令的结果，<em>覆盖</em>写入符号右侧指定的文件中<br><strong>&gt;&gt;</strong> 将左侧命令的结果，<em>追加</em>写入符号右侧指定的文件中</p>
+<p><strong>好处：</strong>Linux 命令主要通过命令行界面的单命令来执行，重定向符可以让单命令组合为<code>批处理命令</code>，使得执行命令更加高效快捷。</p>
+<p><strong>注：</strong> 如果左侧为<strong>命令</strong>，那么会把命令产生的结果覆盖或追加到指定文件中</p>
+<ul>
+<li>&amp; <strong>管道符</strong>  <code>|</code></li>
+</ul>
+<p><code>|</code> 含义是将左边命令的结果作为右边命令的输入。<br>例如：<br>统计 test.txt 文件中带有 test 关键字有几行：<code>cat test.txt | grep test | wc -l</code></p>
+<p>适合搭配 <strong>cat &#x2F; grep</strong> 等命令使用。</p>
+<ul>
+<li>&amp; <strong>通配符</strong></li>
+<li><strong>模糊匹配</strong> <code>*</code></li>
+</ul>
+<ol>
+<li>test* , 表示如何任何以test开头的内容。</li>
+<li>*test，表示如何任何以test结尾的内容。</li>
+<li><em>test</em>，表示如何任何包含test的内容。</li>
+</ol>
+<p>适合搭配 <strong>rm find</strong> 等命令使用。</p>
+<p>通配符还有多种，以下为AI生成<br>问号（?）：</p>
+<p>问号代表单个任意字符。例如，ls ?.txt 会列出当前目录下所有以单个字符和 .txt 结尾的文件，如 a.txt、b.txt 等。<br>方括号（[]）：</p>
+<p>方括号用于匹配括号内的任意一个字符。例如，ls [abc].txt 会列出当前目录下所有以 a.txt、b.txt 或 c.txt 结尾的文件。<br>方括号还可以包含字符范围，如 [a-z] 代表任意一个小写字母。<br>花括号（{}）：</p>
+<p>花括号用于匹配括号内的多个选项中的任意一个。例如，ls {file1,file2,file3}.txt 会列出 file1.txt、file2.txt 和 file3.txt。<br>花括号也可以与模式结合使用，如 {a,b,c}* 会匹配以 a、b 或 c 开头的任意文件。<br>反斜杠（\）：</p>
+<p>当你需要匹配通配符本身时，可以使用反斜杠进行转义。例如，ls *.txt 会匹配文件名中包含星号的文件，如 example*.txt。<br>正则表达式：</p>
+<p>虽然不是通配符，但正则表达式在某些命令中（如 grep）用于复杂的模糊匹配。正则表达式使用特定的模式来匹配字符串，例如 grep ‘^[0-9]+’ 会匹配以一个或多个数字开头的行。</p>
+<h2 id="9-echo"><a href="#9-echo" class="headerlink" title="9. echo"></a>9. echo</h2><ul>
+<li><p>&amp; <strong>echo</strong><br>打印内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：echo 输出的内容</span><br><span class="line">echo 无选项 参数必填</span><br></pre></td></tr></table></figure>
+
+<p>等同于c语言命令中的 printf ，打印内容在屏幕上</p>
+</li>
+</ul>
+<ol>
+<li>输出内容建议用双引号括起来，更加美观，容易辨识</li>
+<li>输出内容为<strong>命令</strong>的话必须用 <code>``</code> 括起来</li>
+</ol>
+<h1 id="三-权限"><a href="#三-权限" class="headerlink" title="三. 权限"></a>三. 权限</h1><h2 id="su-sudo"><a href="#su-sudo" class="headerlink" title="su - sudo"></a>su - sudo</h2><ul>
+<li>&amp; <strong>su</strong><br><strong>切换用户</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//switch user</span><br><span class="line">语法：su - [用户名]</span><br><span class="line">exit 命令会回退到上一个用户</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>root 用户拥有最大的系统操作权限，而普通用户在许多地方权限受限。</li>
+<li>切换到root用户会要求输入密码，密码<code>不会显现</code></li>
+<li>普通用户一般会在HOME目录下不受影响</li>
+<li>不填用户名默认为root用户</li>
+</ol>
+<ul>
+<li>&amp; <strong>sudo</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：sudo 其他命令</span><br></pre></td></tr></table></figure>
+<p>  <code>临时授权</code>其他命令为 root 权限<br>  <strong>注：</strong>该命令要提前在认证文件中添加命令，不然无法使用，以下为添加命令方式</p>
+<p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ccc.png"></p>
+<h2 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h2><p>Linux关于权限管理级别有两个</p>
+<ol>
+<li>针对<strong>用户</strong>的权限控制</li>
+<li>针对<strong>用户组</strong>的权限控制</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>groupadd</strong><br><strong>创建用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">groupadd 组名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>grupdel</strong><br><strong>删除用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grupdel 组名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>useradd</strong><br><strong>创建用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：useradd [-g -d] 用户名</span><br><span class="line">-g：指定用户组，不指定会创建同名组并且自动加入</span><br><span class="line">-d：指定用户HOME路径，默认在/home/用户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>userdel</strong><br><strong>删除用户</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">userdel [-r] 用户名</span><br><span class="line">-r：删除用户的HOME目录，不带则保留</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>id</strong><br><strong>查看用户所属的组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：id 用户名</span><br><span class="line">用户名：查看的用户，不带则查看自身</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>usermod -aG</strong><br><strong>修改用户所属的组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：usermod -aG 用户组 用户</span><br></pre></td></tr></table></figure>
+
+<p>将指定用户加入指定用户组</p>
+</li>
+<li><p>&amp; <strong>getent</strong><br><strong>查看该电脑中有哪些用户或用户组</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：getent passwd[用户]/group[用户组]</span><br></pre></td></tr></table></figure>
+
+<p>用户名带有七份信息：密码（x）；用户ID；描述信息；HOME目录；执行终端</p>
+</li>
+</ul>
+<p>​	用户名带有三份信息：组名；密码；用户组ID</p>
+<h2 id="查看权限控制信息"><a href="#查看权限控制信息" class="headerlink" title="查看权限控制信息"></a>查看权限控制信息</h2><p><img src="/../images/Linux%E7%AC%94%E8%AE%B0/q.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ww.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/vvv.png"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/zzz.png"></p>
+<h2 id="chmod-命令和chown-命令"><a href="#chmod-命令和chown-命令" class="headerlink" title="chmod 命令和chown 命令"></a>chmod 命令和chown 命令</h2><ul>
+<li><p>&amp; <strong>chmod</strong><br>修改文件&#x2F;文件夹的权限信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chmod [-R] 权限 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>只有文件、文件夹所属用户或者root用户才可以使用该命令</p>
+<p>快捷修改权限可以使用 751权限</p>
+</li>
+</ul>
+<p><strong>例如：</strong><br>将文件夹里所有文件权限修改为：rwx r-x –x 命令为：chmod -R u&#x3D;rwx,g&#x3D;rx,o&#x3D;x test<br>将文件夹权限修改为：rwx r-x –x 命令为：chmod 751 test</p>
+<ul>
+<li><p>&amp; <strong>chown</strong><br>可以修改文件&#x2F;文件夹所属用户和用户组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：chown [-R] [用户][:][用户组] 文件/文件夹</span><br><span class="line">-R：对文件内全部内容进行相同操作</span><br><span class="line">: ：分隔</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>该命令只有root用户可以使用</p>
+<p>例如：</p>
+<p>将文件夹里所有文件权限修改为root用户，用户组修改为kkfp：chown -R root:kkdp test</p>
+</li>
+</ul>
+<h2 id="yum-软件安装"><a href="#yum-软件安装" class="headerlink" title="yum 软件安装"></a>yum 软件安装</h2><ul>
+<li><p>&amp; <strong>yum</strong></p>
+<p>rpm包软件管理器，用于自动化安装配置Linux软件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：yum [-y] [install | remove | sratch] 软件名称</span><br><span class="line">-y：自动确认</span><br><span class="line">install 安装，remove 卸载，search 搜索</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>该命令需要root权限和联网</p>
+</li>
+</ul>
+<h2 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h2><ul>
+<li><p>&amp; <strong>systemctl</strong></p>
+<p>管理服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start | stop | status | enable | disable 服务名</span><br><span class="line">start 启动，stop 关闭，status 查看状态，enable 开机启动，disable 关闭开机启动</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>部分软件安装后没有自动集成到systemctl中，这些需要手动添加</p>
+</li>
+</ul>
+<p>​	内置服务有很多，比如：<br>​	networkmanger 主网络服务<br>​	network 副网络服务<br>​	firewalld 防火墙服务<br>​	sshd ssh服务</p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h2><ul>
+<li><p>&amp; <strong>ln</strong></p>
+<p>软连接：在系统中创建软连接可以将文件链接到其他位置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ln -s 参1 参2</span><br><span class="line">-s：创建软连接</span><br><span class="line">参1：被链接的文件或文件夹</span><br><span class="line">参2：要链接去的目的地</span><br></pre></td></tr></table></figure>
+<p>类似于win下的创建快捷方式</p>
+</li>
+</ul>
+<h2 id="ping-wget-curl"><a href="#ping-wget-curl" class="headerlink" title="ping - wget - curl"></a>ping - wget - curl</h2><ul>
+<li><p>&amp; <strong>ping</strong><br><strong>查看指定网络服务器是否联通</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：ping [-c num] ip或主机名</span><br><span class="line">-c：检查的次数，不填默认无限次检查</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>wget</strong><br><strong>非交换式文件下载器，可下载网络文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：wget [-b] url</span><br><span class="line">-b：可选，后台下载</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>curl</strong><br><strong>可下载文件也可以发送网络请求</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：curl [-O] url</span><br><span class="line">-O：用于下载文件，当url为下载链接时，可以使用此项目保存文件</span><br><span class="line">url：链接</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="ps-kill"><a href="#ps-kill" class="headerlink" title="ps - kill"></a>ps - kill</h2><ul>
+<li><p>&amp; <strong>ps</strong></p>
+<p>查看Linux系统中的进程信息</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：ps [-e -f]</span><br><span class="line">-e：显示全部的进程</span><br><span class="line">-f：以完全格式化的形式展示信息</span><br><span class="line">一般是固定语法 ps -ef</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp; <strong>kill</strong></p>
+<p>关闭进程</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：kill [<span class="number">-9</span>] 进程ID</span><br><span class="line"><span class="number">-9</span>：强制关闭进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="主机状态监控-top-df"><a href="#主机状态监控-top-df" class="headerlink" title="主机状态监控 top - df -"></a>主机状态监控 top - df -</h2><ul>
+<li><p>&amp; <strong>top</strong><br><strong>查看CPU，内存的使用情况，类似于win的任务管理器</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：直接使用top</span><br></pre></td></tr></table></figure>
+
+<p>默认五秒刷新一次<br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ab.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/ac.png" alt="img"><br><img src="/../images/Linux%E7%AC%94%E8%AE%B0/aq.png" alt="img"></p>
+</li>
+<li><p>&amp; <strong>df</strong><br><strong>查看硬盘的使用情况</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：df [-h]</span><br><span class="line">-h：人性化显示</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="压缩与解压"><a href="#压缩与解压" class="headerlink" title="压缩与解压"></a>压缩与解压</h2><p>常用有2种压缩格式</p>
+<ol>
+<li>.tar  称为 tarball 简单的将文件封装到 .tar 文件内，没有多少内存压缩。</li>
+<li>.gz  .tar.gz 这个会压缩内存。</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>tar</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：tar [-c -v -x -f -C] 参<span class="number">1</span> 参<span class="number">2</span> 参<span class="number">3.</span>..</span><br><span class="line">-c：创建压缩文件</span><br><span class="line">-v：显示过程查看进度</span><br><span class="line">-x：解压模式</span><br><span class="line">-f：要创建或解压的文件，-f 必须在最后</span><br><span class="line">-z：gzip模式</span><br><span class="line">-C：选择解压的目的地</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<p>-z ：如果要使用的话一般处于选项第一位</p>
+<p>-f ：必须在选项最后一位</p>
+<p>-C  ：建议单独使用</p>
+</li>
+</ul>
+<p><strong>例子：</strong></p>
+<ol>
+<li>压缩<br><strong>封装</strong>1,2,3.txt文件于test.tar文件夹中：tar -cvf test.tar 1.txt 2.txt 3.txt<br><strong>压缩</strong>1,2,3.txt文件于test.tar文件夹中：tar -zcvf test.tar.gz 1.txt 2.txt 3.txt</li>
+<li>解压<br>解压 test.tar 到指定目录：tar -xvf test.tar -C &#x2F;home&#x2F;kkdp<br>以Gzip模式解压 test.tar.gz 到指定目录：tar -zxvf test.tar.gz -C &#x2F;home&#x2F;kkdp</li>
+</ol>
+<ul>
+<li><p>&amp; <strong>zip</strong><br><strong>压缩为zip格式</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：zip [-r] 参<span class="number">1</span> 参<span class="number">2.</span>..</span><br><span class="line">-r：被压缩的包含文件夹，需要加上</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子：</strong><br>将abc.txt 和 test文件夹压缩到test.zip 文件中：zip -r test.zip a.txt b.txt c.txt test</p>
+</li>
+<li><p>&amp; <strong>unzip</strong><br><strong>解压zip格式</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">语法：unzip [-d] 压缩包文件</span><br><span class="line">-d：指定要压缩去的位置</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MarkeDown使用方法</title>
+    <url>/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>MarkDown 基础使用方法</p>
+<span id="more"></span>
+
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p><em>斜体</em><br><strong>加粗</strong><br><em><strong>斜体和加粗</strong></em><br><u>下划线</u><br>&#x3D;&#x3D;高亮&#x3D;&#x3D;</p>
+<blockquote>
+<p>这是一段引用</p>
+</blockquote>
+<p>有序列表：</p>
+<ol>
+<li>有序一</li>
+<li>有序二</li>
+<li>有序三</li>
+</ol>
+<p>无序列表：</p>
+<ul>
+<li>无序一</li>
+<li>无序二</li>
+<li>无序三</li>
+</ul>
+<p>自选择</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 选项一</li>
+<li><input checked="" disabled="" type="checkbox"> 选项二</li>
+<li><input disabled="" type="checkbox"> 选项三</li>
+</ul>
+<p><code>我是代码行</code></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//我是代码块</span></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>表格</strong></em></p>
+<table>
+<thead>
+<tr>
+<th align="left">关键字1</th>
+<th align="right">关键字2</th>
+<th align="center">关键字3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">靠左</td>
+<td align="right">靠右</td>
+<td align="center">居中</td>
+</tr>
+<tr>
+<td align="left">张三</td>
+<td align="right">李四</td>
+<td align="center">王五</td>
+</tr>
+</tbody></table>
+<p>脚注：<br>我是脚注<a href="%E6%88%91%E6%98%AF%E8%84%9A%E6%B3%A8">^脚注</a></p>
+<p>分割线：</p>
+<hr>
+<p><a href="baidu.com%22%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">网页跳转</a></p>
+<p>请参考<a href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">标题</a></p>
+<p><img src="/www.baidu.com%22%E5%9B%BE%E7%89%87%E4%BB%8B%E7%BB%8D%22" alt="图片链接"></p>
+<hr>
+<p>LaTeX语法用来表示数学公式，并通过特定的分隔符来区分。</p>
+<ol>
+<li><p><strong>行内数学公式</strong>：</p>
+<ul>
+<li>使用单个美元符号<code>$...$</code>将公式包裹起来。</li>
+<li>例如：<code>$x = \frac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125;$</code> 会显示为 (x &#x3D; \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})。</li>
+</ul>
+</li>
+<li><p><strong>块级（显示模式）数学公式</strong>：</p>
+<ul>
+<li>使用双美元符号<code>$$...$$</code>将公式包裹起来。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">x &amp;= y + z \\</span><br><span class="line">a^2 &amp;= b^2 + c^2</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{align}<br>x &amp;&#x3D; y + z \<br>a^2 &amp;&#x3D; b^2 + c^2<br>\end{align}<br>]</li>
+</ul>
+</li>
+<li><p><strong>数学环境</strong>：</p>
+<ul>
+<li>可以使用一些特定的环境，如<code>align</code>、<code>equation</code>、<code>gather</code>等，来对公式进行更复杂的排版。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">E = mc^2</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">F = ma</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{equation}<br>E &#x3D; mc^2<br>\end{equation}<br>\begin{equation}<br>F &#x3D; ma<br>\end{equation}<br>]</li>
+</ul>
+</li>
+<li><p><strong>希腊字母</strong>：</p>
+<ul>
+<li>例如：<code>$\alpha$</code> 显示为 (\alpha)，<code>$\beta$</code> 显示为 (\beta)，<code>$\gamma$</code> 显示为 (\gamma)。</li>
+</ul>
+</li>
+<li><p><strong>上标和下标</strong>：</p>
+<ul>
+<li>上标使用<code>^</code>，下标使用<code>_</code>。</li>
+<li>例如：<code>$x^2$</code> 显示为 (x^2)，<code>$x_i$</code> 显示为 (x_i)。</li>
+</ul>
+</li>
+<li><p><strong>分数</strong>：</p>
+<ul>
+<li>使用<code>\frac&#123;分子&#125;&#123;分母&#125;</code>。</li>
+<li>例如：<code>$\frac&#123;1&#125;&#123;2&#125;$</code> 显示为 (\frac{1}{2})。</li>
+</ul>
+</li>
+<li><p><strong>根号</strong>：</p>
+<ul>
+<li>使用<code>\sqrt[n]&#123;...&#125;</code>表示n次根。</li>
+<li>例如：<code>$\sqrt&#123;2&#125;$</code> 显示为 (\sqrt{2})，<code>$\sqrt[3]&#123;27&#125;$</code> 显示为 (\sqrt[3]{27})。</li>
+</ul>
+</li>
+<li><p><strong>求和与积分</strong>：</p>
+<ul>
+<li>使用<code>\sum</code>、<code>\int</code>等。</li>
+<li>例如：<code>$\sum_&#123;i=1&#125;^&#123;n&#125; i$</code> 显示为 (\sum_{i&#x3D;1}^{n} i)，<code>$\int_&#123;a&#125;^&#123;b&#125; f(x) dx$</code> 显示为 (\int_{a}^{b} f(x) dx)。</li>
+</ul>
+</li>
+<li><p><strong>矩阵</strong>：</p>
+<ul>
+<li>使用<code>\begin&#123;matrix&#125;...\end&#123;matrix&#125;</code>或<code>\begin&#123;pmatrix&#125;...\end&#123;pmatrix&#125;</code>等。</li>
+<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;pmatrix&#125;</span><br><span class="line">a &amp; b \\</span><br><span class="line">c &amp; d</span><br><span class="line">\end&#123;pmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
+<li>显示为：<br>[<br>\begin{pmatrix}<br>a &amp; b \<br>c &amp; d<br>\end{pmatrix}<br>]</li>
+</ul>
+</li>
+</ol>
+<p>这些是Markdown中一些基本的数学公式表示方法，可以满足大多数数学表达的需求。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>你了解结构体吗？</title>
+    <url>/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p>
+<span id="more"></span>
+
+<p>比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p>
+<h1 id="啥是结构体"><a href="#啥是结构体" class="headerlink" title="啥是结构体"></a>啥是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p>
+<p>int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为复杂数据类型或构造数据类型。</p>
+<h3 id="一-结构体的声明，定义和初始化"><a href="#一-结构体的声明，定义和初始化" class="headerlink" title="一.  结构体的声明，定义和初始化"></a>一.  结构体的声明，定义和初始化</h3><p>在使用结构体之前我们应当先声明它，定义形式为</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">study</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//可以包含多个变量或数组，它们的类型可以相同，也可以不同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><em>注意：</em></p>
+<ol>
+<li>该结构体只是定义，还未初始化，所以不占用内存</li>
+<li>如果结构体声明在maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li>
+</ol>
+<h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line">    student.name, student.age, student.studenid,student.sex,student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line"><span class="comment">//stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span></span><br></pre></td></tr></table></figure>
+<h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
+<p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为<code>该结构体只能用一次</code></p>
+<h3 id="五-结构体指针"><a href="#五-结构体指针" class="headerlink" title="五. 结构体指针"></a>五. 结构体指针</h3><p>其实结构体的指针与基础数据类型的指针大同小异</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
+<p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p>
+<p>以下是错误示范：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student;</span><br></pre></td></tr></table></figure>
+
+<h3 id="六-结构体传参"><a href="#六-结构体传参" class="headerlink" title="六.结构体传参"></a>六.结构体传参</h3><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值，还有一种是传地址，那么到底是传值还是传地址好勒？</p>
+<p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，<code>为什么？</code></p>
+<p>因为在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line">	 print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line">	 print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p><em>小知识：</em> 传值我们用<code>.</code>来访问结构体成员；传地址的话我们用<code>-&gt;</code>来访问，<code>-&gt;</code>符号也只能在结构体中使用。</p>
+<h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">	&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">	&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">	&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
+<p>想打印该变量出来也很简单，用for循环就行</p>
+<h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。<br><a href="https://lpzgzxb.github.io/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/#more">结构体内存大小计算</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
+    <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
+    <content><![CDATA[<p>随心笔记</p>
+<span id="more"></span>
+
+<p>官方原题为：</p>
+<p><img src="/../images/leetcode%20%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/L.png"></p>
+<p>该题官方原解为：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line"><span class="type">int</span> left = <span class="number">0</span>, right = numsSize - <span class="number">1</span>, ans = numsSize;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> mid = ((right - left) &gt;&gt; <span class="number">1</span>) + left;</span><br><span class="line">        <span class="keyword">if</span> (target &lt;= nums[mid]) &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中这段代码，有点小疑惑 - &gt;<br><code>int mid = ((right - left) &gt;&gt; 1) + left;</code><br>这段代码可以同理为：</p>
+<p><code>int mid = (right + left) / 2;</code><br>我们知道 int 是有范围的，如果 r + l 过大会溢出，所以不使用除2的操作；当位移运算符前数字为偶数时， &gt;&gt; 1 等同 &#x2F; 2 ；<code>+ left</code>是保证移运算符前数字为奇数时<code>mid</code>的值依然为偶数，方便下面的运算</p>
+<p>这段代码有两个优点：</p>
+<ol>
+<li>(r - l) 不会溢出，因为我们知道 r &gt; l 。</li>
+<li>(&gt;&gt; 1) 位移运算符所要的计算量少，而且可以代替 &#x2F; 2 。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>如何判断机器的大小端</title>
+    <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
+    <content><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p>
+<span id="more"></span>
+
+
+<h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
+<ol>
+<li>小端存储：</li>
+</ol>
+<p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p>
+<ol start="2">
+<li>大端存储：</li>
+</ol>
+<p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p>
+<p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p>
+<ul>
+<li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p>
+</li>
+<li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p>
+</li>
+<li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p>
+</li>
+<li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p>
+</li>
+</ul>
+<p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p>
+<p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>数电笔记</title>
+    <url>/2024/05/28/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>该文章是关于模拟电子技术基础的学习笔记，不是专业的教学文章，主要用于本人复盘和复习，如有写的不对的，请谅解</p>
+<span id="more"></span>
+
+<h1 id="1-PN结"><a href="#1-PN结" class="headerlink" title="1. PN结"></a>1. PN结</h1><p>我们常见的小灯泡就是二极管，而二极管最重要的结构就是PN结</p>
+<h3 id="1-1-1-PN结的形成"><a href="#1-1-1-PN结的形成" class="headerlink" title="1.1.1  PN结的形成"></a>1.1.1  PN结的形成</h3><p>1.1.1  单晶硅</p>
+<p>硅元素最外层有四个电子，与其他硅元素的电子形成共价键，当硅元素足够多时，形成的晶体就叫单晶硅</p>
+<p>因为硅元素最外层电子两两成为共价键，由于共价键的<code>稳定性</code>，所以这时候单晶硅不导电，这种我们称之为<code>本征半导体</code><br><img src="../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102107.jpg" style="zoom: 25%;" /></p>
+<p>1.1.2  N型半导体（Negative 负电）</p>
+<p>我们可以通过掺杂工艺在单晶硅里加入磷元素（P），磷元素最外层电子有五个，四个电子与硅元素外四个形成稳定的共价键，剩下一个<code>带负电的自由电子</code></p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102113.jpg"></p>
+<p>1.1.3  P型半导体（Positive 正电）</p>
+<p>同理我们在单晶硅里加入硼元素（B），磷元素最外层电子有三个，与硅元素外电子一一对应后会形成一个<code>空穴</code>，空穴容易吸引来一个电子，但硼元素最外层只有三个电子，所以又很容易失去空穴中的电子</p>
+<p>空穴可以被视为一个正电荷载流子，因为它们可以移动并在电场作用下传导电流。当空穴移动时，它们相当于正电荷在移动，但实际的正电荷并没有移动，而是电子的缺失。因此，空穴在PN结中起到正电荷载流子的作用，但它们本身并不是实际的带电粒子。</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102116.jpg"></p>
+<p>1.1.4  扩散运动</p>
+<p>B型半导体带一个自由移动的电子，而P型半导体带一个空穴，我们把他们放在一起，B区的自由电子会自发的向P区移动，我们称之为扩散运动</p>
+<p>1.1.5  漂移运动</p>
+<p>我把P区和B区交汇处用 p 和 n 表示，也称之为<code>耗尽层</code>，耗尽层会产生一个电场，n 带正电 p 带负电，电场方向由 n -&gt; p ，因为电子受电场力与电场方向相反，所以电子会受到 p -&gt; n 的力 ，p 的自由电子会自发的向 n 移动这种我们称之为<code>漂移运动</code></p>
+<p><code>注意</code>: 扩散运动和漂移运动是处于动态平衡的</p>
+<p>p 和 n 形成的区域我们称之为 <code>PN结</code></p>
+<p>1.1.6  对称结和不对称结</p>
+<p>对称性指的是当P区N区的掺杂浓度相同时，PN结两侧的载流子（空穴和电子）数量是对称的，它们在各自的区域内是平衡的。</p>
+<p>不对称性的原因很多，</p>
+<ul>
+<li><p>掺杂浓度的不对称性：通常P型和N型半导体的掺杂浓度是不同的，这导致了PN结两侧的载流子浓度不同。</p>
+</li>
+<li><p>电场方向的不对称性：PN结内建电场的方向是从N型半导体指向P型半导体，这种电场方向是固定的，表现出不对称性。</p>
+</li>
+<li><p>电流方向的不对称性：在外加电压的情况下，PN结允许电流从P型流向N型（正向偏置），而对从N型流向P型的电流（反向偏置）有较大的阻碍，这种电流方向的不对称性是PN结的基本特性之一。</p>
+</li>
+<li><p>温度系数的不对称性：虽然PN结的内建电势与温度有关，但P型和N型半导体的温度系数可能不同，这在一定程度上破坏了温度效应的对称性。</p>
+</li>
+<li><p>材料特性的不对称性：如果P型和N型半导体的材料特性（如掺杂类型、晶格结构等）不同，那么即使在没有外加电压的情况下，PN结两侧的物理特性也可能表现出不对称性。</p>
+</li>
+</ul>
+<h3 id="1-2-PN结的伏安特性"><a href="#1-2-PN结的伏安特性" class="headerlink" title="1.2. PN结的伏安特性"></a>1.2. PN结的伏安特性</h3><p>1.2.1  伏安特性曲线图</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110536.jpg"></p>
+<p>1.2.2  PN结的电流方程</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110539.jpg"><br>V<del>t</del>在室温下一般为26mv，所以电流 i 趋近无穷，所以看伏安特性曲线图当电压达到一定值超过死区时，电流 i 为无穷大。</p>
+<p>1.2.3  正向导通和反向截止</p>
+<ul>
+<li><p>正向导通：我们在PN结上加一个外电场比如电池，正极接P区，负极接N区，当外电场力大于 p 和 n 形成的电场力时，N区的自由电子会不断的填充P区的空穴，P区的自由电子又会顺着正极进入电源，循环往复，PN结就导通了</p>
+</li>
+<li><p>反向截止：当PN结上所加的反向电压达到一定数值时，反向电流激增的现象</p>
+</li>
+</ul>
+<p>1.2.4  反向击穿</p>
+<ul>
+<li>雪崩击穿：<br>发生在掺杂浓度低的PN结，浓度越低，PN结越厚。当电压达到一定的值，电子被赋予很大的能量，会直接撞飞价原子，一生二，二生三，三生万物，雪崩就开始了</li>
+</ul>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110547.jpg"></p>
+<ul>
+<li><p>齐纳击穿：<br>  发生在掺杂浓度高的PN结，浓度越高，PN结越薄。不需要多大的电压，电子会而击穿，常用于稳压</p>
+</li>
+<li><p>热击穿：<br>  PN结耗散功率超阈值，温度升高，PN结过热而烧毁，也叫二次击穿，不可逆。前两种击穿发生时都<em>不一定</em>会损坏PN结，都是可逆的，</p>
+</li>
+</ul>
+<p><strong>知识点：</strong>当温度升高时雪崩击穿不容易发生，齐纳击穿容易发生。</p>
+<p>1.2.5  温度的影响</p>
+<ul>
+<li>随着温度升高，正向曲线向左移，反向曲线向下移动。</li>
+</ul>
+<p><img src="/"></p>
+<ul>
+<li>室温上升 1 摄氏度，正向压降 2 - 2.5 mv；室温上升 10 摄氏度时，反向电流增大一倍。</li>
+</ul>
+<h1 id="2-二极管"><a href="#2-二极管" class="headerlink" title="2. 二极管"></a>2. 二极管</h1><h3 id="2-1-二极管的主要参数"><a href="#2-1-二极管的主要参数" class="headerlink" title="2.1  二极管的主要参数"></a>2.1  二极管的主要参数</h3><p>二极管是一种半导体器件，主要用于控制电流的单向流动。它具有许多重要的参数，这些参数决定了二极管的性能和应用范围。以下是一些主要的二极管参数：</p>
+<ul>
+<li><strong>正向压降（Vf）</strong>：二极管在正向偏置时，电流开始流动的最小电压。</li>
+<li><strong>反向电压（Vr）</strong>：二极管在反向偏置时，能够承受的最大电压，超过这个电压可能会导致二极管损坏。</li>
+<li><strong>最大电流（If）</strong>：二极管能够安全通过的最大电流，超过这个电流可能会损坏二极管。</li>
+<li><strong>最大功耗（Pd）</strong>：二极管在正常工作时能够承受的最大功耗。</li>
+<li><strong>工作频率（f）</strong>：二极管能够正常工作的频率范围。</li>
+<li><strong>最大正向电流（Ifmax）</strong>：二极管在正向偏置时能够承受的最大电流。</li>
+<li><strong>最小正向电压（Vfmin）</strong>：二极管在正向偏置时能够导通的最小电压。</li>
+</ul>
+<p>了解这些参数对于选择合适的二极管以及确保其在电路中正常工作是非常重要的。</p>
+<h3 id="2-2-二极管的等效电路模型"><a href="#2-2-二极管的等效电路模型" class="headerlink" title="2.2  二极管的等效电路模型"></a>2.2  二极管的等效电路模型</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/aac83e8f-39df-46c9-84ee-26361fc69cf0.png"></p>
+<h3 id="2-3-二极管的微变等效"><a href="#2-3-二极管的微变等效" class="headerlink" title="2.3  二极管的微变等效"></a>2.3  二极管的微变等效</h3><p>微变等效电路可以用来分析二极管在交流信号或高频信号下的响应，这对于设计二极管在电路中的实际应用非常重要。</p>
+<h3 id="2-2-特殊二极管的应用"><a href="#2-2-特殊二极管的应用" class="headerlink" title="2.2  特殊二极管的应用"></a>2.2  特殊二极管的应用</h3><p>特殊二极管在现代电子技术中发挥着重要的作用，具有独特的功能和特点，适用于不同的应用场合。以下是一些特殊二极管的应用及其特点：</p>
+<ol>
+<li><strong>肖特基二极管</strong>：<ul>
+<li><strong>特点</strong>：肖特基二极管具有低正向电压降、快速开关速度和高频性能优异等特点。它还具有较低的反向漏电流和较高的温度稳定性。</li>
+<li><strong>应用</strong>：广泛应用于高速开关电路、电源管理、信号处理和射频应用等领域。随着科技的进步，研究者还在不断探索新型半导体材料和优化器件结构，以提高肖特基二极管的性能和应用范围。</li>
+</ul>
+</li>
+<li><strong>光电二极管</strong>：<ul>
+<li><strong>特点</strong>：光电二极管利用光电效应，将光的能量转换为电子的能量，具有高灵敏度、快速响应和宽波长范围。</li>
+<li><strong>应用</strong>：广泛应用于光通信、光电测量和光电控制等领域，是光学传感器和光电探测器的理想选择。</li>
+</ul>
+</li>
+<li><strong>稳压二极管</strong>：<ul>
+<li><strong>特点</strong>：稳压二极管利用反向击穿效应，在一定的电压范围内保持较为稳定的电压输出。</li>
+<li><strong>应用</strong>：广泛应用于电源电路和电压稳定器中，提供稳定的电压输出。</li>
+</ul>
+</li>
+<li><strong>齐纳二极管</strong>：<ul>
+<li><strong>特点</strong>：齐纳二极管在受到反向偏压时能够维持固定的电压，提供已知基准电压。</li>
+<li><strong>应用</strong>：用于电源中的电压基准，波形削波或限幅，防止电压超过极限。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-三级管（BJT）"><a href="#3-三级管（BJT）" class="headerlink" title="3. 三级管（BJT）"></a>3. 三级管（BJT）</h1><h3 id="3-1-三极管的结构"><a href="#3-1-三极管的结构" class="headerlink" title="3.1  三极管的结构"></a>3.1  三极管的结构</h3><p>3.1.1  构成方式<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/6731c1eb-2d55-4f85-b261-5df0b854b763.png"><br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/17feb439-24e2-42b1-8494-864d3683f49a.png"></p>
+<p>三个区域：PNP 或者 NPN<br>三个电极：基极（b），集电极（c），发射极（e）<br>两个PN结：集电结，发射结</p>
+<h3 id="3-2-三极管的导电原理"><a href="#3-2-三极管的导电原理" class="headerlink" title="3.2  三极管的导电原理"></a>3.2  三极管的导电原理</h3><p><strong>特征及原理</strong>：</p>
+<ul>
+<li>发射极浓度很高，以便于有大量的自由电子运动</li>
+<li>基极很薄，方便发射极的电子更容易进入集电极；同时可看作开关，控制集电极和发射极的导通</li>
+<li>集电极主要来接收发射极的电子<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/64e4cf40-ba78-4c6a-86f6-daf7dce7b77d.png"><br>内部载流子的运动</li>
+</ul>
+<ol>
+<li>发射结正偏，发射区的自由电子会进入基区，与其空穴复合</li>
+<li>基区的空穴很少，只有少量的电子会进入循环</li>
+<li>集电区的自由电子在电场力的作用下进入发射区</li>
+<li>发射区的电子和基区的空穴复合有限，多余的电子会穿过PN结进入集电区，进入下一个循环</li>
+</ol>
+<h3 id="3-3-三极管的四种状态"><a href="#3-3-三极管的四种状态" class="headerlink" title="3.3  三极管的四种状态"></a>3.3  三极管的四种状态</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/24219830-4007-41d1-97ba-51b37eadcc1e.png"><br>3.3.1  截止状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/89322a67-e19a-42cd-9f2c-6f5609de7fc6.png"></p>
+<p>3.3.2  饱和状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ddf3dbe2-37f4-40fa-b136-2c9ae2533004.png"></p>
+<p>3.3.3  放大状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/a909e048-f5d7-40b2-abce-9509d3278477.png"></p>
+<p>3.3.4  击穿状态<br>当V<del>CE</del>过大，三极管进入击穿状态，三极管烧毁</p>
+<h3 id="3-4-三级管的正反偏置和基本公式"><a href="#3-4-三级管的正反偏置和基本公式" class="headerlink" title="3.4  三级管的正反偏置和基本公式"></a>3.4  三级管的正反偏置和基本公式</h3><p>发大区：i<del>B</del> &#x3D; $\beta$ * i<del>c</del><br>截止区：双结反偏<br>饱和区：双结正偏</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/d7fa9999-9e15-47ba-88f9-6834b6fa81e8.png"></p>
+<h3 id="3-5-BJT共射特征曲线"><a href="#3-5-BJT共射特征曲线" class="headerlink" title="3.5  BJT共射特征曲线"></a>3.5  BJT共射特征曲线</h3><p>3.5.1  输入特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/164a600a-5cf0-45df-bc82-83dcca8499ef.png"></p>
+<p>3.5.2  输出特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240727_084632.jpg"></p>
+<h3 id="3-6-温度变化曲线"><a href="#3-6-温度变化曲线" class="headerlink" title="3.6  温度变化曲线"></a>3.6  温度变化曲线</h3><p>3.6.1  输入温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p>
+<p>3.6.2  输出温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/beb9bc12-89a7-4b0a-84c6-0ac277e1ad14.png"></p>
+<h1 id="4-MOS管的使用"><a href="#4-MOS管的使用" class="headerlink" title="4. MOS管的使用"></a>4. MOS管的使用</h1><h3 id="4-1-MOS管都组成和使用原理"><a href="#4-1-MOS管都组成和使用原理" class="headerlink" title="4.1  MOS管都组成和使用原理"></a>4.1  MOS管都组成和使用原理</h3><p>4.1.1  MOS管都组成<br><img src="/"></p>
+<p>4.1.2  结型场效应管</p>
+<p>4.1.3  绝缘栅型场效应管（MOSFET）</p>
+<ol>
+<li>U<del>GS</del> 不导通时，U<del>GS</del> &lt; U<del>GS(th)</del>，U<del>GS</del> &#x3D; R<del>DS</del></li>
+<li>U<del>GS</del> &gt; U<del>GS(th)</del></li>
+</ol>
+<hr>
+<p>鸣谢：</p>
+<p><a href="https://www.bilibili.com/video/BV1bm4y1V7Ek/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">人类最伟大的发明–PN结</a></p>
+<p>[模拟电子技术基础 上交大 郑益慧主讲](【4K精品】模拟电子技术基础 上交大 郑益慧主讲（模拟电路&#x2F;模电 讲课水平略胜华成英，视频质量完爆清华版 4K超清重制版）_哔哩哔哩_bilibili(<a href="https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&amp;vd_source=7cfb68109cfb644748c42234407548fb</a>))</p>
+<p><a href="https://www.bilibili.com/video/BV1Jq4y1E7QZ/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">三极管的饱和与放大</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>结构体大小计算</title>
+    <url>/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/</url>
+    <content><![CDATA[<p>结构体内存大小计算不是简单的 1 + 1 ，那么系统是如何存放结构体的数据？它的大小又是如何计算的呢？</p>
+<span id="more"></span>
+
+<h2 id="简单结构体大小计算"><a href="#简单结构体大小计算" class="headerlink" title="简单结构体大小计算"></a>简单结构体大小计算</h2><p>可以简单分为<strong>三步走战略</strong>：</p>
+<ol>
+<li>找到各个成员大小，这个CPU原因会有所差异。</li>
+<li>考虑成员对其方式<br><strong>注：</strong> 这里会有一个默认对其数的概念，如VS编译器默认对其数为8。<br>找到最小值</li>
+</ol>
+<p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/qqq.png" alt="img"></p>
+<ol start="3">
+<li>计算结构体的总大小<br>把它在内存中的存在方式画出来</li>
+</ol>
+<p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/www.png" alt="img"></p>
+<p>我们可以清楚的看到该结构体的大小为13</p>
+<h2 id="进阶大小计算"><a href="#进阶大小计算" class="headerlink" title="进阶大小计算"></a>进阶大小计算</h2><ol>
+<li>结构体数组大小计算</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">	double num;</span><br><span class="line">	char name[10];</span><br><span class="line">	int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>首先找最小值：<br>double -&gt; 8（内存大小） -&gt; 8（默认对齐数） -&gt; 8（最小值）<br>char -&gt; 1 -&gt; 8 -&gt;1<br>int -&gt; 4 -&gt; 8 -&gt; 4<br>考虑对其方式：<br>这个 char 类型的数组，只需要把它看做十个 char 型连在一起即可，最大对齐数是 int 的4<br>计算：<br>所以该结构体的大小为：8 + 10 + 空2 + 4 &#x3D; 24</p>
+<ol start="2">
+<li>嵌套结构体大小计算</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct s1 &#123;</span><br><span class="line">    char a;//1 -&gt; 8 -&gt; 1</span><br><span class="line">    int b;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    struct s &#123;</span><br><span class="line">        char c;//1 -&gt; 8 -&gt; 1 </span><br><span class="line">        int d;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    &#125;;</span><br><span class="line">    float e;//4 -&gt; 8 -&gt; 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>计算结构体大小时是把里面这个结构体就看做是一个char,和一个int，不是看做一个整体。</p>
+<p>所以该结构体大小为：1 + 空3 + 4 +1 +空3 + 4 + 4 &#x3D; 20</p>
+<h2 id="修改默认对其数"><a href="#修改默认对其数" class="headerlink" title="修改默认对其数"></a>修改默认对其数</h2><p>我们可以借助预处理命令来修改‘</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure>
+
+<p>C语言中的默认对齐数，取决于编译器和计算机体系结构。C语言标准并没有规定特定的默认对齐数，而是留给了编译器实现来确定。在大多数情况下，编译器会根据目标体系结构的要求来确定默认的对齐数。</p>
+<p><strong>注意以下几点：</strong></p>
+<ol>
+<li>使用 #pragma pack() 可能会<strong>降低内存</strong>访问效率，因为不再按照默认的对齐方式进行对齐，导致内存访问更频繁。</li>
+<li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li>
+<li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li>
+<li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
+    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>发送AT无返回值解决方法</p>
+<span id="more"></span>
+<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
+<ol>
+<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
+</li>
+<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
+</li>
+<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>我的市长父亲</title>
+    <url>/2025/07/14/%E6%88%91%E7%9A%84%E5%B8%82%E9%95%BF%E7%88%B6%E4%BA%B2/</url>
+    <content><![CDATA[<p>test</p>
+]]></content>
+  </entry>
 </search>
