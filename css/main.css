@@ -1379,7 +1379,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #444d28;
+    background: #ff81ff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2888,37 +2888,44 @@ header.header {
     padding: 10px 5px;
   }
 }
-/* 只在首页和文章页截断内容，归档页不截断 */
-body:not(.archive) .post-body {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* 显示的行数 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* 归档页的文章内容完全显示 */
-.archive .post-body {
+/* 1. 先解除所有场景的限制（重置基础样式） */
+.post-body {
   display: block !important;
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
+  max-height: none !important;
 }
-/* 减小文章容器宽度 */
+/* 2. 只对“列表页中的内容框”进行限制 */
+/* 假设列表页的文章容器有 .post-list 或 .home 这样的父级类 */
+/* （请根据你的主题实际类名修改，可通过F12开发者工具查看） */
+.post-list .post-block .post-body,
+.home .post-block .post-body {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important; /* 只在列表页显示3行 */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-height: 80px !important; /* 配合行数限制，根据字体大小调整 */
+}
+/* 3. 确保归档页不限制（如果归档页有专用父类，如 .archive-page） */
+.archive-page .post-block .post-body {
+  display: block !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+/* 以下是你的其他样式（保持不变） */
 .post-block {
-  max-width: 750px; /* 调整为你想要的宽度 */
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 7px; /* 增加文章间的底部间距 */
-  padding: 25px; /* 调整内边距 */
-  border-radius: 100px; /* 圆角边框 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* 轻微阴影 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 过渡动画 */
-/* 鼠标悬停效果 */
+  max-width: 750px;
+  margin: 0 auto 7px;
+  padding: 25px;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .post-block:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
-/* 响应式调整 */
 @media (max-width: 767px) {
   .post-block {
     max-width: 100%;
@@ -2926,14 +2933,12 @@ body:not(.archive) .post-body {
     margin-bottom: 30px;
   }
 }
-/* 移除默认分隔线 */
 .post-block:not(:last-child) {
   border-bottom: none;
 }
-/* 添加自定义分隔线 */
 .post-block + .post-block {
   position: relative;
-  padding-top: 40px; /* 为分隔线留出空间 */
+  padding-top: 40px;
 }
 .post-block + .post-block::before {
   content: "";
@@ -2941,21 +2946,19 @@ body:not(.archive) .post-body {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px; /* 分隔线宽度 */
+  width: 120px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #eaeaea, transparent); /* 渐变分隔线 */
+  background: linear-gradient(90deg, transparent, #eaeaea, transparent);
 }
-/* 增大标题尺寸 */
 .post-title {
-  font-size: 1em; /* 调整标题大小 */
-  margin-bottom: 0px; /* 增加标题与内容间距 */
-/* 标题下划线效果 */
+  font-size: 1em;
+  margin-bottom: 0;
 }
 .post-title::after {
   content: "";
   display: block;
   width: 40px;
   height: 2px;
-  background-color: #37c6c0; /* 与主题色匹配 */
+  background-color: #37c6c0;
   margin-top: 8px;
 }
