@@ -1,258 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>MarkeDown使用方法</title>
-    <url>/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>MarkDown 基础使用方法</p>
-<span id="more"></span>
-
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p><em>斜体</em><br><strong>加粗</strong><br><em><strong>斜体和加粗</strong></em><br><u>下划线</u><br>&#x3D;&#x3D;高亮&#x3D;&#x3D;</p>
-<blockquote>
-<p>这是一段引用</p>
-</blockquote>
-<p>有序列表：</p>
-<ol>
-<li>有序一</li>
-<li>有序二</li>
-<li>有序三</li>
-</ol>
-<p>无序列表：</p>
-<ul>
-<li>无序一</li>
-<li>无序二</li>
-<li>无序三</li>
-</ul>
-<p>自选择</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> 选项一</li>
-<li><input checked="" disabled="" type="checkbox"> 选项二</li>
-<li><input disabled="" type="checkbox"> 选项三</li>
-</ul>
-<p><code>我是代码行</code></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//我是代码块</span></span><br></pre></td></tr></table></figure>
-
-<p><em><strong>表格</strong></em></p>
-<table>
-<thead>
-<tr>
-<th align="left">关键字1</th>
-<th align="right">关键字2</th>
-<th align="center">关键字3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">靠左</td>
-<td align="right">靠右</td>
-<td align="center">居中</td>
-</tr>
-<tr>
-<td align="left">张三</td>
-<td align="right">李四</td>
-<td align="center">王五</td>
-</tr>
-</tbody></table>
-<p>脚注：<br>我是脚注<a href="%E6%88%91%E6%98%AF%E8%84%9A%E6%B3%A8">^脚注</a></p>
-<p>分割线：</p>
-<hr>
-<p><a href="baidu.com%22%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">网页跳转</a></p>
-<p>请参考<a href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">标题</a></p>
-<p><img src="/www.baidu.com%22%E5%9B%BE%E7%89%87%E4%BB%8B%E7%BB%8D%22" alt="图片链接"></p>
-<hr>
-<p>LaTeX语法用来表示数学公式，并通过特定的分隔符来区分。</p>
-<ol>
-<li><p><strong>行内数学公式</strong>：</p>
-<ul>
-<li>使用单个美元符号<code>$...$</code>将公式包裹起来。</li>
-<li>例如：<code>$x = \frac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125;$</code> 会显示为 (x &#x3D; \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})。</li>
-</ul>
-</li>
-<li><p><strong>块级（显示模式）数学公式</strong>：</p>
-<ul>
-<li>使用双美元符号<code>$$...$$</code>将公式包裹起来。</li>
-<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">x &amp;= y + z \\</span><br><span class="line">a^2 &amp;= b^2 + c^2</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
-<li>显示为：<br>[<br>\begin{align}<br>x &amp;&#x3D; y + z \<br>a^2 &amp;&#x3D; b^2 + c^2<br>\end{align}<br>]</li>
-</ul>
-</li>
-<li><p><strong>数学环境</strong>：</p>
-<ul>
-<li>可以使用一些特定的环境，如<code>align</code>、<code>equation</code>、<code>gather</code>等，来对公式进行更复杂的排版。</li>
-<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">E = mc^2</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">F = ma</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
-<li>显示为：<br>[<br>\begin{equation}<br>E &#x3D; mc^2<br>\end{equation}<br>\begin{equation}<br>F &#x3D; ma<br>\end{equation}<br>]</li>
-</ul>
-</li>
-<li><p><strong>希腊字母</strong>：</p>
-<ul>
-<li>例如：<code>$\alpha$</code> 显示为 (\alpha)，<code>$\beta$</code> 显示为 (\beta)，<code>$\gamma$</code> 显示为 (\gamma)。</li>
-</ul>
-</li>
-<li><p><strong>上标和下标</strong>：</p>
-<ul>
-<li>上标使用<code>^</code>，下标使用<code>_</code>。</li>
-<li>例如：<code>$x^2$</code> 显示为 (x^2)，<code>$x_i$</code> 显示为 (x_i)。</li>
-</ul>
-</li>
-<li><p><strong>分数</strong>：</p>
-<ul>
-<li>使用<code>\frac&#123;分子&#125;&#123;分母&#125;</code>。</li>
-<li>例如：<code>$\frac&#123;1&#125;&#123;2&#125;$</code> 显示为 (\frac{1}{2})。</li>
-</ul>
-</li>
-<li><p><strong>根号</strong>：</p>
-<ul>
-<li>使用<code>\sqrt[n]&#123;...&#125;</code>表示n次根。</li>
-<li>例如：<code>$\sqrt&#123;2&#125;$</code> 显示为 (\sqrt{2})，<code>$\sqrt[3]&#123;27&#125;$</code> 显示为 (\sqrt[3]{27})。</li>
-</ul>
-</li>
-<li><p><strong>求和与积分</strong>：</p>
-<ul>
-<li>使用<code>\sum</code>、<code>\int</code>等。</li>
-<li>例如：<code>$\sum_&#123;i=1&#125;^&#123;n&#125; i$</code> 显示为 (\sum_{i&#x3D;1}^{n} i)，<code>$\int_&#123;a&#125;^&#123;b&#125; f(x) dx$</code> 显示为 (\int_{a}^{b} f(x) dx)。</li>
-</ul>
-</li>
-<li><p><strong>矩阵</strong>：</p>
-<ul>
-<li>使用<code>\begin&#123;matrix&#125;...\end&#123;matrix&#125;</code>或<code>\begin&#123;pmatrix&#125;...\end&#123;pmatrix&#125;</code>等。</li>
-<li>例如：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;pmatrix&#125;</span><br><span class="line">a &amp; b \\</span><br><span class="line">c &amp; d</span><br><span class="line">\end&#123;pmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li>
-<li>显示为：<br>[<br>\begin{pmatrix}<br>a &amp; b \<br>c &amp; d<br>\end{pmatrix}<br>]</li>
-</ul>
-</li>
-</ol>
-<p>这些是Markdown中一些基本的数学公式表示方法，可以满足大多数数学表达的需求。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
-    <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
-    <content><![CDATA[<p>随心笔记</p>
-<span id="more"></span>
-
-<p>官方原题为：</p>
-<p><img src="/../images/leetcode%20%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/L.png"></p>
-<p>该题官方原解为：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line"><span class="type">int</span> left = <span class="number">0</span>, right = numsSize - <span class="number">1</span>, ans = numsSize;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> mid = ((right - left) &gt;&gt; <span class="number">1</span>) + left;</span><br><span class="line">        <span class="keyword">if</span> (target &lt;= nums[mid]) &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中这段代码，有点小疑惑 - &gt;<br><code>int mid = ((right - left) &gt;&gt; 1) + left;</code><br>这段代码可以同理为：</p>
-<p><code>int mid = (right + left) / 2;</code><br>我们知道 int 是有范围的，如果 r + l 过大会溢出，所以不使用除2的操作；当位移运算符前数字为偶数时， &gt;&gt; 1 等同 &#x2F; 2 ；<code>+ left</code>是保证移运算符前数字为奇数时<code>mid</code>的值依然为偶数，方便下面的运算</p>
-<p>这段代码有两个优点：</p>
-<ol>
-<li>(r - l) 不会溢出，因为我们知道 r &gt; l 。</li>
-<li>(&gt;&gt; 1) 位移运算符所要的计算量少，而且可以代替 &#x2F; 2 。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STM32学习笔记</title>
-    <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p>
-<span id="more"></span>
-
-<p>##一 内存的</p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何判断机器的大小端</title>
-    <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
-    <content><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p>
-<span id="more"></span>
-
-
-<h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
-<ol>
-<li>小端存储：</li>
-</ol>
-<p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p>
-<ol start="2">
-<li>大端存储：</li>
-</ol>
-<p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p>
-<p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p>
-<ul>
-<li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p>
-</li>
-<li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p>
-</li>
-<li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p>
-</li>
-<li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p>
-</li>
-</ul>
-<p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p>
-<p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>结构体大小计算</title>
-    <url>/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/</url>
-    <content><![CDATA[<p>结构体内存大小计算不是简单的 1 + 1 ，那么系统是如何存放结构体的数据？它的大小又是如何计算的呢？</p>
-<span id="more"></span>
-
-<h2 id="简单结构体大小计算"><a href="#简单结构体大小计算" class="headerlink" title="简单结构体大小计算"></a>简单结构体大小计算</h2><p>可以简单分为<strong>三步走战略</strong>：</p>
-<ol>
-<li>找到各个成员大小，这个CPU原因会有所差异。</li>
-<li>考虑成员对其方式<br><strong>注：</strong> 这里会有一个默认对其数的概念，如VS编译器默认对其数为8。<br>找到最小值</li>
-</ol>
-<p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/qqq.png" alt="img"></p>
-<ol start="3">
-<li>计算结构体的总大小<br>把它在内存中的存在方式画出来</li>
-</ol>
-<p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/www.png" alt="img"></p>
-<p>我们可以清楚的看到该结构体的大小为13</p>
-<h2 id="进阶大小计算"><a href="#进阶大小计算" class="headerlink" title="进阶大小计算"></a>进阶大小计算</h2><ol>
-<li>结构体数组大小计算</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">	double num;</span><br><span class="line">	char name[10];</span><br><span class="line">	int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>首先找最小值：<br>double -&gt; 8（内存大小） -&gt; 8（默认对齐数） -&gt; 8（最小值）<br>char -&gt; 1 -&gt; 8 -&gt;1<br>int -&gt; 4 -&gt; 8 -&gt; 4<br>考虑对其方式：<br>这个 char 类型的数组，只需要把它看做十个 char 型连在一起即可，最大对齐数是 int 的4<br>计算：<br>所以该结构体的大小为：8 + 10 + 空2 + 4 &#x3D; 24</p>
-<ol start="2">
-<li>嵌套结构体大小计算</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct s1 &#123;</span><br><span class="line">    char a;//1 -&gt; 8 -&gt; 1</span><br><span class="line">    int b;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    struct s &#123;</span><br><span class="line">        char c;//1 -&gt; 8 -&gt; 1 </span><br><span class="line">        int d;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    &#125;;</span><br><span class="line">    float e;//4 -&gt; 8 -&gt; 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>计算结构体大小时是把里面这个结构体就看做是一个char,和一个int，不是看做一个整体。</p>
-<p>所以该结构体大小为：1 + 空3 + 4 +1 +空3 + 4 + 4 &#x3D; 20</p>
-<h2 id="修改默认对其数"><a href="#修改默认对其数" class="headerlink" title="修改默认对其数"></a>修改默认对其数</h2><p>我们可以借助预处理命令来修改‘</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure>
-
-<p>C语言中的默认对齐数，取决于编译器和计算机体系结构。C语言标准并没有规定特定的默认对齐数，而是留给了编译器实现来确定。在大多数情况下，编译器会根据目标体系结构的要求来确定默认的对齐数。</p>
-<p><strong>注意以下几点：</strong></p>
-<ol>
-<li>使用 #pragma pack() 可能会<strong>降低内存</strong>访问效率，因为不再按照默认的对齐方式进行对齐，导致内存访问更频繁。</li>
-<li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li>
-<li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li>
-<li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
-    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>发送AT无返回值解决方法</p>
-<span id="more"></span>
-<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
-<ol>
-<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
-</li>
-<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
-</li>
-<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
+<search> 
+  
+  
+    
+    <entry>
+      <title>STM32学习笔记</title>
+      <link href="/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p><span id="more"></span><p>##一 内存的</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
+      <link href="/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/"/>
+      <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
+      
+        <content type="html"><![CDATA[<p>随心笔记</p><span id="more"></span><p>官方原题为：</p><p><img src="/../images/leetcode%20%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/L.png"></p><p>该题官方原解为：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">searchInsert</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> target)</span> &#123;</span><br><span class="line"><span class="type">int</span> left = <span class="number">0</span>, right = numsSize - <span class="number">1</span>, ans = numsSize;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="type">int</span> mid = ((right - left) &gt;&gt; <span class="number">1</span>) + left;</span><br><span class="line">        <span class="keyword">if</span> (target &lt;= nums[mid]) &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中这段代码，有点小疑惑 - &gt;<br><code>int mid = ((right - left) &gt;&gt; 1) + left;</code><br>这段代码可以同理为：</p><p><code>int mid = (right + left) / 2;</code><br>我们知道 int 是有范围的，如果 r + l 过大会溢出，所以不使用除2的操作；当位移运算符前数字为偶数时， &gt;&gt; 1 等同 &#x2F; 2 ；<code>+ left</code>是保证移运算符前数字为奇数时<code>mid</code>的值依然为偶数，方便下面的运算</p><p>这段代码有两个优点：</p><ol><li>(r - l) 不会溢出，因为我们知道 r &gt; l 。</li><li>(&gt;&gt; 1) 位移运算符所要的计算量少，而且可以代替 &#x2F; 2 。</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> C语言 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>结构体大小计算</title>
+      <link href="/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/"/>
+      <url>/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/</url>
+      
+        <content type="html"><![CDATA[<p>结构体内存大小计算不是简单的 1 + 1 ，那么系统是如何存放结构体的数据？它的大小又是如何计算的呢？</p><span id="more"></span><h2 id="简单结构体大小计算"><a href="#简单结构体大小计算" class="headerlink" title="简单结构体大小计算"></a>简单结构体大小计算</h2><p>可以简单分为<strong>三步走战略</strong>：</p><ol><li>找到各个成员大小，这个CPU原因会有所差异。</li><li>考虑成员对其方式<br><strong>注：</strong> 这里会有一个默认对其数的概念，如VS编译器默认对其数为8。<br>找到最小值</li></ol><p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/qqq.png" alt="img"></p><ol start="3"><li>计算结构体的总大小<br>把它在内存中的存在方式画出来</li></ol><p><img src="/../images/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/www.png" alt="img"></p><p>我们可以清楚的看到该结构体的大小为13</p><h2 id="进阶大小计算"><a href="#进阶大小计算" class="headerlink" title="进阶大小计算"></a>进阶大小计算</h2><ol><li>结构体数组大小计算</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Student1</span><br><span class="line">&#123;</span><br><span class="line">double num;</span><br><span class="line">char name[10];</span><br><span class="line">int age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>首先找最小值：<br>double -&gt; 8（内存大小） -&gt; 8（默认对齐数） -&gt; 8（最小值）<br>char -&gt; 1 -&gt; 8 -&gt;1<br>int -&gt; 4 -&gt; 8 -&gt; 4<br>考虑对其方式：<br>这个 char 类型的数组，只需要把它看做十个 char 型连在一起即可，最大对齐数是 int 的4<br>计算：<br>所以该结构体的大小为：8 + 10 + 空2 + 4 &#x3D; 24</p><ol start="2"><li>嵌套结构体大小计算</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct s1 &#123;</span><br><span class="line">    char a;//1 -&gt; 8 -&gt; 1</span><br><span class="line">    int b;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    struct s &#123;</span><br><span class="line">        char c;//1 -&gt; 8 -&gt; 1 </span><br><span class="line">        int d;//4 -&gt; 8 -&gt; 4</span><br><span class="line">    &#125;;</span><br><span class="line">    float e;//4 -&gt; 8 -&gt; 4</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>计算结构体大小时是把里面这个结构体就看做是一个char,和一个int，不是看做一个整体。</p><p>所以该结构体大小为：1 + 空3 + 4 +1 +空3 + 4 + 4 &#x3D; 20</p><h2 id="修改默认对其数"><a href="#修改默认对其数" class="headerlink" title="修改默认对其数"></a>修改默认对其数</h2><p>我们可以借助预处理命令来修改‘</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#pragma pack()</span><br></pre></td></tr></table></figure><p>C语言中的默认对齐数，取决于编译器和计算机体系结构。C语言标准并没有规定特定的默认对齐数，而是留给了编译器实现来确定。在大多数情况下，编译器会根据目标体系结构的要求来确定默认的对齐数。</p><p><strong>注意以下几点：</strong></p><ol><li>使用 #pragma pack() 可能会<strong>降低内存</strong>访问效率，因为不再按照默认的对齐方式进行对齐，导致内存访问更频繁。</li><li>使用不恰当的对齐值可能会导致与硬件或其他软件的<strong>兼容性问题</strong>。</li><li>在设置 #pragma pack(n) 后，通常应该在后续的代码中使用 #pragma pack() <strong>恢复默认的对齐方式</strong>，以免影响其他部分的代码。</li><li>使用 #pragma pack() 是非标准的，不具有跨编译器的可移植性，<strong>不同编译器可能会采用不同的语法或默认对齐值</strong>。</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> C语言 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何判断机器的大小端</title>
+      <link href="/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/"/>
+      <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
+      
+        <content type="html"><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p><span id="more"></span><h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p><ol><li>小端存储：</li></ol><p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p><ol start="2"><li>大端存储：</li></ol><p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p><p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p><ul><li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p></li><li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p></li><li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p></li><li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p></li></ul><p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p><p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> C语言 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
+      <link href="/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+      <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>发送AT无返回值解决方法</p><span id="more"></span><p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p><ol><li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p></li><li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p></li><li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p></li></ol><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MarkeDown使用方法</title>
+      <link href="/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+      <url>/2024/05/28/MarkeDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>MarkDown 基础使用方法</p><span id="more"></span><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p><em>斜体</em><br><strong>加粗</strong><br><em><strong>斜体和加粗</strong></em><br><u>下划线</u><br>&#x3D;&#x3D;高亮&#x3D;&#x3D;</p><blockquote><p>这是一段引用</p></blockquote><p>有序列表：</p><ol><li>有序一</li><li>有序二</li><li>有序三</li></ol><p>无序列表：</p><ul><li>无序一</li><li>无序二</li><li>无序三</li></ul><p>自选择</p><ul><li><input checked="" disabled="" type="checkbox"> 选项一</li><li><input checked="" disabled="" type="checkbox"> 选项二</li><li><input disabled="" type="checkbox"> 选项三</li></ul><p><code>我是代码行</code></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我是代码块</span></span><br></pre></td></tr></table></figure><p><em><strong>表格</strong></em></p><table><thead><tr><th align="left">关键字1</th><th align="right">关键字2</th><th align="center">关键字3</th></tr></thead><tbody><tr><td align="left">靠左</td><td align="right">靠右</td><td align="center">居中</td></tr><tr><td align="left">张三</td><td align="right">李四</td><td align="center">王五</td></tr></tbody></table><p>脚注：<br>我是脚注<a href="%E6%88%91%E6%98%AF%E8%84%9A%E6%B3%A8">^脚注</a></p><p>分割线：</p><hr><p><a href="baidu.com%22%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">网页跳转</a></p><p>请参考<a href="#%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">标题</a></p><p><img src="/www.baidu.com%22%E5%9B%BE%E7%89%87%E4%BB%8B%E7%BB%8D%22" alt="图片链接"></p><hr><p>LaTeX语法用来表示数学公式，并通过特定的分隔符来区分。</p><ol><li><p><strong>行内数学公式</strong>：</p><ul><li>使用单个美元符号<code>$...$</code>将公式包裹起来。</li><li>例如：<code>$x = \frac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125;$</code> 会显示为 (x &#x3D; \frac{-b \pm \sqrt{b^2 - 4ac}}{2a})。</li></ul></li><li><p><strong>块级（显示模式）数学公式</strong>：</p><ul><li>使用双美元符号<code>$$...$$</code>将公式包裹起来。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">x &amp;= y + z \\</span><br><span class="line">a^2 &amp;= b^2 + c^2</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{align}<br>x &amp;&#x3D; y + z \<br>a^2 &amp;&#x3D; b^2 + c^2<br>\end{align}<br>]</li></ul></li><li><p><strong>数学环境</strong>：</p><ul><li>可以使用一些特定的环境，如<code>align</code>、<code>equation</code>、<code>gather</code>等，来对公式进行更复杂的排版。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">E = mc^2</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">\begin&#123;equation&#125;</span><br><span class="line">F = ma</span><br><span class="line">\end&#123;equation&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{equation}<br>E &#x3D; mc^2<br>\end{equation}<br>\begin{equation}<br>F &#x3D; ma<br>\end{equation}<br>]</li></ul></li><li><p><strong>希腊字母</strong>：</p><ul><li>例如：<code>$\alpha$</code> 显示为 (\alpha)，<code>$\beta$</code> 显示为 (\beta)，<code>$\gamma$</code> 显示为 (\gamma)。</li></ul></li><li><p><strong>上标和下标</strong>：</p><ul><li>上标使用<code>^</code>，下标使用<code>_</code>。</li><li>例如：<code>$x^2$</code> 显示为 (x^2)，<code>$x_i$</code> 显示为 (x_i)。</li></ul></li><li><p><strong>分数</strong>：</p><ul><li>使用<code>\frac&#123;分子&#125;&#123;分母&#125;</code>。</li><li>例如：<code>$\frac&#123;1&#125;&#123;2&#125;$</code> 显示为 (\frac{1}{2})。</li></ul></li><li><p><strong>根号</strong>：</p><ul><li>使用<code>\sqrt[n]&#123;...&#125;</code>表示n次根。</li><li>例如：<code>$\sqrt&#123;2&#125;$</code> 显示为 (\sqrt{2})，<code>$\sqrt[3]&#123;27&#125;$</code> 显示为 (\sqrt[3]{27})。</li></ul></li><li><p><strong>求和与积分</strong>：</p><ul><li>使用<code>\sum</code>、<code>\int</code>等。</li><li>例如：<code>$\sum_&#123;i=1&#125;^&#123;n&#125; i$</code> 显示为 (\sum_{i&#x3D;1}^{n} i)，<code>$\int_&#123;a&#125;^&#123;b&#125; f(x) dx$</code> 显示为 (\int_{a}^{b} f(x) dx)。</li></ul></li><li><p><strong>矩阵</strong>：</p><ul><li>使用<code>\begin&#123;matrix&#125;...\end&#123;matrix&#125;</code>或<code>\begin&#123;pmatrix&#125;...\end&#123;pmatrix&#125;</code>等。</li><li>例如：<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;pmatrix&#125;</span><br><span class="line">a &amp; b \\</span><br><span class="line">c &amp; d</span><br><span class="line">\end&#123;pmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></li><li>显示为：<br>[<br>\begin{pmatrix}<br>a &amp; b \<br>c &amp; d<br>\end{pmatrix}<br>]</li></ul></li></ol><p>这些是Markdown中一些基本的数学公式表示方法，可以满足大多数数学表达的需求。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
