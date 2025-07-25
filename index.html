@@ -103,7 +103,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a></li>
   </ul>
 </nav>
 
@@ -142,7 +142,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,90 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/24/%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_20240616_192955.jpg">
+      <meta itemprop="name" content="KKDP">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="酷酷小彭">
+      <meta itemprop="description" content="饿了，想吃人">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 酷酷小彭">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/07/24/%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">交换两个变量的四种方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-07-24 09:30:03" itemprop="dateCreated datePublished" datetime="2025-07-24T09:30:03+08:00">2025-07-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<h2 id="1-临时变量"><a href="#1-临时变量" class="headerlink" title="1. 临时变量"></a>1. 临时变量</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> main</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> c; <span class="comment">// c作为一个新的变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    c = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = c;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-加减法"><a href="#2-加减法" class="headerlink" title="2. 加减法"></a>2. 加减法</h2><p>有一些题型会要求不允许用创建新的变量，但注意该方法如果数字过大可能会溢出和越界</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">	a = b + a;</span><br><span class="line">	b = a - b;</span><br><span class="line">	a = a - b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-异或交换"><a href="#3-异或交换" class="headerlink" title="3. 异或交换"></a>3. 异或交换</h2><p>好用多用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    a = a^b;</span><br><span class="line">    b = a^b;</span><br><span class="line">    a = a^b;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-指针交换"><a href="#4-指针交换" class="headerlink" title="4. 指针交换"></a>4. 指针交换</h2><p>适用于嵌入式，占用少量的寄存器</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap_with_pointers</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> &#123;</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a + (<span class="type">char</span>*)*b);</span><br><span class="line">    *b = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-函数返回交换法"><a href="#5-函数返回交换法" class="headerlink" title="5.函数返回交换法"></a>5.函数返回交换法</h2><p>写着玩，实用性不大</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">get_first</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> b; &#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">get_second</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line">x = get_first(x, y);</span><br><span class="line">y = get_second(x, y);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -453,6 +537,82 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_20240616_192955.jpg">
+      <meta itemprop="name" content="KKDP">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="酷酷小彭">
+      <meta itemprop="description" content="饿了，想吃人">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 酷酷小彭">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">你了解结构体吗？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-04 18:36:25" itemprop="dateCreated datePublished" datetime="2024-06-04T18:36:25+08:00">2024-06-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
