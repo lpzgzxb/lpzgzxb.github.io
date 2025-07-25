@@ -121,18 +121,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>STM32学习笔记</title>
-    <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p>
-<span id="more"></span>
-
-<p>##一 内存的</p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
     <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
     <content><![CDATA[<p>随心笔记</p>
@@ -153,6 +141,18 @@
 ]]></content>
       <tags>
         <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32学习笔记</title>
+    <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p>
+<span id="more"></span>
+
+<p>##一 内存的</p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -190,24 +190,6 @@
       <tags>
         <tag>C语言</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
-    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>发送AT无返回值解决方法</p>
-<span id="more"></span>
-<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
-<ol>
-<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
-</li>
-<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
-</li>
-<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
-
-]]></content>
   </entry>
   <entry>
     <title>结构体大小计算</title>
@@ -254,5 +236,23 @@
       <tags>
         <tag>C语言</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
+    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>发送AT无返回值解决方法</p>
+<span id="more"></span>
+<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
+<ol>
+<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
+</li>
+<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
+</li>
+<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
 </search>
