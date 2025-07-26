@@ -141,79 +141,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>STM32学习笔记</title>
-    <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p>
-<span id="more"></span>
-
-<p>##一 内存的</p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>交换两个变量的四种方法</title>
-    <url>/2025/07/24/%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>交换两个变量</p>
-<span id="more"></span>
-
-<h2 id="1-临时变量"><a href="#1-临时变量" class="headerlink" title="1. 临时变量"></a>1. 临时变量</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> main</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> c; <span class="comment">// c作为一个新的变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    c = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = c;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-加减法"><a href="#2-加减法" class="headerlink" title="2. 加减法"></a>2. 加减法</h2><p>有一些题型会要求不允许用创建新的变量，但注意该方法如果数字过大可能会溢出和越界</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">	a = b + a;</span><br><span class="line">	b = a - b;</span><br><span class="line">	a = a - b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-异或交换"><a href="#3-异或交换" class="headerlink" title="3. 异或交换"></a>3. 异或交换</h2><p>好用多用</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    a = a^b;</span><br><span class="line">    b = a^b;</span><br><span class="line">    a = a^b;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-指针交换"><a href="#4-指针交换" class="headerlink" title="4. 指针交换"></a>4. 指针交换</h2><p>适用于嵌入式，占用少量的寄存器</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap_with_pointers</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> &#123;</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a + (<span class="type">char</span>*)*b);</span><br><span class="line">    *b = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-函数返回交换法"><a href="#5-函数返回交换法" class="headerlink" title="5.函数返回交换法"></a>5.函数返回交换法</h2><p>写着玩，实用性不大</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">get_first</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> b; &#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">get_second</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line">x = get_first(x, y);</span><br><span class="line">y = get_second(x, y);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何判断机器的大小端</title>
-    <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
-    <content><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p>
-<span id="more"></span>
-
-
-<h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
-<ol>
-<li>小端存储：</li>
-</ol>
-<p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p>
-<ol start="2">
-<li>大端存储：</li>
-</ol>
-<p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p>
-<p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p>
-<ul>
-<li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p>
-</li>
-<li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p>
-</li>
-<li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p>
-</li>
-<li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p>
-</li>
-</ul>
-<p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p>
-<p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>
-]]></content>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode 中二分查找的((right - left) &gt;&gt; 1) + left</title>
     <url>/2024/06/16/leetcode-%E4%B8%AD%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84-right-left-1-left/</url>
     <content><![CDATA[<p>随心笔记</p>
@@ -237,159 +164,59 @@
       </tags>
   </entry>
   <entry>
-    <title>常见的排序算法</title>
-    <url>/2025/07/24/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>模电笔记</title>
-    <url>/2024/05/28/%E6%A8%A1%E7%94%B5%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>该文章是关于模拟电子技术基础的学习笔记，不是专业的教学文章，主要用于本人复盘和复习，如有写的不对的，请谅解</p>
+    <title>STM32学习笔记</title>
+    <url>/2025/07/15/STM32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>主要借鉴<a href="https://blog.csdn.net/u010249597/article/details/134762513?fromshare=blogdetail&sharetype=blogdetail&sharerId=134762513&sharerefer=PC&sharesource=m0_68891024&sharefrom=from_link">【STM32】江科大STM32学习笔记汇总</a>重要内容不反复，仅仅写了一些小知识点</p>
 <span id="more"></span>
 
-<h1 id="1-PN结"><a href="#1-PN结" class="headerlink" title="1. PN结"></a>1. PN结</h1><p>我们常见的小灯泡就是二极管，而二极管最重要的结构就是PN结</p>
-<h3 id="1-1-1-PN结的形成"><a href="#1-1-1-PN结的形成" class="headerlink" title="1.1.1  PN结的形成"></a>1.1.1  PN结的形成</h3><p>1.1.1  单晶硅</p>
-<p>硅元素最外层有四个电子，与其他硅元素的电子形成共价键，当硅元素足够多时，形成的晶体就叫单晶硅</p>
-<p>因为硅元素最外层电子两两成为共价键，由于共价键的<code>稳定性</code>，所以这时候单晶硅不导电，这种我们称之为<code>本征半导体</code><br><img src="../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102107.jpg" style="zoom: 25%;" /></p>
-<p>1.1.2  N型半导体（Negative 负电）</p>
-<p>我们可以通过掺杂工艺在单晶硅里加入磷元素（P），磷元素最外层电子有五个，四个电子与硅元素外四个形成稳定的共价键，剩下一个<code>带负电的自由电子</code></p>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102113.jpg"></p>
-<p>1.1.3  P型半导体（Positive 正电）</p>
-<p>同理我们在单晶硅里加入硼元素（B），磷元素最外层电子有三个，与硅元素外电子一一对应后会形成一个<code>空穴</code>，空穴容易吸引来一个电子，但硼元素最外层只有三个电子，所以又很容易失去空穴中的电子</p>
-<p>空穴可以被视为一个正电荷载流子，因为它们可以移动并在电场作用下传导电流。当空穴移动时，它们相当于正电荷在移动，但实际的正电荷并没有移动，而是电子的缺失。因此，空穴在PN结中起到正电荷载流子的作用，但它们本身并不是实际的带电粒子。</p>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102116.jpg"></p>
-<p>1.1.4  扩散运动</p>
-<p>B型半导体带一个自由移动的电子，而P型半导体带一个空穴，我们把他们放在一起，B区的自由电子会自发的向P区移动，我们称之为扩散运动</p>
-<p>1.1.5  漂移运动</p>
-<p>我把P区和B区交汇处用 p 和 n 表示，也称之为<code>耗尽层</code>，耗尽层会产生一个电场，n 带正电 p 带负电，电场方向由 n -&gt; p ，因为电子受电场力与电场方向相反，所以电子会受到 p -&gt; n 的力 ，p 的自由电子会自发的向 n 移动这种我们称之为<code>漂移运动</code></p>
-<p><code>注意</code>: 扩散运动和漂移运动是处于动态平衡的</p>
-<p>p 和 n 形成的区域我们称之为 <code>PN结</code></p>
-<p>1.1.6  对称结和不对称结</p>
-<p>对称性指的是当P区N区的掺杂浓度相同时，PN结两侧的载流子（空穴和电子）数量是对称的，它们在各自的区域内是平衡的。</p>
-<p>不对称性的原因很多，</p>
-<ul>
-<li><p>掺杂浓度的不对称性：通常P型和N型半导体的掺杂浓度是不同的，这导致了PN结两侧的载流子浓度不同。</p>
-</li>
-<li><p>电场方向的不对称性：PN结内建电场的方向是从N型半导体指向P型半导体，这种电场方向是固定的，表现出不对称性。</p>
-</li>
-<li><p>电流方向的不对称性：在外加电压的情况下，PN结允许电流从P型流向N型（正向偏置），而对从N型流向P型的电流（反向偏置）有较大的阻碍，这种电流方向的不对称性是PN结的基本特性之一。</p>
-</li>
-<li><p>温度系数的不对称性：虽然PN结的内建电势与温度有关，但P型和N型半导体的温度系数可能不同，这在一定程度上破坏了温度效应的对称性。</p>
-</li>
-<li><p>材料特性的不对称性：如果P型和N型半导体的材料特性（如掺杂类型、晶格结构等）不同，那么即使在没有外加电压的情况下，PN结两侧的物理特性也可能表现出不对称性。</p>
-</li>
-</ul>
-<h3 id="1-2-PN结的伏安特性"><a href="#1-2-PN结的伏安特性" class="headerlink" title="1.2. PN结的伏安特性"></a>1.2. PN结的伏安特性</h3><p>1.2.1  伏安特性曲线图</p>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110536.jpg"></p>
-<p>1.2.2  PN结的电流方程</p>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110539.jpg"><br>V<del>t</del>在室温下一般为26mv，所以电流 i 趋近无穷，所以看伏安特性曲线图当电压达到一定值超过死区时，电流 i 为无穷大。</p>
-<p>1.2.3  正向导通和反向截止</p>
-<ul>
-<li><p>正向导通：我们在PN结上加一个外电场比如电池，正极接P区，负极接N区，当外电场力大于 p 和 n 形成的电场力时，N区的自由电子会不断的填充P区的空穴，P区的自由电子又会顺着正极进入电源，循环往复，PN结就导通了</p>
-</li>
-<li><p>反向截止：当PN结上所加的反向电压达到一定数值时，反向电流激增的现象</p>
-</li>
-</ul>
-<p>1.2.4  反向击穿</p>
-<ul>
-<li>雪崩击穿：<br>发生在掺杂浓度低的PN结，浓度越低，PN结越厚。当电压达到一定的值，电子被赋予很大的能量，会直接撞飞价原子，一生二，二生三，三生万物，雪崩就开始了</li>
-</ul>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110547.jpg"></p>
-<ul>
-<li><p>齐纳击穿：<br>  发生在掺杂浓度高的PN结，浓度越高，PN结越薄。不需要多大的电压，电子会而击穿，常用于稳压</p>
-</li>
-<li><p>热击穿：<br>  PN结耗散功率超阈值，温度升高，PN结过热而烧毁，也叫二次击穿，不可逆。前两种击穿发生时都<em>不一定</em>会损坏PN结，都是可逆的，</p>
-</li>
-</ul>
-<p><strong>知识点：</strong>当温度升高时雪崩击穿不容易发生，齐纳击穿容易发生。</p>
-<p>1.2.5  温度的影响</p>
-<ul>
-<li>随着温度升高，正向曲线向左移，反向曲线向下移动。</li>
-</ul>
-<p><img src="/../images/%E6%A8%A1%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p>
-<ul>
-<li>室温上升 1 摄氏度，正向压降 2 - 2.5 mv；室温上升 10 摄氏度时，反向电流增大一倍。</li>
-</ul>
-<h1 id="2-二极管"><a href="#2-二极管" class="headerlink" title="2. 二极管"></a>2. 二极管</h1><h3 id="2-1-二极管的主要参数"><a href="#2-1-二极管的主要参数" class="headerlink" title="2.1  二极管的主要参数"></a>2.1  二极管的主要参数</h3><p>二极管是一种半导体器件，主要用于控制电流的单向流动。它具有许多重要的参数，这些参数决定了二极管的性能和应用范围。以下是一些主要的二极管参数：</p>
-<ul>
-<li><strong>正向压降（Vf）</strong>：二极管在正向偏置时，电流开始流动的最小电压。</li>
-<li><strong>反向电压（Vr）</strong>：二极管在反向偏置时，能够承受的最大电压，超过这个电压可能会导致二极管损坏。</li>
-<li><strong>最大电流（If）</strong>：二极管能够安全通过的最大电流，超过这个电流可能会损坏二极管。</li>
-<li><strong>最大功耗（Pd）</strong>：二极管在正常工作时能够承受的最大功耗。</li>
-<li><strong>工作频率（f）</strong>：二极管能够正常工作的频率范围。</li>
-<li><strong>最大正向电流（Ifmax）</strong>：二极管在正向偏置时能够承受的最大电流。</li>
-<li><strong>最小正向电压（Vfmin）</strong>：二极管在正向偏置时能够导通的最小电压。</li>
-</ul>
-<p>了解这些参数对于选择合适的二极管以及确保其在电路中正常工作是非常重要的。</p>
-<h3 id="2-2-二极管的等效电路模型"><a href="#2-2-二极管的等效电路模型" class="headerlink" title="2.2  二极管的等效电路模型"></a>2.2  二极管的等效电路模型</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/aac83e8f-39df-46c9-84ee-26361fc69cf0.png"></p>
-<h3 id="2-3-二极管的微变等效"><a href="#2-3-二极管的微变等效" class="headerlink" title="2.3  二极管的微变等效"></a>2.3  二极管的微变等效</h3><p>微变等效电路可以用来分析二极管在交流信号或高频信号下的响应，这对于设计二极管在电路中的实际应用非常重要。</p>
-<h3 id="2-2-特殊二极管的应用"><a href="#2-2-特殊二极管的应用" class="headerlink" title="2.2  特殊二极管的应用"></a>2.2  特殊二极管的应用</h3><p>特殊二极管在现代电子技术中发挥着重要的作用，具有独特的功能和特点，适用于不同的应用场合。以下是一些特殊二极管的应用及其特点：</p>
-<ol>
-<li><strong>肖特基二极管</strong>：<ul>
-<li><strong>特点</strong>：肖特基二极管具有低正向电压降、快速开关速度和高频性能优异等特点。它还具有较低的反向漏电流和较高的温度稳定性。</li>
-<li><strong>应用</strong>：广泛应用于高速开关电路、电源管理、信号处理和射频应用等领域。随着科技的进步，研究者还在不断探索新型半导体材料和优化器件结构，以提高肖特基二极管的性能和应用范围。</li>
-</ul>
-</li>
-<li><strong>光电二极管</strong>：<ul>
-<li><strong>特点</strong>：光电二极管利用光电效应，将光的能量转换为电子的能量，具有高灵敏度、快速响应和宽波长范围。</li>
-<li><strong>应用</strong>：广泛应用于光通信、光电测量和光电控制等领域，是光学传感器和光电探测器的理想选择。</li>
-</ul>
-</li>
-<li><strong>稳压二极管</strong>：<ul>
-<li><strong>特点</strong>：稳压二极管利用反向击穿效应，在一定的电压范围内保持较为稳定的电压输出。</li>
-<li><strong>应用</strong>：广泛应用于电源电路和电压稳定器中，提供稳定的电压输出。</li>
-</ul>
-</li>
-<li><strong>齐纳二极管</strong>：<ul>
-<li><strong>特点</strong>：齐纳二极管在受到反向偏压时能够维持固定的电压，提供已知基准电压。</li>
-<li><strong>应用</strong>：用于电源中的电压基准，波形削波或限幅，防止电压超过极限。</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-三级管（BJT）"><a href="#3-三级管（BJT）" class="headerlink" title="3. 三级管（BJT）"></a>3. 三级管（BJT）</h1><h3 id="3-1-三极管的结构"><a href="#3-1-三极管的结构" class="headerlink" title="3.1  三极管的结构"></a>3.1  三极管的结构</h3><p>3.1.1  构成方式<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/6731c1eb-2d55-4f85-b261-5df0b854b763.png"><br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/17feb439-24e2-42b1-8494-864d3683f49a.png"></p>
-<p>三个区域：PNP 或者 NPN<br>三个电极：基极（b），集电极（c），发射极（e）<br>两个PN结：集电结，发射结</p>
-<h3 id="3-2-三极管的导电原理"><a href="#3-2-三极管的导电原理" class="headerlink" title="3.2  三极管的导电原理"></a>3.2  三极管的导电原理</h3><p><strong>特征及原理</strong>：</p>
-<ul>
-<li>发射极浓度很高，以便于有大量的自由电子运动</li>
-<li>基极很薄，方便发射极的电子更容易进入集电极；同时可看作开关，控制集电极和发射极的导通</li>
-<li>集电极主要来接收发射极的电子<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/64e4cf40-ba78-4c6a-86f6-daf7dce7b77d.png"><br>内部载流子的运动</li>
-</ul>
-<ol>
-<li>发射结正偏，发射区的自由电子会进入基区，与其空穴复合</li>
-<li>基区的空穴很少，只有少量的电子会进入循环</li>
-<li>集电区的自由电子在电场力的作用下进入发射区</li>
-<li>发射区的电子和基区的空穴复合有限，多余的电子会穿过PN结进入集电区，进入下一个循环</li>
-</ol>
-<h3 id="3-3-三极管的四种状态"><a href="#3-3-三极管的四种状态" class="headerlink" title="3.3  三极管的四种状态"></a>3.3  三极管的四种状态</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/24219830-4007-41d1-97ba-51b37eadcc1e.png"><br>3.3.1  截止状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/89322a67-e19a-42cd-9f2c-6f5609de7fc6.png"></p>
-<p>3.3.2  饱和状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ddf3dbe2-37f4-40fa-b136-2c9ae2533004.png"></p>
-<p>3.3.3  放大状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/a909e048-f5d7-40b2-abce-9509d3278477.png"></p>
-<p>3.3.4  击穿状态<br>当V<del>CE</del>过大，三极管进入击穿状态，三极管烧毁</p>
-<h3 id="3-4-三级管的正反偏置和基本公式"><a href="#3-4-三级管的正反偏置和基本公式" class="headerlink" title="3.4  三级管的正反偏置和基本公式"></a>3.4  三级管的正反偏置和基本公式</h3><p>发大区：i<del>B</del> &#x3D; $\beta$ * i<del>c</del><br>截止区：双结反偏<br>饱和区：双结正偏</p>
-<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/d7fa9999-9e15-47ba-88f9-6834b6fa81e8.png"></p>
-<h3 id="3-5-BJT共射特征曲线"><a href="#3-5-BJT共射特征曲线" class="headerlink" title="3.5  BJT共射特征曲线"></a>3.5  BJT共射特征曲线</h3><p>3.5.1  输入特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/164a600a-5cf0-45df-bc82-83dcca8499ef.png"></p>
-<p>3.5.2  输出特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240727_084632.jpg"></p>
-<h3 id="3-6-温度变化曲线"><a href="#3-6-温度变化曲线" class="headerlink" title="3.6  温度变化曲线"></a>3.6  温度变化曲线</h3><p>3.6.1  输入温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p>
-<p>3.6.2  输出温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/beb9bc12-89a7-4b0a-84c6-0ac277e1ad14.png"></p>
-<h1 id="4-场效应管（MOS）"><a href="#4-场效应管（MOS）" class="headerlink" title="4. 场效应管（MOS）"></a>4. 场效应管（MOS）</h1><h3 id="4-1-MOS管都组成和使用原理"><a href="#4-1-MOS管都组成和使用原理" class="headerlink" title="4.1  MOS管都组成和使用原理"></a>4.1  MOS管都组成和使用原理</h3><p>4.1.1  MOS管都组成<br><img src="/"></p>
-<p>4.1.2  结型场效应管</p>
-<p>4.1.3  绝缘栅型场效应管（MOSFET）</p>
-<ol>
-<li>U<del>GS</del> 不导通时，U<del>GS</del> &lt; U<del>GS(th)</del>，U<del>GS</del> &#x3D; R<del>DS</del></li>
-<li>U<del>GS</del> &gt; U<del>GS(th)</del></li>
-</ol>
-<hr>
-<p>鸣谢：</p>
-<p><a href="https://www.bilibili.com/video/BV1bm4y1V7Ek/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">人类最伟大的发明–PN结</a></p>
-<p>[模拟电子技术基础 上交大 郑益慧主讲](【4K精品】模拟电子技术基础 上交大 郑益慧主讲（模拟电路&#x2F;模电 讲课水平略胜华成英，视频质量完爆清华版 4K超清重制版）_哔哩哔哩_bilibili(<a href="https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&amp;vd_source=7cfb68109cfb644748c42234407548fb</a>))</p>
-<p><a href="https://www.bilibili.com/video/BV1Jq4y1E7QZ/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">三极管的饱和与放大</a></p>
+<p>##一 内存的</p>
 ]]></content>
       <tags>
         <tag>笔记</tag>
-        <tag>模电</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你了解结构体吗？</title>
+    <url>/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p>
+<span id="more"></span>
+
+<p>比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p>
+<h1 id="啥是结构体"><a href="#啥是结构体" class="headerlink" title="啥是结构体"></a>啥是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p>
+<p>int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为复杂数据类型或构造数据类型。</p>
+<h3 id="一-结构体的声明，定义和初始化"><a href="#一-结构体的声明，定义和初始化" class="headerlink" title="一.  结构体的声明，定义和初始化"></a>一.  结构体的声明，定义和初始化</h3><p>在使用结构体之前我们应当先声明它，定义形式为</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">study</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//可以包含多个变量或数组，它们的类型可以相同，也可以不同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><em>注意：</em></p>
+<ol>
+<li>该结构体只是定义，还未初始化，所以不占用内存</li>
+<li>如果结构体声明在maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li>
+</ol>
+<h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line">    student.name, student.age, student.studenid,student.sex,student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line"><span class="comment">//stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span></span><br></pre></td></tr></table></figure>
+<h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
+<p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为<code>该结构体只能用一次</code></p>
+<h3 id="五-结构体指针"><a href="#五-结构体指针" class="headerlink" title="五. 结构体指针"></a>五. 结构体指针</h3><p>其实结构体的指针与基础数据类型的指针大同小异</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
+<p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p>
+<p>以下是错误示范：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student;</span><br></pre></td></tr></table></figure>
+
+<h3 id="六-结构体传参"><a href="#六-结构体传参" class="headerlink" title="六.结构体传参"></a>六.结构体传参</h3><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值，还有一种是传地址，那么到底是传值还是传地址好勒？</p>
+<p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，<code>为什么？</code></p>
+<p>因为在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line">	 print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line">	 print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p><em>小知识：</em> 传值我们用<code>.</code>来访问结构体成员；传地址的话我们用<code>-&gt;</code>来访问，<code>-&gt;</code>符号也只能在结构体中使用。</p>
+<h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">	&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">	&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">	&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
+<p>想打印该变量出来也很简单，用for循环就行</p>
+<h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。<br><a href="https://lpzgzxb.github.io/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/#more">结构体内存大小计算</a></p>
+]]></content>
+      <tags>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -715,64 +542,72 @@
       </tags>
   </entry>
   <entry>
-    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
-    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>发送AT无返回值解决方法</p>
-<span id="more"></span>
-<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
-<ol>
-<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
-</li>
-<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
-</li>
-<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>你了解结构体吗？</title>
-    <url>/2024/06/04/%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%BB%93%E6%9E%84%E4%BD%93%E5%90%97%EF%BC%9F/</url>
-    <content><![CDATA[<p>我们知道c语言内置了许多基本数据类型，现在我需要一个可以同时存储多个不一样的数据类型的容器，那我该怎么办呢？</p>
+    <title>交换两个变量的四种方法</title>
+    <url>/2025/07/24/%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>交换两个变量</p>
 <span id="more"></span>
 
-<p>比如：在小明这个变量下同时存在年龄，班级，成绩等数据，这些数据类型都不同但是他们又是表示一个整体，要存在联系，我该怎么把他们整合起来呢?</p>
-<h1 id="啥是结构体"><a href="#啥是结构体" class="headerlink" title="啥是结构体"></a>啥是结构体</h1><p>结构体是C语言中一种重要的数据类型，该数据类型由一组称为成员的数据所组成，其中每个成员可以是不同类型的。结构体通常用来表示类型不同但是又相关的若干数据。</p>
-<p>int、float、char 等是由C语言提供的数据类型，不能再进行分拆，我们称之为基本数据类型；而结构体可以包含多个基本类型的数据，也可以包含其他的结构体，我们将它称为复杂数据类型或构造数据类型。</p>
-<h3 id="一-结构体的声明，定义和初始化"><a href="#一-结构体的声明，定义和初始化" class="headerlink" title="一.  结构体的声明，定义和初始化"></a>一.  结构体的声明，定义和初始化</h3><p>在使用结构体之前我们应当先声明它，定义形式为</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">study</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//可以包含多个变量或数组，它们的类型可以相同，也可以不同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><em>注意：</em></p>
-<ol>
-<li>该结构体只是定义，还未初始化，所以不占用内存</li>
-<li>如果结构体声明在maim{}外，那么该结构体变量是一个全局变量；同理，反之则为局部变量</li>
-</ol>
-<h3 id="二-我们可以在对结构体定义的同时初始化"><a href="#二-我们可以在对结构体定义的同时初始化" class="headerlink" title="二. 我们可以在对结构体定义的同时初始化"></a>二. 我们可以在对结构体定义的同时初始化</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>//结构名</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> strudentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;<span class="comment">//变量名</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name: %s\n age: %d\n studenid: %s\n sex: %d\n score: %f&quot;</span>,</span><br><span class="line">    student.name, student.age, student.studenid,student.sex,student.score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="三-如果大家觉得结构名太长可以用typedef来定义"><a href="#三-如果大家觉得结构名太长可以用typedef来定义" class="headerlink" title="三. 如果大家觉得结构名太长可以用typedef来定义"></a>三. 如果大家觉得结构名太长可以用typedef来定义</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;stu;</span><br><span class="line"><span class="comment">//stu在这里不是作为变量，而是为student的代称，你可以以操作student的方式来操作stu</span></span><br></pre></td></tr></table></figure>
-<h3 id="四-匿名结构体类型"><a href="#四-匿名结构体类型" class="headerlink" title="四. 匿名结构体类型"></a>四. 匿名结构体类型</h3><p>顾名思义“匿名”就是改个昵称，但对于结构体而言，匿名就是没有名字</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>因为我们没有完全的声明，也就是不写结构体标签，所以称之为匿名</p>
-<p><em>注意：</em> 这种语法c语言是支持的，但我们实际工作中一般不会用，因为<code>该结构体只能用一次</code></p>
-<h3 id="五-结构体指针"><a href="#五-结构体指针" class="headerlink" title="五. 结构体指针"></a>五. 结构体指针</h3><p>其实结构体的指针与基础数据类型的指针大同小异</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; student = &#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;student;</span><br></pre></td></tr></table></figure>
-<p>该程序把结构体变量student的地址赋给指针Student<br><em>注意：</em> 结构体和结构体变量是不一样的，我之前提到，声明只是画了一个结构图，就像一个肚子没墨水的花花公子，当然系统也没有给他分配内存，只有初始化之后（比如读了我的博客后）变成结构变量（有学识的人），才会有内存发配的，所以结构体是不能直接取地址的</p>
-<p>以下是错误示范：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">stu</span> =</span> &amp;Student;</span><br></pre></td></tr></table></figure>
+<h2 id="1-临时变量"><a href="#1-临时变量" class="headerlink" title="1. 临时变量"></a>1. 临时变量</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> main</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> c; <span class="comment">// c作为一个新的变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    c = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = c;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="六-结构体传参"><a href="#六-结构体传参" class="headerlink" title="六.结构体传参"></a>六.结构体传参</h3><p>同基本数据类型一样，数据结构也有两种传递方式，一种是传值，还有一种是传地址，那么到底是传值还是传地址好勒？</p>
-<p>如果你对指针比较了解，我想你应该毫不犹豫选择指针，<code>为什么？</code></p>
-<p>因为在数据传递时，如果数据块较大（比如说数据缓冲区或比较大的结构体），这时就可以使用指针传递地址而不是实际数据，即提高传输速度，又节省大量内存。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"> <span class="type">int</span> x1;</span><br><span class="line"> <span class="type">int</span> x2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体值传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print1</span><span class="params">(<span class="keyword">struct</span> S s)</span></span><br><span class="line">&#123;</span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, s.x1, s.x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体地址传参</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print2</span><span class="params">(<span class="keyword">struct</span> S *p)</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, p-&gt;x1, p-&gt;x2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	 <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</span><br><span class="line">	 print1(s);  <span class="comment">//传结构体值</span></span><br><span class="line">	 print2(&amp;s); <span class="comment">//传地址</span></span><br><span class="line">	 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
-<p><em>小知识：</em> 传值我们用<code>.</code>来访问结构体成员；传地址的话我们用<code>-&gt;</code>来访问，<code>-&gt;</code>符号也只能在结构体中使用。</p>
-<h3 id="七-结构体数组"><a href="#七-结构体数组" class="headerlink" title="七. 结构体数组"></a>七. 结构体数组</h3><p>所谓结构题数组，就相当于结构题中每个成员都是数组</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">char</span> name[<span class="number">10</span>];<span class="comment">//姓名</span></span><br><span class="line">	<span class="type">int</span> age;<span class="comment">//年龄</span></span><br><span class="line">	<span class="type">int</span> studentid;<span class="comment">//学号</span></span><br><span class="line">	<span class="type">char</span> sex[<span class="number">10</span>];<span class="comment">//性别</span></span><br><span class="line">	<span class="type">float</span> score;<span class="comment">//成绩</span></span><br><span class="line">&#125; <span class="class"><span class="keyword">class</span>[] =</span> &#123; </span><br><span class="line">	&#123;<span class="string">&quot;xiaoming&quot;</span>, <span class="number">20</span>, <span class="number">8997</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">98.5</span>&#125;;</span><br><span class="line">	&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">21</span>, <span class="number">8998</span>, <span class="string">&#x27;男&#x27;</span>, <span class="number">78.5</span>&#125;</span><br><span class="line">	&#123;<span class="string">&quot;lisi&quot;</span>, <span class="number">20</span>, <span class="number">8999</span>, <span class="string">&#x27;女&#x27;</span>, <span class="number">88</span>&#125;	</span><br><span class="line">&#125;;		</span><br></pre></td></tr></table></figure>
-<p>想打印该变量出来也很简单，用for循环就行</p>
-<h3 id="八-结构体内存大小"><a href="#八-结构体内存大小" class="headerlink" title="八. 结构体内存大小"></a>八. 结构体内存大小</h3><p>这个内存大小涉及知识点较多，我会另外写一篇博客单独讲解。<br><a href="https://lpzgzxb.github.io/2024/06/11/%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97/#more">结构体内存大小计算</a></p>
+<h2 id="2-加减法"><a href="#2-加减法" class="headerlink" title="2. 加减法"></a>2. 加减法</h2><p>有一些题型会要求不允许用创建新的变量，但注意该方法如果数字过大可能会溢出和越界</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">	a = b + a;</span><br><span class="line">	b = a - b;</span><br><span class="line">	a = a - b;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-异或交换"><a href="#3-异或交换" class="headerlink" title="3. 异或交换"></a>3. 异或交换</h2><p>好用多用</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>,b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a和b的值分别为%d %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="comment">//交换</span></span><br><span class="line">    a = a^b;</span><br><span class="line">    b = a^b;</span><br><span class="line">    a = a^b;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;交换后a和b的值为%d %d\n&quot;</span>, a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-指针交换"><a href="#4-指针交换" class="headerlink" title="4. 指针交换"></a>4. 指针交换</h2><p>适用于嵌入式，占用少量的寄存器</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap_with_pointers</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span> &#123;</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a + (<span class="type">char</span>*)*b);</span><br><span class="line">    *b = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">    *a = (<span class="type">int</span>)((<span class="type">char</span>*)*a - (<span class="type">char</span>*)*b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-函数返回交换法"><a href="#5-函数返回交换法" class="headerlink" title="5.函数返回交换法"></a>5.函数返回交换法</h2><p>写着玩，实用性不大</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">get_first</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> b; &#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">get_second</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line">x = get_first(x, y);</span><br><span class="line">y = get_second(x, y);</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何判断机器的大小端</title>
+    <url>/2024/06/04/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
+    <content><![CDATA[<p>小端存储和大端存储的区别可能不太明显，但在处理二进制数据时会产生影响，特别是在不同计算机架构之间进行数据交换时。程序员和开发人员需要注意存储顺序，以确保数据在不同系统之间正确传递和解释。某些协议和文件格式规定了使用的字节顺序，以确保跨平台互操作性。</p>
+<span id="more"></span>
+
+
+<h1 id="什么是小端存储，大端存储"><a href="#什么是小端存储，大端存储" class="headerlink" title="什么是小端存储，大端存储"></a>什么是小端存储，大端存储</h1><p>小端存储和大端存储都是计算机系统中用于组织和存储多字节数据的两种不同方法。</p>
+<ol>
+<li>小端存储：</li>
+</ol>
+<p>在小端存储中，<code>最低有效字节</code>（即最小的地址部分）存储在内存的<code>最低地址处</code>，而<code>最高有效字节</code>（即最大的地址部分）存储在内存的<code>最高地址处</code>。</p>
+<ol start="2">
+<li>大端存储：</li>
+</ol>
+<p>在大端存储中，最高有效字节（即最大的地址部分）存储在内存的最低地址处，而最低有效字节（即最小的地址部分）存储在内存的最高地址处。</p>
+<p><strong>为什么会存在小端存储，大端存储</strong><br>小端存储和大端存储的存在是由计算机系统的设计和历史演变所决定的。这两种存储方式有各自的优点和用途，取决于特定的硬件和软件需求，其原因包括打不仅限于以下几点：</p>
+<ul>
+<li><p>历史原因：计算机的存储方式早在计算机行业的早期就已经存在。IBM System&#x2F;360计算机系列是在1960年代早期首次引入的，它使用了大端存储方式。随着时间的推移，不同的计算机制造商采用了不同的存储方式。因此，存储方式的选择在很大程度上取决于计算机制造商的决策。</p>
+</li>
+<li><p>硬件架构：不同的处理器架构对存储方式有不同的偏好。例如，Intel x86架构采用小端存储（现存x86机器大都也是小端存储），而一些其他处理器架构如SPARC和MIPS采用大端存储。这种差异主要是由硬件设计和指令集架构决定的。</p>
+</li>
+<li><p>数据传输：大端存储方式在网络通信协议中更为常见，因为它与人类的阅读习惯（从左到右）和大多数书写系统更匹配。这就是为什么许多网络协议如TCP&#x2F;IP使用大端存储方式。小端存储方式在个别硬件上的数据传输速度更高，因为它更容易与硬件原语（如处理器的加载和存储指令）匹配。</p>
+</li>
+<li><p>多字节数据：小端存储方式在多字节数据类型（如整数和浮点数）上执行特定操作时效率更高，因为最低有效字节是首先被访问的。这可以提高内存操作的效率，尤其在处理大型数据集时。</p>
+</li>
+</ul>
+<p>那怎么判断本电脑是大端存储还是小端存储呢？<br>我们可以编写一个简单的测试程序，用于检查处理器的字节顺序。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> *c = (<span class="type">unsigned</span> <span class="type">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端存储 \n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端存储 \n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们创建一个无符号整数（num），然后将其地址强制转换为指向字符的指针（char *）。它检查最低地址处的字节的值，如果最低地址处的字节值为1，那么CPU采用小端存储；如果最高地址处的字节值为1，那么CPU采用大端存储。</p>
+<p>如果我们是用的 VS 编译器，我们可以打开一个内存的窗口，把列改为1，然后随便定义一个变量（a），按F11逐条编译，在内存窗口中输入 &amp;a 可以看到如图<br><img src="/../images/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%BA%E5%99%A8%E5%A4%A7%E5%B0%8F%E7%AB%AF/23_10_22_2.png"><br>最小位的有效数据存放在低位，所以该电脑为小端存储</p>
+]]></content>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见的排序算法</title>
+    <url>/2025/07/24/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>算法</tag>
         <tag>C语言</tag>
       </tags>
   </entry>
@@ -821,5 +656,170 @@
       <tags>
         <tag>C语言</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>模电笔记</title>
+    <url>/2024/05/28/%E6%A8%A1%E7%94%B5%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>该文章是关于模拟电子技术基础的学习笔记，不是专业的教学文章，主要用于本人复盘和复习，如有写的不对的，请谅解</p>
+<span id="more"></span>
+
+<h1 id="1-PN结"><a href="#1-PN结" class="headerlink" title="1. PN结"></a>1. PN结</h1><p>我们常见的小灯泡就是二极管，而二极管最重要的结构就是PN结</p>
+<h3 id="1-1-1-PN结的形成"><a href="#1-1-1-PN结的形成" class="headerlink" title="1.1.1  PN结的形成"></a>1.1.1  PN结的形成</h3><p>1.1.1  单晶硅</p>
+<p>硅元素最外层有四个电子，与其他硅元素的电子形成共价键，当硅元素足够多时，形成的晶体就叫单晶硅</p>
+<p>因为硅元素最外层电子两两成为共价键，由于共价键的<code>稳定性</code>，所以这时候单晶硅不导电，这种我们称之为<code>本征半导体</code><br><img src="../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102107.jpg" style="zoom: 25%;" /></p>
+<p>1.1.2  N型半导体（Negative 负电）</p>
+<p>我们可以通过掺杂工艺在单晶硅里加入磷元素（P），磷元素最外层电子有五个，四个电子与硅元素外四个形成稳定的共价键，剩下一个<code>带负电的自由电子</code></p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102113.jpg"></p>
+<p>1.1.3  P型半导体（Positive 正电）</p>
+<p>同理我们在单晶硅里加入硼元素（B），磷元素最外层电子有三个，与硅元素外电子一一对应后会形成一个<code>空穴</code>，空穴容易吸引来一个电子，但硼元素最外层只有三个电子，所以又很容易失去空穴中的电子</p>
+<p>空穴可以被视为一个正电荷载流子，因为它们可以移动并在电场作用下传导电流。当空穴移动时，它们相当于正电荷在移动，但实际的正电荷并没有移动，而是电子的缺失。因此，空穴在PN结中起到正电荷载流子的作用，但它们本身并不是实际的带电粒子。</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240618_102116.jpg"></p>
+<p>1.1.4  扩散运动</p>
+<p>B型半导体带一个自由移动的电子，而P型半导体带一个空穴，我们把他们放在一起，B区的自由电子会自发的向P区移动，我们称之为扩散运动</p>
+<p>1.1.5  漂移运动</p>
+<p>我把P区和B区交汇处用 p 和 n 表示，也称之为<code>耗尽层</code>，耗尽层会产生一个电场，n 带正电 p 带负电，电场方向由 n -&gt; p ，因为电子受电场力与电场方向相反，所以电子会受到 p -&gt; n 的力 ，p 的自由电子会自发的向 n 移动这种我们称之为<code>漂移运动</code></p>
+<p><code>注意</code>: 扩散运动和漂移运动是处于动态平衡的</p>
+<p>p 和 n 形成的区域我们称之为 <code>PN结</code></p>
+<p>1.1.6  对称结和不对称结</p>
+<p>对称性指的是当P区N区的掺杂浓度相同时，PN结两侧的载流子（空穴和电子）数量是对称的，它们在各自的区域内是平衡的。</p>
+<p>不对称性的原因很多，</p>
+<ul>
+<li><p>掺杂浓度的不对称性：通常P型和N型半导体的掺杂浓度是不同的，这导致了PN结两侧的载流子浓度不同。</p>
+</li>
+<li><p>电场方向的不对称性：PN结内建电场的方向是从N型半导体指向P型半导体，这种电场方向是固定的，表现出不对称性。</p>
+</li>
+<li><p>电流方向的不对称性：在外加电压的情况下，PN结允许电流从P型流向N型（正向偏置），而对从N型流向P型的电流（反向偏置）有较大的阻碍，这种电流方向的不对称性是PN结的基本特性之一。</p>
+</li>
+<li><p>温度系数的不对称性：虽然PN结的内建电势与温度有关，但P型和N型半导体的温度系数可能不同，这在一定程度上破坏了温度效应的对称性。</p>
+</li>
+<li><p>材料特性的不对称性：如果P型和N型半导体的材料特性（如掺杂类型、晶格结构等）不同，那么即使在没有外加电压的情况下，PN结两侧的物理特性也可能表现出不对称性。</p>
+</li>
+</ul>
+<h3 id="1-2-PN结的伏安特性"><a href="#1-2-PN结的伏安特性" class="headerlink" title="1.2. PN结的伏安特性"></a>1.2. PN结的伏安特性</h3><p>1.2.1  伏安特性曲线图</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110536.jpg"></p>
+<p>1.2.2  PN结的电流方程</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110539.jpg"><br>V<del>t</del>在室温下一般为26mv，所以电流 i 趋近无穷，所以看伏安特性曲线图当电压达到一定值超过死区时，电流 i 为无穷大。</p>
+<p>1.2.3  正向导通和反向截止</p>
+<ul>
+<li><p>正向导通：我们在PN结上加一个外电场比如电池，正极接P区，负极接N区，当外电场力大于 p 和 n 形成的电场力时，N区的自由电子会不断的填充P区的空穴，P区的自由电子又会顺着正极进入电源，循环往复，PN结就导通了</p>
+</li>
+<li><p>反向截止：当PN结上所加的反向电压达到一定数值时，反向电流激增的现象</p>
+</li>
+</ul>
+<p>1.2.4  反向击穿</p>
+<ul>
+<li>雪崩击穿：<br>发生在掺杂浓度低的PN结，浓度越低，PN结越厚。当电压达到一定的值，电子被赋予很大的能量，会直接撞飞价原子，一生二，二生三，三生万物，雪崩就开始了</li>
+</ul>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240706_110547.jpg"></p>
+<ul>
+<li><p>齐纳击穿：<br>  发生在掺杂浓度高的PN结，浓度越高，PN结越薄。不需要多大的电压，电子会而击穿，常用于稳压</p>
+</li>
+<li><p>热击穿：<br>  PN结耗散功率超阈值，温度升高，PN结过热而烧毁，也叫二次击穿，不可逆。前两种击穿发生时都<em>不一定</em>会损坏PN结，都是可逆的，</p>
+</li>
+</ul>
+<p><strong>知识点：</strong>当温度升高时雪崩击穿不容易发生，齐纳击穿容易发生。</p>
+<p>1.2.5  温度的影响</p>
+<ul>
+<li>随着温度升高，正向曲线向左移，反向曲线向下移动。</li>
+</ul>
+<p><img src="/../images/%E6%A8%A1%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p>
+<ul>
+<li>室温上升 1 摄氏度，正向压降 2 - 2.5 mv；室温上升 10 摄氏度时，反向电流增大一倍。</li>
+</ul>
+<h1 id="2-二极管"><a href="#2-二极管" class="headerlink" title="2. 二极管"></a>2. 二极管</h1><h3 id="2-1-二极管的主要参数"><a href="#2-1-二极管的主要参数" class="headerlink" title="2.1  二极管的主要参数"></a>2.1  二极管的主要参数</h3><p>二极管是一种半导体器件，主要用于控制电流的单向流动。它具有许多重要的参数，这些参数决定了二极管的性能和应用范围。以下是一些主要的二极管参数：</p>
+<ul>
+<li><strong>正向压降（Vf）</strong>：二极管在正向偏置时，电流开始流动的最小电压。</li>
+<li><strong>反向电压（Vr）</strong>：二极管在反向偏置时，能够承受的最大电压，超过这个电压可能会导致二极管损坏。</li>
+<li><strong>最大电流（If）</strong>：二极管能够安全通过的最大电流，超过这个电流可能会损坏二极管。</li>
+<li><strong>最大功耗（Pd）</strong>：二极管在正常工作时能够承受的最大功耗。</li>
+<li><strong>工作频率（f）</strong>：二极管能够正常工作的频率范围。</li>
+<li><strong>最大正向电流（Ifmax）</strong>：二极管在正向偏置时能够承受的最大电流。</li>
+<li><strong>最小正向电压（Vfmin）</strong>：二极管在正向偏置时能够导通的最小电压。</li>
+</ul>
+<p>了解这些参数对于选择合适的二极管以及确保其在电路中正常工作是非常重要的。</p>
+<h3 id="2-2-二极管的等效电路模型"><a href="#2-2-二极管的等效电路模型" class="headerlink" title="2.2  二极管的等效电路模型"></a>2.2  二极管的等效电路模型</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/aac83e8f-39df-46c9-84ee-26361fc69cf0.png"></p>
+<h3 id="2-3-二极管的微变等效"><a href="#2-3-二极管的微变等效" class="headerlink" title="2.3  二极管的微变等效"></a>2.3  二极管的微变等效</h3><p>微变等效电路可以用来分析二极管在交流信号或高频信号下的响应，这对于设计二极管在电路中的实际应用非常重要。</p>
+<h3 id="2-2-特殊二极管的应用"><a href="#2-2-特殊二极管的应用" class="headerlink" title="2.2  特殊二极管的应用"></a>2.2  特殊二极管的应用</h3><p>特殊二极管在现代电子技术中发挥着重要的作用，具有独特的功能和特点，适用于不同的应用场合。以下是一些特殊二极管的应用及其特点：</p>
+<ol>
+<li><strong>肖特基二极管</strong>：<ul>
+<li><strong>特点</strong>：肖特基二极管具有低正向电压降、快速开关速度和高频性能优异等特点。它还具有较低的反向漏电流和较高的温度稳定性。</li>
+<li><strong>应用</strong>：广泛应用于高速开关电路、电源管理、信号处理和射频应用等领域。随着科技的进步，研究者还在不断探索新型半导体材料和优化器件结构，以提高肖特基二极管的性能和应用范围。</li>
+</ul>
+</li>
+<li><strong>光电二极管</strong>：<ul>
+<li><strong>特点</strong>：光电二极管利用光电效应，将光的能量转换为电子的能量，具有高灵敏度、快速响应和宽波长范围。</li>
+<li><strong>应用</strong>：广泛应用于光通信、光电测量和光电控制等领域，是光学传感器和光电探测器的理想选择。</li>
+</ul>
+</li>
+<li><strong>稳压二极管</strong>：<ul>
+<li><strong>特点</strong>：稳压二极管利用反向击穿效应，在一定的电压范围内保持较为稳定的电压输出。</li>
+<li><strong>应用</strong>：广泛应用于电源电路和电压稳定器中，提供稳定的电压输出。</li>
+</ul>
+</li>
+<li><strong>齐纳二极管</strong>：<ul>
+<li><strong>特点</strong>：齐纳二极管在受到反向偏压时能够维持固定的电压，提供已知基准电压。</li>
+<li><strong>应用</strong>：用于电源中的电压基准，波形削波或限幅，防止电压超过极限。</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-三级管（BJT）"><a href="#3-三级管（BJT）" class="headerlink" title="3. 三级管（BJT）"></a>3. 三级管（BJT）</h1><h3 id="3-1-三极管的结构"><a href="#3-1-三极管的结构" class="headerlink" title="3.1  三极管的结构"></a>3.1  三极管的结构</h3><p>3.1.1  构成方式<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/6731c1eb-2d55-4f85-b261-5df0b854b763.png"><br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/17feb439-24e2-42b1-8494-864d3683f49a.png"></p>
+<p>三个区域：PNP 或者 NPN<br>三个电极：基极（b），集电极（c），发射极（e）<br>两个PN结：集电结，发射结</p>
+<h3 id="3-2-三极管的导电原理"><a href="#3-2-三极管的导电原理" class="headerlink" title="3.2  三极管的导电原理"></a>3.2  三极管的导电原理</h3><p><strong>特征及原理</strong>：</p>
+<ul>
+<li>发射极浓度很高，以便于有大量的自由电子运动</li>
+<li>基极很薄，方便发射极的电子更容易进入集电极；同时可看作开关，控制集电极和发射极的导通</li>
+<li>集电极主要来接收发射极的电子<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/64e4cf40-ba78-4c6a-86f6-daf7dce7b77d.png"><br>内部载流子的运动</li>
+</ul>
+<ol>
+<li>发射结正偏，发射区的自由电子会进入基区，与其空穴复合</li>
+<li>基区的空穴很少，只有少量的电子会进入循环</li>
+<li>集电区的自由电子在电场力的作用下进入发射区</li>
+<li>发射区的电子和基区的空穴复合有限，多余的电子会穿过PN结进入集电区，进入下一个循环</li>
+</ol>
+<h3 id="3-3-三极管的四种状态"><a href="#3-3-三极管的四种状态" class="headerlink" title="3.3  三极管的四种状态"></a>3.3  三极管的四种状态</h3><p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/24219830-4007-41d1-97ba-51b37eadcc1e.png"><br>3.3.1  截止状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/89322a67-e19a-42cd-9f2c-6f5609de7fc6.png"></p>
+<p>3.3.2  饱和状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ddf3dbe2-37f4-40fa-b136-2c9ae2533004.png"></p>
+<p>3.3.3  放大状态<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/a909e048-f5d7-40b2-abce-9509d3278477.png"></p>
+<p>3.3.4  击穿状态<br>当V<del>CE</del>过大，三极管进入击穿状态，三极管烧毁</p>
+<h3 id="3-4-三级管的正反偏置和基本公式"><a href="#3-4-三级管的正反偏置和基本公式" class="headerlink" title="3.4  三级管的正反偏置和基本公式"></a>3.4  三级管的正反偏置和基本公式</h3><p>发大区：i<del>B</del> &#x3D; $\beta$ * i<del>c</del><br>截止区：双结反偏<br>饱和区：双结正偏</p>
+<p><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/d7fa9999-9e15-47ba-88f9-6834b6fa81e8.png"></p>
+<h3 id="3-5-BJT共射特征曲线"><a href="#3-5-BJT共射特征曲线" class="headerlink" title="3.5  BJT共射特征曲线"></a>3.5  BJT共射特征曲线</h3><p>3.5.1  输入特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/164a600a-5cf0-45df-bc82-83dcca8499ef.png"></p>
+<p>3.5.2  输出特性曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/IMG_20240727_084632.jpg"></p>
+<h3 id="3-6-温度变化曲线"><a href="#3-6-温度变化曲线" class="headerlink" title="3.6  温度变化曲线"></a>3.6  温度变化曲线</h3><p>3.6.1  输入温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/ad7152c0-93f0-4484-a78f-63852a6c9f78.png"></p>
+<p>3.6.2  输出温度变化曲线<br><img src="/../images/%E6%95%B0%E7%94%B5%E7%AC%94%E8%AE%B0/beb9bc12-89a7-4b0a-84c6-0ac277e1ad14.png"></p>
+<h1 id="4-场效应管（MOS）"><a href="#4-场效应管（MOS）" class="headerlink" title="4. 场效应管（MOS）"></a>4. 场效应管（MOS）</h1><h3 id="4-1-MOS管都组成和使用原理"><a href="#4-1-MOS管都组成和使用原理" class="headerlink" title="4.1  MOS管都组成和使用原理"></a>4.1  MOS管都组成和使用原理</h3><p>4.1.1  MOS管都组成<br><img src="/"></p>
+<p>4.1.2  结型场效应管</p>
+<p>4.1.3  绝缘栅型场效应管（MOSFET）</p>
+<ol>
+<li>U<del>GS</del> 不导通时，U<del>GS</del> &lt; U<del>GS(th)</del>，U<del>GS</del> &#x3D; R<del>DS</del></li>
+<li>U<del>GS</del> &gt; U<del>GS(th)</del></li>
+</ol>
+<hr>
+<p>鸣谢：</p>
+<p><a href="https://www.bilibili.com/video/BV1bm4y1V7Ek/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">人类最伟大的发明–PN结</a></p>
+<p>[模拟电子技术基础 上交大 郑益慧主讲](【4K精品】模拟电子技术基础 上交大 郑益慧主讲（模拟电路&#x2F;模电 讲课水平略胜华成英，视频质量完爆清华版 4K超清重制版）_哔哩哔哩_bilibili(<a href="https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&vd_source=7cfb68109cfb644748c42234407548fb">https://www.bilibili.com/video/BV1Gt411b7Zq/?spm_id_from=333.999.0.0&amp;vd_source=7cfb68109cfb644748c42234407548fb</a>))</p>
+<p><a href="https://www.bilibili.com/video/BV1Jq4y1E7QZ/?spm_id_from=333.337.search-card.all.click&vd_source=7cfb68109cfb644748c42234407548fb">三极管的饱和与放大</a></p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+        <tag>模电</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蓝牙HC-05出现进入AT模式之后串口发送AT无返回值解决方法</title>
+    <url>/2024/06/04/%E8%93%9D%E7%89%99HC-05%E5%87%BA%E7%8E%B0%E8%BF%9B%E5%85%A5AT%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%90%8E%E4%B8%B2%E5%8F%A3%E5%8F%91%E9%80%81AT%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>发送AT无返回值解决方法</p>
+<span id="more"></span>
+<p>本人使用的信泰微hc-05蓝牙模块，使用STCAL-ISP软件进行串口调试，发现AT命令没有返回，多方尝试，发现问题</p>
+<ol>
+<li><p>接线正确<br>  GND – GND<br>  VCC – 5V<br>  RXD – TXD<br>  TXD – RXD</p>
+</li>
+<li><p>一定要按住状态键在上电，这是针对hc-05的蓝牙模块，hc-06的没有</p>
+</li>
+<li><p>串口软件要在AT命令后加个回车, 或者加<code>/r/n</code></p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">AT/r/n</span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
 </search>
